@@ -2,19 +2,26 @@ version: '2'
 
 services:
 
+  fcrepo:
+    build:
+      context: ./fcrepo/4.7.4
+    image: dataconservancy/pass-fcrepo:4.7.4-demo
+    env_file: .env
+    ports: 
+      - "${FCREPO_PORT}:${FCREPO_PORT}"
+      - "${FCREPO_JMS_PORT}:${FCREPO_JMS_PORT}"
+      - "${FCREPO_STOMP_PORT}:${FCREPO_STOMP_PORT}"
+
   ember:
     build:
-      context: ./pass-ember
+      context: ./ember/2.17.0-fcrepo
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: pass
+    image: dataconservancy/pass-ember:2.17.0-demo
     env_file: .env
     depends_on:
       - submission
-    environment:
-      EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
-      EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
     ports:
       - "4200:4200"
     links:
