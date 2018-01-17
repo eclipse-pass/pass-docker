@@ -23,7 +23,7 @@ services:
     depends_on:
       - submission
     ports:
-      - "4200:4200"
+      - "${EMBER_PORT}:${EMBER_PORT}"
     links:
       - submission
 
