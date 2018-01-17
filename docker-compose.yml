@@ -4,8 +4,8 @@ services:
 
   fcrepo:
     build:
-      context: ./fcrepo/4.7.4
-    image: dataconservancy/pass-fcrepo:4.7.4-demo
+      context: ./fcrepo/4.7.4-demo
+    image: pass/fcrepo:4.7.4-demo
     env_file: .env
     ports: 
       - "${FCREPO_PORT}:${FCREPO_PORT}"
@@ -14,11 +14,11 @@ services:
 
   ember:
     build:
-      context: ./ember/2.17.0-fcrepo
+      context: ./ember-fcrepo/0.0.1-demo
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: dataconservancy/pass-ember:2.17.0-demo
+    image: pass/ember-fcrepo:0.0.1-demo
     env_file: .env
     depends_on:
       - submission
@@ -28,8 +28,8 @@ services:
       - submission
 
   ftpserver:
-    build: ./ftpserver
-    image: ftpserver
+    build: ./ftpserver/0.0.1-demo
+    image: pass/ftpserver:0.0.1-demo
     env_file: .env
     environment:
       PUBLICHOST: "${DOCKER_HOST_ADDRESS}"
@@ -38,11 +38,11 @@ services:
 
   submission:
     build:
-      context: ./nihms-submission
+      context: ./nihms-submission/1.0.0-SNAPSHOT-demo
       args:
         SUBMISSION_GIT_REPO: "${SUBMISSION_GIT_REPO}"
         SUBMISSION_GIT_BRANCH: "${SUBMISSION_GIT_BRANCH}"
-    image: submission
+    image: pass/nihms-submission:1.0.0-SNAPSHOT-demo
     depends_on:
       - ftpserver
     env_file: .env
