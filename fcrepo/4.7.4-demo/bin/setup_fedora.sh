@@ -5,7 +5,7 @@ REPO="$1"
 LOG="setup_fedora.log"
 
 function wait_until_up {
-    CMD="curl --write-out %{http_code} --silent -o /dev/stderr ${REPO}"
+    CMD="curl -u bootstrap:bootstrap --write-out %{http_code} --silent -o /dev/stderr ${REPO}"
     echo "Waiting for response from Fedora via ${CMD}"
     RESULT=$(${CMD})
     until [ ${RESULT} -lt 400 ] && [ ${RESULT} -gt 199 ]
@@ -34,7 +34,7 @@ function create_binary {
     echo $msg
     echo -e "\n$msg\n" >> $LOG
     
-    curl -# -X PUT --upload-file "$file_path" -H "Content-Type: $content_type" "$repo_path" >> $LOG
+    curl -# -u bootstrap:bootstrap -X PUT --upload-file "$file_path" -H "Content-Type: $content_type" "$repo_path" >> $LOG
 
     if [ $? -ne 0 ]; then
 	echo "Failed"
@@ -55,7 +55,7 @@ function create_object {
     echo $msg
     echo -e "\n$msg\n" >> $LOG
 
-    curl -# -X PUT -H "Content-Type: text/turtle" "$repo_path" >> $LOG
+    curl -# -u bootstrap:bootstrap -X PUT -H "Content-Type: text/turtle" "$repo_path" >> $LOG
 
     if [ $? -ne 0 ]; then
 	echo "Failed"
@@ -70,8 +70,8 @@ function delete_object {
     echo $msg
     echo -e "\n$msg\n" >> $LOG
 
-    curl -X DELETE "$repo_path" >> $LOG
-    curl -X DELETE "$repo_path/fcr:tombstone" >> $LOG
+    curl -u bootstrap:bootstrap -X DELETE "$repo_path" >> $LOG
+    curl -u bootstrap:bootstrap -X DELETE "$repo_path/fcr:tombstone" >> $LOG
 }
 
 wait_until_up
