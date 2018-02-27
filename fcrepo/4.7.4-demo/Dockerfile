@@ -42,6 +42,6 @@ RUN apk update && \
 
 
 
-COPY WEB-INF/* ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
+COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
 
 ENTRYPOINT [ "/bin/entrypoint.sh" ]
