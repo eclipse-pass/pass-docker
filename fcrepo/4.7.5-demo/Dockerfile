@@ -7,10 +7,10 @@ FCREPO_JMS_PORT=61616 \
 FCREPO_STOMP_PORT=61613 \
 FCREPO_CONTEXT_PATH=/fcrepo \
 FCREPO_LOG_LEVEL=INFO \
-FCREPO_MODESHAPE_CONFIGURATION=classpath:/config/servlet-auth/repository.json \
 ACTIVEMQ_BROKER_URI=tcp://localhost:61616 \
 FCREPO_ACTIVEMQ_CONFIGURATION=classpath:/config/activemq.xml \
 FCREPO_SPRING_CONFIGURATION=classpath:/spring/master.xml \
+FCREPO_MODESHAPE_CONFIGURATION=classpath:/pass-repository.json \
 SLF4J_VERSION=1.7.25 \
 DEBUG_PORT=5006 \
 DEBUG_ARG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006"
@@ -20,6 +20,7 @@ EXPOSE ${FCREPO_PORT}
 
 COPY bin/* /bin/
 COPY conf/* ${CATALINA_HOME}/conf/
+COPY lib/* ${CATALINA_HOME}/lib/
 COPY tomcat-bin/* ${CATALINA_HOME}/bin/
 
 RUN apk update && \
