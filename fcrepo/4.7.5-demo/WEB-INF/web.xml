@@ -43,7 +43,7 @@
 
     <init-param>
       <param-name>cors.allowed.origins</param-name>
-      <param-value>*</param-value>
+      <param-value>https://pass</param-value>
     </init-param>
 
     <init-param>
@@ -94,7 +94,7 @@
 
   <security-constraint>
     <web-resource-collection>
-      <url-pattern>/</url-pattern>
+      <url-pattern>/*</url-pattern>
       <http-method-omission>OPTIONS</http-method-omission>
     </web-resource-collection>
     <auth-constraint>
