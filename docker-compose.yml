@@ -113,6 +113,30 @@ services:
     secrets:
      - source: sp_key
 
+  fuseki:
+    image: fcrepoapix/apix-fuseki:3.4.0
+    env_file: .env
+    container_name: fuseki
+    ports:
+      - "${FUSEKI_PORT}:${FUSEKI_PORT}"
+    networks:
+      - back
+      - front
+
+  messaging:
+    image: oapass/messaging
+    build: ./messaging/
+    container_name: messaging
+    env_file:
+      - .env
+    ports:
+      - "${REINDEXING_PORT}:${REINDEXING_PORT}"
+    depends_on:
+      - fcrepo
+      - fuseki
+    networks:
+      - back
+  
 networks:
   front:
     driver: bridge
