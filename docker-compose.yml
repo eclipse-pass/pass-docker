@@ -8,6 +8,8 @@ services:
     image: oapass/fcrepo
     container_name: fcrepo
     env_file: .env
+    environment:
+      - FCREPO_JMS_BASEURL=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest
     ports: 
       - "${FCREPO_PORT}:${FCREPO_PORT}"
       - "${FCREPO_JMS_PORT}:${FCREPO_JMS_PORT}"
@@ -114,11 +116,26 @@ services:
      - source: sp_key
 
   fuseki:
-    image: fcrepoapix/apix-fuseki:3.4.0
+    image: oapass/fuseki
+    build: fuseki/3.6.0
     env_file: .env
     container_name: fuseki
+    environment:
+      - REQUEST_SUBSTITUTE_FILTER_HOST_PASS=${PASS_PUBLIC_HOST}
+      - REQUEST_SUBSTITUTE_TERM_PASS=${PASS_PUBLIC_PROTO}://${PASS_PUBLIC_HOST}/fcrepo/rest
+      - REQUEST_SUBSTITUTE_REPLACEMENT_PASS=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest
+      - RESPONSE_SUBSTITUTE_FILTER_HOST_PASS=${PASS_PUBLIC_HOST}
+      - RESPONSE_SUBSTITUTE_TERM_PASS=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest
+      - RESPONSE_SUBSTITUTE_REPLACEMENT_PASS=${PASS_PUBLIC_PROTO}://${PASS_PUBLIC_HOST}/fcrepo/rest
+      - REQUEST_SUBSTITUTE_FILTER_HOST_DEV=${PASS_DEV_HOST}:${FUSEKI_PORT}
+      - REQUEST_SUBSTITUTE_TERM_DEV=${PASS_DEV_PROTO}://${PASS_DEV_HOST}:${FCREPO_PORT}/fcrepo/rest
+      - REQUEST_SUBSTITUTE_REPLACEMENT_DEV=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest
+      - RESPONSE_SUBSTITUTE_FILTER_HOST_DEV=${PASS_DEV_HOST}:${FUSEKI_PORT}
+      - RESPONSE_SUBSTITUTE_TERM_DEV=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest
+      - RESPONSE_SUBSTITUTE_REPLACEMENT_DEV=${PASS_DEV_PROTO}://${PASS_DEV_HOST}:${FCREPO_PORT}/fcrepo/rest
     ports:
       - "${FUSEKI_PORT}:${FUSEKI_PORT}"
+      - "5005:5005"
     networks:
       - back
       - front
@@ -127,6 +144,8 @@ services:
     image: oapass/messaging
     build: ./messaging/
     container_name: messaging
+    environment:
+      - INTERNAL_FCREPO_BASEURI=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest
     env_file:
       - .env
     ports:
