@@ -11,4 +11,4 @@ RUN chmod +x /usr/local/bin/httpd-foreground
 
 EXPOSE 80 443
 
-CMD ["httpd-foreground"]
+CMD ["httpd-foreground.sh"]
