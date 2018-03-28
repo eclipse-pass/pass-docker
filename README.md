@@ -14,6 +14,7 @@ These instructions are for starting PASS with `docker-compose`.  If you have Doc
 2. A working Docker installation: Docker for Mac, Docker for Windows, Docker Linux, or Docker Machine
 3. Checkout (i.e. clone) this repository: `git clone https://github.com/OA-PASS/pass-demo-docker`
 4. `cd` into `pass-demo-docker`
+5. If using docker-machine, edit the `.env` file and set `PASS_DEV_HOST` to your docker-machine address, if you desire direct access to any services in a manner that bypasses shibboleth protection, for development purposes.
 
 > Docker Machine users should remember to set the appropriate environment variables in order to select an active machine (e.g. `eval $(docker-machine env default)`), and insure the selected machine is running (e.g. `docker-machine ls`, `docker-machine start default`)
 
@@ -24,6 +25,12 @@ Configuring the Docker images allows you to:
 - change the default GitHub repository urls and branches used to build the code included in the images
 
 To configure the Docker images, open up the `.env` file and make any necessary changes.  A brief description of the variables are below:
+
+### Global Variables
+  - PASS_PUBLIC_HOST: The hostname for the _public_ (shib protected) addresses.
+  - PASS_PUBLIC_PROTO: The http protocol for _public_ (shib protected) addresses, e.g. `https`
+  - PASS_DEV_HOST: The hostname for _direct_ (non-shib-protected) addresses.  Used for development, with your browser pointing directly to a backens service, bypassing Shibboleth
+  - PASS_DEV_PROTO: The http protocol for _direct_ (non-shib-protected) addresses
 
 ### Submission package-related variables
 
@@ -54,6 +61,20 @@ To configure the Docker images, open up the `.env` file and make any necessary c
   - FCREPO_LOG_LEVEL: sets the log level of the Fedora repository
   - FCREPO_TOMCAT_REQUEST_DUMPER_ENABLED: if set to `true`, instructs Tomcat to dump the headers for each request/response
   - FCREPO_TOMCAT_AUTH_LOGGING_ENABLED: if set to `true`, instructs Tomcat to log additional information regarding authentication and authorization
+  - COMPACTION_PRELOAD_URI_PASS_STATIC: The public URI of JSON-LD contexts to [statically pre-load](https://github.com/DataConservancy/fcrepo-jsonld#static-loaded-contexts)
+  - COMPACTION_PRELOAD_FILE_PASS_STATIC: The location of the matching static context file to load
+  - FCREPO_ACTIVEMQ_CONFIGURATION: ActiveMQ file to be used for Fedora messaging.  To point to an existing configuration:
+    * Set to blank/unset for messages to be published to a topic `topic:fedora`.  
+    * Set to `classpath:/activemq-queue.xml` for messages to be published to a queue `queue:fedora`
+    * Set to `activemq-virtualtopic.xml` for messages to be published to virtual topics
+  
+### Search related variables
+   - FUSEKI_HOST: Internal hostname for the triple store (fuseki)
+   - FUSEKI_PORT: Internam port for the triple store (fuseki)
+   - MESSAGING_QUEUE_TRIPLESTORE: The queue or topic in which to read messages for indexing in Fuseki
+   - MESSAGING_AUTHUSERNAME=fedoraAdmin: Fedora credentials for the indexer to use when reading repository resources
+   - MESSAGING_AUTHPASSWORD=moo: Fedora credentials for the indexer to use when reading repository resoirces
+
 
 <h2><a id="build" href="#build">Building the Docker Images</a> (optional)</h2>
 
