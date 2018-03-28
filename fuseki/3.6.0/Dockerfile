@@ -27,6 +27,7 @@ RUN export FUSEKI_DIST=${FUSEKI_VERSION}/jena-fuseki-war-${FUSEKI_VERSION}.war  
     # gettext provides envsubst used in entrypoint
     apk --no-cache add --update gettext && \
     apk --no-cache add --update curl && \
+    chmod 700 /bin/wait_for_tomcat.sh && \
     /bin/wait_for_tomcat.sh && \
     ${CATALINA_HOME}/bin/catalina.sh stop && \
     rm -rf ${CATALINA_HOME}/webapps/fuseki.war && \ 
