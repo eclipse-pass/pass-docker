@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-alpine
 
-ENV PI_VERSION=0.0.1 \
+ENV PI_VERSION=0.0.2 \
     PI_LOG_LEVEL=${PI_LOG_LEVEL:-info}
 
 WORKDIR /app
