@@ -137,7 +137,7 @@ services:
 
   indexer:
     build:
-      context: ./indexer/0.0.2-SNAPSHOT
+      context: ./indexer/0.0.3-SNAPSHOT
       args:
         PI_LOG_LEVEL: "${PI_LOG_LEVEL}"
     image: oapass/indexer
