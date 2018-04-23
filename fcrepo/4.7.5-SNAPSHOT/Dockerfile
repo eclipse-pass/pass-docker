@@ -52,8 +52,8 @@ RUN apk update && \
     ${CATALINA_HOME}/bin/shutdown.sh && \
     sed -i '/bootstrap/d' conf/tomcat-users.xml
 
-RUN wget -O ${CATALINA_HOME}/lib/context.jsonld \
-   https://oa-pass.github.io/pass-data-model/src/main/resources/context.jsonld
+RUN wget -O ${CATALINA_HOME}/lib/context-2.0.jsonld \
+   https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.0.jsonld
 
 
 COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
