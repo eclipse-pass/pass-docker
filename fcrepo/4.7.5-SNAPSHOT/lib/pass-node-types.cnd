@@ -102,3 +102,9 @@
 [pass:RepositoryCopy] > fedora:Container mixin
 [pass:Submission] > fedora:Container mixin
 [pass:User] > fedora:Container mixin
+
+
+/*
+ * DC types
+ */ 
+<dc = 'http://dataconservancy.org/ns/'>
