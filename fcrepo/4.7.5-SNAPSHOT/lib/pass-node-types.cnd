@@ -107,4 +107,4 @@
 /*
  * DC types
  */ 
-<dc = 'http://dataconservancy.org/ns/'>
+<dcjsonld = 'http://dataconservancy.org/ns/jsonld#'>
