@@ -67,8 +67,10 @@ RUN apk update && \
     ${CATALINA_HOME}/bin/shutdown.sh && \
     sed -i '/bootstrap/d' conf/tomcat-users.xml
 
-RUN wget -O ${CATALINA_HOME}/lib/context-2.0.jsonld \
-   ${COMPACTION_URI}
+RUN wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_0} \
+        ${COMPACTION_PRELOAD_URI_PASS_STATIC_2_0} && \
+    wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_1} \
+        ${COMPACTION_PRELOAD_URI_PASS_STATIC_2_1}
 
 COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
 
