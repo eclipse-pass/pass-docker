@@ -6,13 +6,13 @@ ARG EMBER_GIT_BRANCH
 ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-master} \
     EMBER_GIT_REPO=${EMBER_GIT_REPO:-https://github.com/OA-PASS/pass-ember} \
     EMBER_BUILD_DIR=/ember \
-    FEDORA_ADAPTER_BASE=${FEDORA_ADAPTER_BASE:-//fcrepo/rest/} \
-    FEDORA_ADAPTER_CONTEXT=${FEDORA_ADAPTER_CONTEXT:-https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.1.jsonld} \
-    FEDORA_ADAPTER_DATA=${FEDORA_ADAPTER_DATA:-http://example.org/pass/} \
-    FEDORA_ADAPTER_ES=${FEDORA_ADAPTER_ES:-//es/}
+    FEDORA_ADAPTER_BASE=/fcrepo/rest/ \
+    FEDORA_ADAPTER_CONTEXT=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.2.jsonld \
+    FEDORA_ADAPTER_DATA=http://oapass.org/ns/pass# \
+    FEDORA_ADAPTER_ES=/es/ \
+    USER_SERVICE_URL=/pass-user-service/whoami
 
-RUN apk add --no-cache nodejs-npm && \
-    apk add --no-cache --virtual .build-deps git && \
+RUN apk add --no-cache nodejs-npm git && \
     mkdir -p ${EMBER_BUILD_DIR} && \
     cd ${EMBER_BUILD_DIR} && \
     git clone ${EMBER_GIT_REPO} . && \
