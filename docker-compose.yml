@@ -40,7 +40,7 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20180612-2e1011a@sha256:5475f07e0212b362110e96d5cc1f9827f5f9820a9e2f4c99b3b9ec889ee3e80d
+    image: oapass/ember:201806014-76e4dea
     container_name: ember
     env_file: .env
     networks:
@@ -59,7 +59,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy:20180609@sha256:d73e25407c5eb20fa2271734cdb0d24db2b4efde941d8706e116bec1198c5d95
+    image: oapass/httpd-proxy:20180614
     container_name: proxy
     networks:
      - front
@@ -98,7 +98,7 @@ services:
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp:20180609@sha256:7f2066338cf300d88eb8545b35261f64e1749086a7bed28536f0417f2582056e
+    image: oapass/sp:201806014
     container_name: sp
     networks:
      - back
