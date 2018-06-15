@@ -2,6 +2,7 @@ FROM alpine:3.7 as ember-builder
 
 ARG EMBER_GIT_REPO
 ARG EMBER_GIT_BRANCH
+ARG EMBER_ROOT_URL
 
 ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-master} \
     EMBER_GIT_REPO=${EMBER_GIT_REPO:-https://github.com/OA-PASS/pass-ember} \
@@ -11,7 +12,7 @@ ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-master} \
     FEDORA_ADAPTER_DATA=http://oapass.org/ns/pass# \
     FEDORA_ADAPTER_ES=/es/ \
     USER_SERVICE_URL=/pass-user-service/whoami \
-    EMBER_ROOT_URL=/app/
+    EMBER_ROOT_URL=${EMBER_ROOT_URL:-/app/}
 
 RUN apk add --no-cache nodejs-npm git && \
     mkdir -p ${EMBER_BUILD_DIR} && \
@@ -24,7 +25,10 @@ RUN apk add --no-cache nodejs-npm git && \
 
 FROM nginx:1.13.12-alpine
 
-ENV EMBER_PORT=80
+ARG EMBER_ROOT_URL
+
+ENV EMBER_PORT=80 \
+    EMBER_ROOT_URL=${EMBER_ROOT_URL:-/app/}
 COPY bin/entrypoint.sh /bin/
 COPY nginx-template.conf /
 
