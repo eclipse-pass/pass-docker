@@ -26,6 +26,7 @@ else
     _JMS_BASEURL="http://${FCREPO_HOST}:${FCREPO_PORT}${FCREPO_CONTEXT_PATH}/rest"
   fi
 fi
+ACTIVEMQ_BROKER_URI=$( echo ${ACTIVEMQ_BROKER_URI} | sed 's/\(\W\)/\\\1/g')
 
 OPTS="${OPTS}                                                                \
       -Dfcrepo.home=${FCREPO_HOME}                                           \
