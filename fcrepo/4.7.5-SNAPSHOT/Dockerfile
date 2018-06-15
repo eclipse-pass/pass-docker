@@ -78,7 +78,8 @@ RUN apk update && \
     echo "5f3cbb87fc9117b5761efa38c0a085b017166729 *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/jms-addon-${JMS_ADDON_VERSION}.jar" \
         | sha1sum -c -  && \
     chmod 700 /bin/entrypoint.sh && \
-    chmod 700 /bin/setup_fedora.sh
+    chmod 700 /bin/setup_fedora.sh && \
+    chmod 700 /bin/awsentrypoint.sh
 
 RUN export FCREPO_ACTIVEMQ_CONFIGURATION=classpath:/activemq-queue.xml && \
     export FCREPO_JMS_BASEURL=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest && \
