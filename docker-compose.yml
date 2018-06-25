@@ -159,7 +159,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2018-06-20@sha256:a0c584ca72683178382fb6002330c034d10b1b91851202fabfaef9fb812b9863
+    image: birkland/assets:2018-06-24@sha256:3f2214373afe1791235487e153f58c4c3e4f4788a9d2d9ef35d6f8ca2a41bbbb
     build: ./assets
     volumes:
       - passdata:/data
@@ -185,6 +185,14 @@ services:
 # To override packager configuration, create a file named './packagers.properties', edit to suit, and uncomment below
 #    volumes:
 #      - ./packagers.properties:/packagers.properties
+
+  authz:
+    build: ./authz
+    image: oapass/authz:0.1.0-2.2-SNAPSHOT@sha256:7b82b6a348794f5aff4b91a90dcfcbeb1a8fbffee6a7e1bd337f12909480a86f
+    container_name: authz
+    env_file: .env
+    networks:
+      - back
 
 volumes:
   passdata:
