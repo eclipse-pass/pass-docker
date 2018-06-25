@@ -92,7 +92,7 @@ services:
 
   ldap:
     build: ./ldap/
-    image: oapass/ldap:20180609@sha256:a90044c91d70735f8a0b10cf63151d109fbb87fd775d48f5bc02a91c04fbd882
+    image: oapass/ldap:20180625@sha256:91775d0aa6ed7767aa25345355cea22c9136a8be4dac564ecc9c44870ab00af5
     container_name: ldap
     networks:
      - back
@@ -190,6 +190,13 @@ services:
     build: ./authz
     image: oapass/authz:0.1.0-2.2-SNAPSHOT@sha256:7b82b6a348794f5aff4b91a90dcfcbeb1a8fbffee6a7e1bd337f12909480a86f
     container_name: authz
+    env_file: .env
+    networks:
+      - back
+  
+  testing:
+    image: oapass/test:20180625@sha256:15b9a579eb46cfaf823334564078feb1d9f722a32fefb37073b7cd9081cd21f8
+    build: ./testing
     env_file: .env
     networks:
       - back
