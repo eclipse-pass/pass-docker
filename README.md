@@ -113,7 +113,7 @@ If the images deployed to Docker Hub are up-to-date, then you do not need to bui
 If you built the images (or if you already have the images locally from a previous build), services should begin to start right away.  If you did not build the images, Docker will first pull the images from Docker Hub.
 
 The PASS home page is accessible at `https://pass.local`.  It links to the pass ember app at `https://pass.local/app`.  These are the correct URLs to use
-to use pass as a User.  You'll be prompted to log in as necessary.  Use one of the [Shibboleth users](#shibboleth-users) below to log in.
+You'll be prompted to log in as necessary.  Use one of the [Shibboleth users](#shibboleth-users) below to log in.
 
 
 After starting the demo with the defaults, the following services shoud be accessible directly to developers:
