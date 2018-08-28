@@ -2,7 +2,7 @@ FROM tomcat:8.5.31-jre8-alpine@sha256:f9a53932a3cc61ea3a1c307e7bf60897bce356c60c
 
 ENV FCREPO_VERSION=4.7.5 \
 JSONLD_ADDON_VERSION=0.0.6-SNAPSHOT \
-PASS_AUTHZ_VERSION=0.1.2-SNAPSHOT \
+PASS_AUTHZ_VERSION=0.2.0-SNAPSHOT \
 JMS_ADDON_VERSION=0.0.2 \
 FCREPO_HOME=${CATALINA_HOME}/fcrepo4-data \
 FCREPO_HOST=fcrepo \
@@ -42,7 +42,7 @@ EXPOSE ${FCREPO_PORT}
 VOLUME /data
 
 COPY bin/* /bin/
-COPY conf/* ${CATALINA_HOME}/conf/
+COPY conf/ ${CATALINA_HOME}/conf
 COPY lib/* ${CATALINA_HOME}/lib/
 COPY tomcat-bin/* ${CATALINA_HOME}/bin/
 
@@ -61,13 +61,17 @@ RUN apk update && \
         https://github.com/DataConservancy/fcrepo-jsonld/releases/download/${JSONLD_ADDON_VERSION}/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar && \
     echo "fa95adf77b0933f163e213f8133e8d78df7a9141 *${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar" \
         | sha1sum -c -  && \
-    wget -O ${CATALINA_HOME}/lib/pass-authz-filters-shaded.jar \
-        https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-authz-filters-${PASS_AUTHZ_VERSION}-shaded.jar && \
-    echo "1e8d710a20df5d4c4e168be92faf1b530e2a6e89 *${CATALINA_HOME}/lib/pass-authz-filters-shaded.jar" \
+    wget -O ${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar \
+        https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar && \
+    echo "43c3370828ec2eb3f32773cc34ef236b133d53c5 *${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar" \
+       | sha1sum -c -  && \
+    wget -O ${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar \
+        https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar && \
+    echo "a2dd8ee4c7b0a2306881f42ed9844c5bce55dbfb *${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar" \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/webapps/pass-user-service.war \
         https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-user-service-${PASS_AUTHZ_VERSION}.war && \
-    echo "b3e79012a09a97048ded20b76abf3501fa5685df *${CATALINA_HOME}/webapps/pass-user-service.war" \
+    echo "0a5abf8d5a6b558a0c6f8e4d07bc0f14d8604dfd *${CATALINA_HOME}/webapps/pass-user-service.war" \
         | sha1sum -c -  && \
     mkdir ${CATALINA_HOME}/webapps/pass-user-service && \
     unzip ${CATALINA_HOME}/webapps/pass-user-service.war -d ${CATALINA_HOME}/webapps/pass-user-service  && \
