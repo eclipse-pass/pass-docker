@@ -2,7 +2,7 @@ FROM tomcat:8.5.31-jre8-alpine@sha256:f9a53932a3cc61ea3a1c307e7bf60897bce356c60c
 
 ENV FCREPO_VERSION=4.7.5 \
 JSONLD_ADDON_VERSION=0.0.6-SNAPSHOT \
-PASS_AUTHZ_VERSION=0.2.0-SNAPSHOT \
+PASS_AUTHZ_VERSION=0.2.1-SNAPSHOT \
 JMS_ADDON_VERSION=0.0.2 \
 FCREPO_HOME=${CATALINA_HOME}/fcrepo4-data \
 FCREPO_HOST=fcrepo \
@@ -63,15 +63,15 @@ RUN apk update && \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar \
         https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar && \
-    echo "43c3370828ec2eb3f32773cc34ef236b133d53c5 *${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar" \
+    echo "ea729bb05c965e581f5489e250c0e2dc2232c05d *${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar" \
        | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar \
         https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar && \
-    echo "a2dd8ee4c7b0a2306881f42ed9844c5bce55dbfb *${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar" \
+    echo "42262b92902988ac6c1bbf0a33ddd968c2a5913c *${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar" \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/webapps/pass-user-service.war \
         https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-user-service-${PASS_AUTHZ_VERSION}.war && \
-    echo "0a5abf8d5a6b558a0c6f8e4d07bc0f14d8604dfd *${CATALINA_HOME}/webapps/pass-user-service.war" \
+    echo "7b556897692e09ef744cce12d7c085bfc05926e7 *${CATALINA_HOME}/webapps/pass-user-service.war" \
         | sha1sum -c -  && \
     mkdir ${CATALINA_HOME}/webapps/pass-user-service && \
     unzip ${CATALINA_HOME}/webapps/pass-user-service.war -d ${CATALINA_HOME}/webapps/pass-user-service  && \
