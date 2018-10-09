@@ -121,17 +121,17 @@ services:
     secrets:
      - source: sp_key
 
-  dspace:
-    build: ./dspace/6.2
-    image: oapass/dspace@sha256:8b1482a4b8ac31fc656ada66184a7a48e0a0e5dfbcf9aacbe308956f25828abf
-    container_name: dspace
-    env_file: .env
-    ports:
-      - "${DSPACE_PORT}:${DSPACE_PORT}"
-    networks:
-      back:
-        aliases:
-          - pass
+#  dspace:
+#    build: ./dspace/6.2
+#    image: oapass/dspace@sha256:8b1482a4b8ac31fc656ada66184a7a48e0a0e5dfbcf9aacbe308956f25828abf
+#    container_name: dspace
+#    env_file: .env
+#    ports:
+#      - "${DSPACE_PORT}:${DSPACE_PORT}"
+#    networks:
+#      back:
+#        aliases:
+#          - pass
 
   postgres:
     build: ./postgres/10.3
@@ -197,8 +197,8 @@ services:
       - "${DEPOSIT_DEBUG_PORT}:5007"
     networks:
       - back
-    links:
-      - dspace:pass.local
+#    links:
+#      - dspace:pass.local
 # To override configuration, create a file named './repositories.json', edit to suit, and uncomment below
 #    volumes:
 #      - ./repositories.json:/repositories.json
