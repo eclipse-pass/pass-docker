@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5
-    image: oapass/fcrepo:4.7.5-3.1@sha256:fe881bbd1689d7bc019a626e181a124e1f4b4b1c6acf80624dc1c8206c3b04d6
+    image: oapass/fcrepo:4.7.5-3.1@sha256:fe803492981866a0b1722b739d1dbc4bbed751049d662d75348872cb0fd9f84a
     container_name: fcrepo
     env_file: .env
     ports:
@@ -86,7 +86,7 @@ services:
 
   idp:
     build: ./idp/3.3.2
-    image: oapass/idp:20180815@sha256:8cb8e3ac890200bd1611b1b9c82e3cebf7ace1007e5cdfab36eab3118f70be6b
+    image: oapass/idp:20181012@sha256:59d920bd4c6a51d12c0961717f38d743710f1bd8221c2b6c8dda6746ac224d7b
     container_name: idp
     depends_on:
      - ldap
@@ -107,14 +107,14 @@ services:
 
   ldap:
     build: ./ldap/
-    image: oapass/ldap:201808706@sha256:89cdbc3e91917675d9e3da94447f05b74a8fa0b018965c8d97ff278273ab7971
+    image: oapass/ldap:20181012@sha256:813a0be4c301ade0d1f970fea5c51532ba5de90454aa406a5496169a564b0a5f
     container_name: ldap
     networks:
      - back
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp:20180815@sha256:2882114242a7f3160605b3e0f0adfc348f5b74fe625e1eae8db1bb034200c2a8
+    image: oapass/sp:20181012@sha256:fc44a34b8e062eecab66726f4e6bc4da7b2388d1498d90e4ed573953f6885747
     container_name: sp
     networks:
      - back
