@@ -24,9 +24,9 @@ curl -u $1 -i -# -X PUT -H "return=representation" -H "Prefer: handling=lenient;
 {
   "@id" : "${2}users/${3}",
   "@type" : "User",
-  "localKey" : "${3}",
+  "locatorIds" : ["johnshopkins.edu:jhed:${3}"],
   "roles" : [ "${4:-submitter}" ],
-  "@context" : "https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.2.jsonld"
+  "@context" : "https://oa-pass.github.io/pass-data-model/src/main/resources/context-3.1.jsonld"
 }
 EOF
 
