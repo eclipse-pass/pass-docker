@@ -56,7 +56,7 @@ RUN touch /repositories.json
 
 ADD repositories.json /repositories.json
 
-#ADD deposit-messaging-${DEPOSIT_SERVICES_VERSION}-${JSONLD_CONTEXT_VERSION}.jar deposit-messaging.jar
+ADD deposit-messaging.jar deposit-messaging.jar
 
 ENTRYPOINT [ "java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar", "deposit-messaging.jar" ]
 CMD [ "listen" ]
