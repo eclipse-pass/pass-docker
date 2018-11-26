@@ -207,7 +207,7 @@ services:
 
   authz:
     build: ./authz
-    image: oapass/authz:0.4.0-3.2@sha256:64a5a8e7a4280d990d91ca60dffefbde4ad967547569d13d71e6e0d1aed32492
+    image: oapass/authz:0.4.2-3.2@sha256:c34a87ebf5f7f23b48f58fadad68bc12cd58819c2fc2021331896d71c222462d
     container_name: authz
     env_file: .env
     networks:
