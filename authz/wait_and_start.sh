@@ -50,7 +50,7 @@ function wait_until_fedora_up {
 
 wait_until_fedora_up
 
-watch -n10 nslookup ${FCREPO_HOST} 2>/dev/null &
+watch -n10 nslookup ${PASS_FEDORA_HOST} 2>/dev/null &
 
 echo "Executing java -jar ${1}"
 exec java -jar "$1"
