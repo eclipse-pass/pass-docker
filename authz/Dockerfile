@@ -15,6 +15,7 @@ RUN apk add --no-cache ca-certificates wget gettext curl && \
     echo "c03db17ec427f55496389653490c6b91085d3701 *pass-authz-listener-${VERSION}-exe.jar" \
         | sha1sum -c -  && \
     rm -rf /var/cache/apk/ && \
-    chmod 700 wait_and_start.sh 
+    chmod 700 wait_and_start.sh && \
+    echo echo "networkaddress.cache.ttl=10" >> ${JAVA_HOME}/lib/security/java.security
 
 CMD ./wait_and_start.sh pass-authz-listener-${VERSION}-exe.jar
