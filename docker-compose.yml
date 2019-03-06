@@ -250,6 +250,9 @@ services:
     env_file: .env
     ports:
       - "${SCHEMA_SERVICE_PORT}:${SCHEMA_SERVICE_PORT}"
+    networks:
+      - front
+      - back
 
 volumes:
   passdata:
