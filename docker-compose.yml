@@ -75,7 +75,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy:20190306@sha256:8896ee6ab9d57e984ffc5a941011c8a8ba7bb957bc76c408e81b14f7991159eb
+    image: oapass/httpd-proxy:20190306@sha256:63770ee48bfaf251565b2e3ffd593284ed3783ef1b1c44390a60d57c9764009c
     container_name: proxy
     networks:
      - front
