@@ -202,8 +202,8 @@ services:
 # To override configuration, create a file named './repositories.json', edit to suit, and uncomment below
 #    volumes:
 #      - ./packagers.properties:/packagers.properties
-    links:
-      - dspace:pass.local
+#    links:
+#      - dspace:pass.local
 
   authz:
     build: ./authz
@@ -253,6 +253,16 @@ services:
     networks:
       - front
       - back
+
+  journalservice:
+    image: oapass/journal-service:0.0.1@sha256:87a023afede9f32609748952062c93e78eb96edeffd06a29c7886e62603c8f67
+    container_name: journalservice
+    env_file: .env
+    ports:
+      - "${JOURNAL_SERVICE_PORT}:${JOURNAL_SERVICE_PORT}"
+    networks:
+      - back
+
 
 volumes:
   passdata:
