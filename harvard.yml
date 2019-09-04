@@ -44,7 +44,7 @@ services:
         USER_SERVICE_URL: "/pass-user-service/whoami"
         DOI_SERVICE_URL: "/doiservice/journal"
         METADATA_SCHEMA_URI: "https://oa-pass.github.io/metadata-schemas/harvard/global.json"
-    image: oapass/ember:20190827-64ccd5e@sha256:91efc624b14f65a12e99ac92756e51d1dc7c0484d190ed550018163a609cdc9d
+    image: oapass/ember:20190904-aca28b9@sha256:2029f1bfc25fb7aef6c071f6e78b4918aad80316f49709d168a86bdde64df572
     container_name: ember
     env_file: .harvard_env
     networks:
