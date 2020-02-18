@@ -33,7 +33,7 @@ To configure the Docker images, open up the `.env` file and make any necessary c
 
 ### Ember application-related variables
 
-It is important to note that the Ember application does not actually read environment variables at runtime. Instead, values for environment variables are baked into the Ember app at during the build. Ember will actually embed its environment context into the application's HTML by adding it to the rendered document `<head>`. This means that in order to change any variable that the Ember app relies on, you will need to rebuild the app and create a new Docker imafge.
+It is important to note that the Ember application does not actually read environment variables at runtime. Instead, values for environment variables are baked into the Ember app at during the build. Ember will actually embed its environment context into the application's HTML by adding it to the rendered document `<head>`. This means that in order to change any variable that the Ember app relies on, you will need to rebuild the app and create a new Docker image.
 
   - EMBER_PORT: the Ember HTTP application is served on this port
   - The Ember code base will be downloaded and built from `EMBER_GIT_REPO`, using the branch or tag defined in `EMBER_GIT_BRANCH`
