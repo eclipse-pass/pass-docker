@@ -33,7 +33,7 @@ To configure the Docker images, open up the `.env` file and make any necessary c
 
 ### Ember application-related variables
 
-It is important to note that the Ember application does not actually read environment variables at runtime. Instead, values for environment variables are baked into the Ember app at during the build. Ember will actually embed its environment context into the application's HTML by adding it to the rendered document `<head>`. This means that in order to change any variable that the Ember app relies on, you will need to rebuild the app and create a new Docker image.
+It is important to note that the Ember application does not actually read environment variables at runtime. Instead, values for environment variables are baked into the Ember app at during the build. Ember will actually embed its environment context into the application's HTML by adding it to the rendered document `<head>`. This means that in order to change any variable that the Ember app relies on, you will need to rebuild the app and create a new Docker imafge.
 
   - EMBER_PORT: the Ember HTTP application is served on this port
   - The Ember code base will be downloaded and built from `EMBER_GIT_REPO`, using the branch or tag defined in `EMBER_GIT_BRANCH`
@@ -191,6 +191,8 @@ In addition we need PASS_EXTERNAL_FEDORA_BASEURL to be present to translate inte
 - `ACTIVEMQ_JMS_PORT` Openwire wire protocol (ActiveMQ native) port e.g. `61616`
 - `ACTIVEMQ_STOMP_PORT`= STOMP wire protocol (text-based) port e.g. `61613`
 - `ACTIVEMQ_WEBCONSOLE_PORT`= HTTP port for the ActiveMQ web console (admin/admin) e.g. `8161`
+- `ACTIVEMQ_USER`= Username for ActiveMQ clients (default `messaging`), will prefer SPRING_ACTIVEMQ_USER
+- `ACTIVEMQ_PASSWORD`=  Password for ActiveMQ clients (default `moo`), will prefer  SPRING_ACTIVEMQ_PASSWORD
 
 ### Mail-related variables
 
