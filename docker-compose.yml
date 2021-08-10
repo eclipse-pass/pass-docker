@@ -46,7 +46,7 @@ services:
         METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
         MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
         MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
-    image: oapass/ember:20200820-bfaeb5af@sha256:30078e3face08f324c8b2f1dbf93c02789bc8c3665d1269fc3a7586fb214d238
+    image: oapass/ember:foooo
     container_name: ember
     env_file: .env
     networks:
@@ -119,7 +119,7 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: oapass/ldap:20200610-jhu@sha256:44d56b80763c8f11d5db082d3bd2ab78614fcb8e7b6544a146b48d098a2672ce
+    image: oapass/ldap:20210809-jhu-anon
     container_name: ldap
     networks:
      - back
@@ -186,7 +186,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2019-04-08_3.4@sha256:7ec44bd52d7cf635ad05a3f509cf7439e187b7768b8a05abae81b49744ec9d5f
+    image:  oapass/assets:2021-08-09_3.4
     build: ./assets
     volumes:
       - passdata:/data
