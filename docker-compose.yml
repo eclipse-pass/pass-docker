@@ -52,21 +52,6 @@ services:
     networks:
       - back
 
-  static-html:
-    build:
-      context: ./static-html
-      args:
-        STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
-        STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: oapass/static-html:jhu-20220405-3683b71@sha256:sha256:004ee85541a607b17f0d20be56b1df9c99c954dc1c5b331b1325cc0b84a250c7
-    container_name: static-html
-    env_file: .env
-    ports:
-      - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
-    networks:
-      - back
-      - front
-
   ftpserver:
     build: ./ftpserver/0.0.1-demo
     image: oapass/ftpserver@sha256:145f7e3bb494deeb1e1c587f34f0f54649f22d6ef0c107bacd022b0308146ddb
@@ -81,7 +66,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy:20200507@sha256:e8ad2e759fe270998efc80bdcacbeb3f965b4b83d875478e36b0ce4c104bb2d3
+    # image: oapass/httpd-proxy:20200507@sha256:e8ad2e759fe270998efc80bdcacbeb3f965b4b83d875478e36b0ce4c104bb2d3
     container_name: proxy
     networks:
      - front
