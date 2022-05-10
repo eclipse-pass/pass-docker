@@ -89,6 +89,10 @@ services:
     ports:
      - "80:80"
      - "443:443"
+    volumes:
+      - ./star_pass.jhu.edu.crt:/etc/httpd/ssl/domain.crt
+      - ./star_pass.jhu.edu.key:/etc/httpd/ssl/domain.key
+      - ./httpd-proxy/etc-httpd/conf.d/httpd.conf:/etc/httpd/conf.d/httpd.conf
 
   idp:
     build:
@@ -113,7 +117,12 @@ services:
      - source: idp_encryption
      - source: idp_signing
      - source: idp_sealer
-
+    volumes:
+      - ./idp/common/shibboleth-idp/conf/cas-protocol.xml:/opt/shibboleth-idp/conf/cas-protocol.xml
+      - ./idp/common/shibboleth-idp/metadata/sp-metadata.xml:/opt/shibboleth-idp/metadata/sp-metadata.xml
+      - ./idp/jhu/shibboleth-idp/conf/idp.properties:/opt/shibboleth-idp/conf/idp.properties
+      - ./idp/jhu/shibboleth-idp/metadata/idp-metadata.xml:/opt/shibboleth-idp/metadata/idp-metadata.xml
+ 
   ldap:
     build:
       context: ./ldap
@@ -132,7 +141,11 @@ services:
      - back
     secrets:
      - source: sp_key
-
+    volumes:
+      - ./sp/2.6.1/etc-httpd/conf.d/sp.conf:/etc/httpd/conf.d/sp.conf
+      - ./sp/2.6.1/etc-shibboleth/idp-metadata.xml:/etc/shibboleth/idp-metadata.xml
+      - ./sp/2.6.1/etc-shibboleth/shibboleth2.xml:/etc/shibboleth/shibboleth2.xml
+ 
   dspace:
     build: ./dspace/6.2
     image: oapass/dspace:20200419@sha256:99df12f10846f2a2d62058cf4eef631393d7949a343b233a9e487d54fd82a483
@@ -214,7 +227,7 @@ services:
     networks:
       - back
     links:
-      - dspace:pass.local
+      - dspace:sandbox.pass.library.jhu.edu
 # To override configuration, create a file named './repositories.json', edit to suit, and uncomment below
 #    volumes:
 #      - ./packagers.properties:/packagers.properties
