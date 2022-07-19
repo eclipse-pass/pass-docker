@@ -1,9 +1,9 @@
 FROM tomcat:8.5.40-jre8-alpine@sha256:3bfda84777039e5150a74bfdff71979d1cb7106d74382a735a80f18b5d6d2ebb
 
 ENV FCREPO_VERSION=4.7.5 \
-JSONLD_ADDON_VERSION=0.0.6 \
-PASS_AUTHZ_VERSION=0.5.0 \
-JMS_ADDON_VERSION=0.0.2 \
+JSONLD_ADDON_VERSION=0.1.0 \
+PASS_AUTHZ_VERSION=0.1.0 \
+JMS_ADDON_VERSION=0.1.0 \
 POSTGRESQL_VERSION=42.3.2 \
 FCREPO_HOME=${CATALINA_HOME}/fcrepo4-data \
 FCREPO_HOST=fcrepo \
@@ -71,20 +71,20 @@ RUN apk update && \
     echo "org.apache.catalina.webresources.Cache.level = SEVERE" \
       >> ${CATALINA_HOME}/conf/logging.properties && \
     wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar \
-        https://repo1.maven.org/maven2/org/dataconservancy/fcrepo/jsonld-addon-filters/${JSONLD_ADDON_VERSION}/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar && \
-    echo "53883365d715e64bf55ec0e433a2266f9374254e *${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar" \
+        https://repo1.maven.org/maven2/org/eclipse/pass/jsonld-addon-filters/${JSONLD_ADDON_VERSION}/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar && \
+    echo "7d8388c7f8228d86e60e18b79006bf99c0ba35e8 *${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar" \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar \
-        https://repo1.maven.org/maven2/org/dataconservancy/pass/pass-authz-core/${PASS_AUTHZ_VERSION}/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar && \
-    echo "0a0d326ebcd4f47398d5b2c126c49d46153325ab *${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar" \
+        https://repo1.maven.org/maven2/org/eclipse/pass/pass-authz-core/${PASS_AUTHZ_VERSION}/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar && \
+    echo "bd4393c4337f7e439584a9eb86073d4d5daa142f *${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar" \
        | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar \
-        https://repo1.maven.org/maven2/org/dataconservancy/pass/pass-authz-roles/${PASS_AUTHZ_VERSION}/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar && \
-    echo "d3f52226bf86e76fc3ebe9d90a82f4ba4f0aeb6d *${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar" \
+            https://repo1.maven.org/maven2/org/eclipse/pass/pass-authz-roles/${PASS_AUTHZ_VERSION}/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar && \
+    echo "6c00bfa24c3f9ba29277da45961c044928e0c957 *${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar" \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/webapps/pass-user-service.war \
-        https://repo1.maven.org/maven2/org/dataconservancy/pass/pass-user-service/${PASS_AUTHZ_VERSION}/pass-user-service-${PASS_AUTHZ_VERSION}.war && \
-    echo "c603c201fc60b3fb3ae3ac89f4d4e1e5d8f55d5d *${CATALINA_HOME}/webapps/pass-user-service.war" \
+        https://repo1.maven.org/maven2/org/eclipse/pass/pass-user-service/${PASS_AUTHZ_VERSION}/pass-user-service-${PASS_AUTHZ_VERSION}.war && \
+    echo "0f7138d13aeb5f53a9bda264dd68b9448314f01d *${CATALINA_HOME}/webapps/pass-user-service.war" \
         | sha1sum -c -  && \
     mkdir ${CATALINA_HOME}/webapps/pass-user-service && \
     unzip ${CATALINA_HOME}/webapps/pass-user-service.war -d ${CATALINA_HOME}/webapps/pass-user-service  && \
@@ -93,8 +93,8 @@ RUN apk update && \
     unzip ${CATALINA_HOME}/webapps/fcrepo.war -d ${CATALINA_HOME}/webapps/fcrepo  && \
     rm ${CATALINA_HOME}/webapps/fcrepo.war && \
     wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/jms-addon-${JMS_ADDON_VERSION}.jar \
-            https://github.com/DataConservancy/fcrepo-jms/releases/download/jms-addon-${JMS_ADDON_VERSION}/jms-addon-${JMS_ADDON_VERSION}.jar && \
-    echo "5f3cbb87fc9117b5761efa38c0a085b017166729 *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/jms-addon-${JMS_ADDON_VERSION}.jar" \
+            https://repo1.maven.org/maven2/org/eclipse/pass/jms-addon/${JMS_ADDON_VERSION}/jms-addon-${JMS_ADDON_VERSION}.jar && \
+    echo "0f26835c7167a9339cb71b2ec45d926ea05b6955 *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/jms-addon-${JMS_ADDON_VERSION}.jar" \
         | sha1sum -c -  && \
     chmod 700 /bin/entrypoint.sh && \
     chmod 700 /bin/setup_fedora.sh && \
