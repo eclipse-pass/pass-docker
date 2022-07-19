@@ -156,8 +156,8 @@ services:
       - back
 
   indexer:
-    build: ./indexer/0.0.18-SNAPSHOT
-    image: oapass/indexer:0.0.18-3.4-1@sha256:3375ea702e0a1c7a5e0e7e06635d28e49af436aeb1c3d88a03d4cb494d7b40bf
+    build: ./indexer
+    image: oapass/indexer:0.1.0
     container_name: indexer
     env_file: .env
     networks:
