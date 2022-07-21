@@ -46,7 +46,7 @@ services:
         METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
         MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
         MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
-    image: oapass/ember:20220105-08b87e4@sha256:e77f987ff187644532666d815954105647e98629cbea3f7d179d75e743272c39
+    image: oapass/ember:v0.1.0@sha256:f3c5e843009157ac32b3a3072155f483a9ce8ad251729e5f46047f759eea510a
     container_name: ember
     env_file: .env
     networks:
@@ -58,7 +58,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: oapass/static-html:jhu-20220405-3683b71@sha256:004ee85541a607b17f0d20be56b1df9c99c954dc1c5b331b1325cc0b84a250c7
+    image: oapass/static-html:v0.1.0@sha256:433d17ad1199791010c49410c6b1538c0c46c04944720ee7de2074343cbe5fb3
     container_name: static-html
     env_file: .env
     ports:
@@ -288,7 +288,7 @@ services:
     networks:
       - front
       - back
-  
+
   downloadservice:
     image: oapass/download-service:v1.0.2@sha256:53312fcca42a87668a46b34500f7f0153d65fdc5535df1dace755ad6bb3d90ba
     container_name: downloadservice
