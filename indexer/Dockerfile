@@ -14,7 +14,7 @@ RUN apk add --no-cache ca-certificates wget gettext curl && \
     wget https://repo1.maven.org/maven2/org/eclipse/pass/pass-indexer-cli/${PI_VERSION}/pass-indexer-cli-${PI_VERSION}-shaded.jar && \
     echo "3d47917f7039984902c3fe829c51d1d08cafd504 *pass-indexer-cli-${PI_VERSION}-shaded.jar" \
         | sha1sum -c -  && \
-    wget https://oa-pass.github.io/pass-data-model/src/main/resources/esconfig-${ESCONFIG_VERSION}.json && \
+    wget https://eclipse-pass.github.io/pass-data-model/src/main/resources/esconfig-${ESCONFIG_VERSION}.json && \
     rm -rf /var/cache/apk/ && \
     chmod 700 wait_and_start.sh && \
     echo "networkaddress.cache.ttl=10" >> ${JAVA_HOME}/lib/security/java.security
