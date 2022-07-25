@@ -23,7 +23,7 @@ services:
   activemq:
     build:
       context: ./activemq
-    image: oapass/activemq:20200219@sha256:e2351a4ce0d55fd7f016aeca37d789288dc8805fe8bf082b5ede28f7c18e5027
+    image: oapass/activemq:0.1.0@sha256:370189e32b1d34374a0ad15619f356f8d089e7c9000a79fc2de4e078cc23228c
     container_name: activemq
     env_file: .env
     ports:
@@ -68,8 +68,8 @@ services:
       - front
 
   ftpserver:
-    build: ./ftpserver/0.0.1-demo
-    image: oapass/ftpserver@sha256:145f7e3bb494deeb1e1c587f34f0f54649f22d6ef0c107bacd022b0308146ddb
+    build: ./ftpserver
+    image: oapass/ftpserver:0.1.0@sha256:01bc71ee4cb55d8a625e2a8d33e1ba644144ece6bfa0b774b9403e3fe6c29436
     container_name: ftpserver
     env_file: .env
     ports:
@@ -81,7 +81,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy:20200507@sha256:e8ad2e759fe270998efc80bdcacbeb3f965b4b83d875478e36b0ce4c104bb2d3
+    image: oapass/httpd-proxy:0.1.0@sha256:ef5fa38fdf4ba14ed4edd27282d95377946eb25abde3fc97dc817324d200f5a8
     container_name: proxy
     networks:
      - front
@@ -95,7 +95,7 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: oapass/idp:20190813-jhu@sha256:f7a37180964e0e90e1db15440846a39c39659f20999a11c556b99f43d65c7fcb
+    image: oapass/idp:0.1.0@sha256:6028785e1f6b4e35f7d21f9fd4fd11127d628a1e3aef54665a3d53145045d065
     container_name: idp
     depends_on:
      - ldap
@@ -119,14 +119,14 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: oapass/ldap:20200610-jhu@sha256:44d56b80763c8f11d5db082d3bd2ab78614fcb8e7b6544a146b48d098a2672ce
+    image: oapass/ldap:0.1.0@sha256:fd66cb1255b81b81ae602d1ccf56d8534e80a6ee27bccc1de014efab58cbf28c
     container_name: ldap
     networks:
      - back
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp:20200507@sha256:03d652dc51adf919f6f6982bbb5b32188bd8a8053600271dfe0cf9022c2d31fd
+    image: oapass/sp:0.1.0@sha256:3fbdc2d8e7d5e42eda947ead953b78934d7621441a10533261d11b49eea144d7
     container_name: sp
     networks:
      - back
@@ -135,7 +135,7 @@ services:
 
   dspace:
     build: ./dspace/6.2
-    image: oapass/dspace:20200419@sha256:99df12f10846f2a2d62058cf4eef631393d7949a343b233a9e487d54fd82a483
+    image: oapass/dspace:0.1.0@sha256:ffb21fc796f0ff0149fe89958c0cc425826325b96b2b8336522b9028e44876c9
     container_name: dspace
     env_file: .env
     ports:
