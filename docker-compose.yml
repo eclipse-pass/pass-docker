@@ -280,7 +280,7 @@ services:
       - back
 
   doiservice:
-    image: oapass/doi-service:0.1.0:sha256:6b7ec4910216ba0c8368cb0f516c835132236d7626f6453000dd42dfa8b87281
+    image: oapass/doi-service:0.1.0@sha256:6b7ec4910216ba0c8368cb0f516c835132236d7626f6453000dd42dfa8b87281
     container_name: doiservice
     env_file: .env
     ports:
