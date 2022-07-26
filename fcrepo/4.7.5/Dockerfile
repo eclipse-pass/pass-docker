@@ -1,7 +1,7 @@
 FROM tomcat:8.5.40-jre8-alpine@sha256:3bfda84777039e5150a74bfdff71979d1cb7106d74382a735a80f18b5d6d2ebb
 
 ENV FCREPO_VERSION=4.7.5 \
-JSONLD_ADDON_VERSION=0.1.0 \
+JSONLD_ADDON_VERSION=0.1.1 \
 PASS_AUTHZ_VERSION=0.1.0 \
 JMS_ADDON_VERSION=0.1.0 \
 POSTGRESQL_VERSION=42.3.2 \
@@ -71,7 +71,7 @@ RUN apk update && \
       >> ${CATALINA_HOME}/conf/logging.properties && \
     wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar \
         https://repo1.maven.org/maven2/org/eclipse/pass/jsonld-addon-filters/${JSONLD_ADDON_VERSION}/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar && \
-    echo "7d8388c7f8228d86e60e18b79006bf99c0ba35e8 *${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar" \
+    echo "56a7eef9deba0fa8b7d6b185e5d0fa00c098bc8d *${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar" \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar \
         https://repo1.maven.org/maven2/org/eclipse/pass/pass-authz-core/${PASS_AUTHZ_VERSION}/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar && \
