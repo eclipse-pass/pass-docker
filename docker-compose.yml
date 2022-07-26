@@ -260,7 +260,7 @@ services:
       - PASS_NOTIFICATION_CONFIGURATION=file:/notification.json
 
   schemaservice:
-    image: oapass/schema-service:v0.6.1-3-gaa6d2f8@sha256:127b8b640b2c4669a6ca89f52677b54997bf0ea32a5e5f5d3e386537d3cf1e68
+    image: oapass/schema-service:0.1.0@sha256:673104043615f4204c77ba89836e833270a6003641f862aacdf8a0aeab240c0f
     container_name: schemaservice
     env_file: .env
     ports:
@@ -270,7 +270,7 @@ services:
       - back
 
   policyservice:
-    image: oapass/policy-service:v0.1.2@sha256:b361bc7dd9d366465f7683052e038e5ec93ef77a48e69176590c84044ce7d804
+    image: oapass/policy-service:0.1.0@sha256:7c31dabd7dbb3a09ca47f19efe6a1b2aa9cea66ffe21775279ca8189358d4bfa
     container_name: policyservice
     env_file: .env
     ports:
@@ -290,7 +290,7 @@ services:
       - back
 
   downloadservice:
-    image: oapass/download-service:v1.0.2@sha256:53312fcca42a87668a46b34500f7f0153d65fdc5535df1dace755ad6bb3d90ba
+    image: oapass/download-service:0.1.0@sha256:1156fe0847d84f2c24399a19b0a91fd334c7016880d398fa536cb5217b14ea81
     container_name: downloadservice
     env_file: .env
     ports:
