@@ -69,7 +69,7 @@ services:
 
   ftpserver:
     build: ./ftpserver
-    image: oapass/ftpserver:0.1.0@sha256:01bc71ee4cb55d8a625e2a8d33e1ba644144ece6bfa0b774b9403e3fe6c29436
+    image: oapass/ftpserver:0.1.0@sha256:f095b1944aca9c7dd8f68641f682dcba36a0d779b3ba8cb79475a84e4632ab57
     container_name: ftpserver
     env_file: .env
     ports:
