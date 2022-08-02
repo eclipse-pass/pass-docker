@@ -170,6 +170,7 @@ services:
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
+      - network.bind_host=_eth1_
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
