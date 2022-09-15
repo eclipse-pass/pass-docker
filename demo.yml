@@ -1,0 +1,70 @@
+version: '3.8'
+
+# When running commands with this file, you must specify both this yml file and
+# the correct env file. For example:
+#   `docker-compose -f demo.yml --env-file=.demo_env up`
+services:
+  auth:
+    image: eclipse-pass/auth:0.1.0
+    env_file: .demo_env
+    # networks:
+    #   - front
+    #   - back
+
+  elide:
+    image: oapass/elide-test:0.3.0
+    env_file: .demo_env
+    ports:
+      - "${ELIDE_API_PORT}:${ELIDE_API_PORT}"
+    # networks:
+    #   - back
+    depends_on:
+      - postgres
+  
+  ember:
+    build:
+      context: ./ember
+      args:
+        EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
+        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
+        USER_SERVICE_URL: "${USER_SERVICE_URL}"
+        DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
+        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
+        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
+        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
+    image: oapass/ember:local
+    env_file: .demo_env
+    container_name: ember
+    # networks:
+    #   - front # is 'back' in the main docker-compose, use this or 'front'?
+
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    env_file: .demo_env
+    ports:
+      - "${ELIDE_POSTGRES_PORT}:${ELIDE_POSTGRES_PORT}"
+    volumes: 
+      - db:/var/lib/postgresql/data
+      - ./elide/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh
+  
+  proxy:
+    build: ./demo-proxy/
+    image: eclipse-pass/proxy:0.1.0
+    container_name: proxy
+    # networks:
+    #   - front
+    #   - back
+    ports:
+      - "80:80"
+      - "443:443"
+
+volumes:
+  db:
+    driver: local
+
+# networks:
+#   front:
+#     driver: bridge
+#   back:
+#     driver: bridge
