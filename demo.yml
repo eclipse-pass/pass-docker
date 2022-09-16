@@ -64,6 +64,15 @@ services:
       - "80:80"
       - "443:443"
 
+  # loader:
+  #   image: eclipse-pass/demo-loader:local
+  #   env_file: .demo_env
+  #   container_name: loader
+  #   networks:
+  #     - back
+  #   depends_on:
+  #     - elide
+
 volumes:
   db:
     driver: local
