@@ -7,17 +7,17 @@ services:
   auth:
     image: eclipse-pass/auth:0.1.0
     env_file: .demo_env
-    # networks:
-    #   - front
-    #   - back
+    networks:
+      - front
+      - back
 
   elide:
     image: oapass/elide-test:0.3.0
     env_file: .demo_env
-    ports:
-      - "${ELIDE_API_PORT}:${ELIDE_API_PORT}"
-    # networks:
-    #   - back
+    # ports:
+    #   - "${ELIDE_API_PORT}:${ELIDE_API_PORT}"
+    networks:
+      - back
     depends_on:
       - postgres
   
@@ -32,18 +32,23 @@ services:
         METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
         MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
         MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
+        PASS_API_URL: "${PASS_API_URL}"
+        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE}"
+        STATIC_CONFIG_URL: "${STATIC_CONFIG_URL}"
     image: oapass/ember:local
     env_file: .demo_env
     container_name: ember
-    # networks:
-    #   - front # is 'back' in the main docker-compose, use this or 'front'?
+    networks:
+      - back # is 'back' in the main docker-compose, use this or 'front'?
 
   postgres:
     image: postgres:14-alpine
     restart: always
     env_file: .demo_env
-    ports:
-      - "${ELIDE_POSTGRES_PORT}:${ELIDE_POSTGRES_PORT}"
+    # ports:
+    #   - "${ELIDE_POSTGRES_PORT}:${ELIDE_POSTGRES_PORT}"
+    networks:
+      - back
     volumes: 
       - db:/var/lib/postgresql/data
       - ./elide/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh
@@ -52,9 +57,9 @@ services:
     build: ./demo-proxy/
     image: eclipse-pass/proxy:0.1.0
     container_name: proxy
-    # networks:
-    #   - front
-    #   - back
+    networks:
+      - front
+      - back
     ports:
       - "80:80"
       - "443:443"
@@ -63,8 +68,8 @@ volumes:
   db:
     driver: local
 
-# networks:
-#   front:
-#     driver: bridge
-#   back:
-#     driver: bridge
+networks:
+  front:
+    driver: bridge
+  back:
+    driver: bridge
