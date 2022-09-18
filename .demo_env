@@ -15,14 +15,14 @@ JDBC_DATABASE_PASSWORD=moo
 ###################################################
 # Ember app runtime config
 EMBER_PORT=81
-PASS_API_URL=http://localhost
+PASS_API_URL=https://localhost
 PASS_API_NAMESPACE=api/v1
 
 # Ember app build-time config
 EMBER_GIT_REPO=https://github.com/eclipse-pass/pass-ui
 EMBER_GIT_BRANCH=main
 
-EMBER_ROOT_URL=/app/
+EMBER_ROOT_URL=/app
 
 STATIC_CONFIG_URL=/app/config.json
 
@@ -37,8 +37,8 @@ STATIC_CONFIG_URL=/app/config.json
 ###################################################
 # Auth / Proxy config #############################
 ###################################################
-ELIDE_API_URL=http://elide:8080/
-ELIDE_NAMESPACE=api/v1/
+ELIDE_API_URL=http://elide:8080
+ELIDE_NAMESPACE=api/v1
 
 EMBER_URL=http://ember:81/
 

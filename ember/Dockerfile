@@ -19,9 +19,10 @@ ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-main} \
     METADATA_SCHEMA_URI=${METADATA_SCHEMA_URI:-https://oa-pass.github.com/metadata-schemas/jhu/global.json} \
     MANUSCRIPT_SERVICE_LOOKUP_URL=${MANUSCRIPT_SERVICE_LOOKUP_URL:-/downloadservice/lookup} \
     MANUSCRIPT_SERVICE_DOWNLOAD_URL=${MANUSCRIPT_SERVICE_DOWNLOAD_URL:-/downloadservice/download} \
-    PASS_API_URL=${PASS_API_URL:-http://localhost} \
+    PASS_API_URL=${PASS_API_URL:-https://localhost} \
     PASS_API_NAMESPACE=${PASS_API_NAMESPACE:-/api/v1} \
     STATIC_CONFIG_URL=${STATIC_CONFIG_URL:-/app/config.json}
+
 
 RUN apk add --no-cache git python2 g++ make && \
     node -v && npm -v && yarn -v && \
