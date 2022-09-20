@@ -37,8 +37,8 @@ STATIC_CONFIG_URL=/app/config.json
 ###################################################
 # Auth / Proxy config #############################
 ###################################################
-ELIDE_API_URL=http://elide:8080
-ELIDE_NAMESPACE=api/v1
+ELIDE_API_URL=http://elide:8080/
+ELIDE_NAMESPACE=api/v1/
 
 EMBER_URL=http://ember:81/
 
@@ -59,6 +59,6 @@ SESSION_SECRET="J6@NXHe!6ANivq*kp2xVL.hmuMsPQ@2XWTJpzN3YANXDNFGfVUmm.m_gEvXaLstu
 # Sample data loader ##############################
 # Must specify. Can differ from other values ######
 ###################################################
-LOADER_API_HOST=elide
+LOADER_API_HOST=http://elide
 LOADER_API_PORT=8080
 LOADER_API_NAMESPACE=api/v1

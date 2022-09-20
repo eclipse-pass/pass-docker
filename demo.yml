@@ -12,7 +12,7 @@ services:
       - back
 
   elide:
-    image: oapass/elide-test:0.3.0
+    image: eclipse-pass/elide:0.3.0
     env_file: .demo_env
     # ports:
     #   - "${ELIDE_API_PORT}:${ELIDE_API_PORT}"
@@ -22,20 +22,7 @@ services:
       - postgres
   
   ember:
-    build:
-      context: ./ember
-      args:
-        EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
-        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-        USER_SERVICE_URL: "${USER_SERVICE_URL}"
-        DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
-        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
-        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
-        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
-        PASS_API_URL: "${PASS_API_URL}"
-        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE}"
-        STATIC_CONFIG_URL: "${STATIC_CONFIG_URL}"
-    image: oapass/ember:local
+    image: eclipse-pass/ui:local
     env_file: .demo_env
     container_name: ember
     networks:
@@ -64,14 +51,14 @@ services:
       - "80:80"
       - "443:443"
 
-  loader:
-    image: eclipse-pass/demo-loader:local
-    env_file: .demo_env
-    container_name: loader
-    networks:
-      - back
-    depends_on:
-      - elide
+  # loader:
+  #   image: eclipse-pass/demo-loader:local
+  #   env_file: .demo_env
+  #   container_name: loader
+  #   networks:
+  #     - back
+  #   depends_on:
+  #     - elide
 
 volumes:
   db:
