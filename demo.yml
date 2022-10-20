@@ -14,7 +14,7 @@ services:
       - back
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:eae7505426547db7b12c6962372a38030deab9567bbbf0cf1fe90629c9457b99
     env_file: .demo_env
     container_name: pass-core
     networks:
