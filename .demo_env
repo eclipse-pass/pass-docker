@@ -12,7 +12,8 @@ JDBC_DATABASE_USERNAME=pass
 JDBC_DATABASE_PASSWORD=moo
 
 ###################################################
-# PASS_UI config #################################
+# PASS_UI config ##################################
+# ## Changes here require new image build #########
 ###################################################
 # Ember app runtime config
 PASS_UI_PORT=81
