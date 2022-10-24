@@ -27,13 +27,13 @@ PASS_UI_ROOT_URL=/app
 
 STATIC_CONFIG_URL=/app/config.json
 
-DOI_SERVICE_URL=/doiservice/journal
-MANUSCRIPT_SERVICE_LOOKUP_URL=/downloadservice/lookup
-MANUSCRIPT_SERVICE_DOWNLOAD_URL=/downloadservice/download
+DOI_SERVICE_PUBLIC_URL=/doiservice/journal
+MANUSCRIPT_SERVICE_LOOKUP_PUBLIC_URL=/downloadservice/lookup
+MANUSCRIPT_SERVICE_DOWNLOAD_PUBLIC_URL=/downloadservice/download
 POLICY_SERVICE_POLICY_ENDPOINT=/policyservice/policies
 POLICY_SERVICE_REPOSITORY_ENDPOINT=/policyservice/repositories
-SCHEMA_SERVICE_URL=/schemaservice
-USER_SERVICE_URL=/pass-user-service/whoami
+SCHEMA_SERVICE_PUBLIC_URL=/schemaservice
+USER_SERVICE_PUBLIC_URL=/pass-user-service/whoami
 
 ###################################################
 # Auth / Proxy config #############################
@@ -85,7 +85,7 @@ LOADER_API_NAMESPACE=data
 ###################################################
 
 # Static html server runtime config
-STATIC_CONFIG_URI=/config.json
+# STATIC_CONFIG_URI=/config.json
 STATIC_HTML_PORT=82
 
 # Static html server build-time config
