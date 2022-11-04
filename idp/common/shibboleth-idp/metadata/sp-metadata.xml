@@ -1,5 +1,5 @@
 <EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
-  xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://sp.pass/shibboleth" ID="https___sp_pass_shibboleth">
+  xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://demo.eclipse-pass.org/shibboleth" ID="https___sp_pass_shibboleth">
   <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
     <KeyDescriptor use="encryption">
       <ds:KeyInfo>
@@ -29,6 +29,6 @@
       <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc" />
     </KeyDescriptor>
     <NameIDFormat />
-    <AssertionConsumerService index="1" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://pass.local/Shibboleth.sso/SAML2/POST/jhu" />
+    <AssertionConsumerService index="1" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://demo.eclipse-pass.org/Shibboleth.sso/SAML2/POST/jhu" />
   </SPSSODescriptor>
 </EntityDescriptor>
