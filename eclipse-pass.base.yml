@@ -8,7 +8,7 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:08d3afb4ee4a7042c97d6d9a889b4adeeff0dfc199fa24d397a1c71830d3be5e
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:1149308b52a01b83ff490ac01490eaff7440dff8e35828f65093129bda30c6ca
     container_name: auth
     networks:
       - front
@@ -23,7 +23,7 @@ services:
       - postgres
 
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:16608e780279640b400a86678a83555203dcff68fea333681d57742fe100dab2
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:214fac075acc10f37c8aba318463979dba9f47be93a6c4019d2a8a7c57b9f302
     build:
       context: ./ember
       args:
@@ -70,7 +70,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:59288c8687050d3d8822b9b4b8903db599ce9ef44a392f8c151620fd23305f47
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:b51827ed21908c76fcb8a955743b5418f4e0c3e01426de96884645051512a7e0
     container_name: pass-ui-public
     ports:
       - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
@@ -82,7 +82,7 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:48998d5160175c98742eea99ec29be63096d7d9407bdc6b99a97b4a89b5d657e
+    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:63c7c08e46474948d669ff77c8a51f8010dac02c019216ff12d90656ae0f816e
     container_name: idp
     depends_on:
      - ldap
@@ -112,7 +112,7 @@ services:
      - back
 
   loader:
-    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:42cecc2be7c6a9421094f21327943ac1353fce565c0b4dba003852a31d47f1e8
+    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:231b96c7010048b618fbd07ed555547dba98544cc0b4ad96782db4ea4e774f7e
     container_name: loader
     networks:
       - back
