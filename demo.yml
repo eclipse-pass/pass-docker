@@ -109,13 +109,13 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: oapass/ldap:0.1.0@sha256:059f4b287a8a1e8381afeca0e3e13b0255ccf2d93d50d8b318fc8d9826f5d5e5
+    image: ghcr.io/eclipse-pass/demo-ldap:0.2.0@sha256:331cd3ae9c3673c9439fa7465ee807172702bc3dac6583c173766e3c036e8c3e
     container_name: ldap
     networks:
      - back
 
   loader:
-    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:231b96c7010048b618fbd07ed555547dba98544cc0b4ad96782db4ea4e774f7e
+    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:a37b48e513f6d86015f62ab39f50b2dc2fc203e6101df1112d73ffb896e23547
     env_file: .demo_env
     container_name: loader
     networks:
