@@ -23,7 +23,7 @@ services:
       - postgres
   
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:e78e363a4185ee96c9a83478546c43698f0373d900911d7082c9350ce8aced81
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:300602608acd70e5c0330242f1b7bb5c991f06de70a9260c080f6e641c992bd9
     build:
       context: ./ember
       args:
@@ -115,7 +115,7 @@ services:
      - back
 
   loader:
-    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:a37b48e513f6d86015f62ab39f50b2dc2fc203e6101df1112d73ffb896e23547
+    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:d6d559ad9a35e62c4109dff559dc346f700c6f56b516ae666bb03971c7561646
     env_file: .demo_env
     container_name: loader
     networks:
