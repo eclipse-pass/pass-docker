@@ -106,7 +106,7 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: oapass/ldap:0.1.0@sha256:331cd3ae9c3673c9439fa7465ee807172702bc3dac6583c173766e3c036e8c3e
+    image: ghcr.io/eclipse-pass/ldap:0.1.0@sha256:331cd3ae9c3673c9439fa7465ee807172702bc3dac6583c173766e3c036e8c3e
     container_name: ldap
     networks:
      - back
