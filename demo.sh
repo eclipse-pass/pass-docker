@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f demo.yml --env-file .demo_env $@
+docker compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml -f eclipse-pass.local.yml $@

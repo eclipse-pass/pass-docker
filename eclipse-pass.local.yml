@@ -1,0 +1,24 @@
+version: '3.8'
+
+# When running commands with this file, you must specify both this yml file and
+# the correct env file. For example:
+#   `docker compose -f demo.yml --env-file .demo_env up`
+services:
+
+  auth:
+    environment:
+      SAML_ENTRY_POINT: "https://pass.local/idp/profile/SAML2/Redirect/SSO"
+
+  pass-core:
+    environment:
+      PASS_CORE_BASE_URL: "https://pass.local"
+
+  idp:
+    build:
+      context: ./idp
+      args:
+        TENANT: jhu
+    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:48998d5160175c98742eea99ec29be63096d7d9407bdc6b99a97b4a89b5d657e
+    container_name: idp
+    depends_on:
+     - ldap
