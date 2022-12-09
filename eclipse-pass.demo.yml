@@ -20,3 +20,9 @@ services:
 
   loader:
     env_file: .eclipse-pass.demo_env
+
+  idp:
+    build:
+      args:
+        IDP_ENV: demo
+    image: ec982e6f4c8d

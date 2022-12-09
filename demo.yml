@@ -135,14 +135,14 @@ networks:
 
 secrets:
   idp_backchannel:
-    file: ./secrets/idp/idp-backchannel.p12
+    file: ./sample-secrets/idp/idp-backchannel.p12
   idp_browser:
-    file: ./secrets/idp/idp-browser.p12
+    file: ./sample-secrets/idp/idp-browser.p12
   idp_encryption:
-    file: ./secrets/idp/idp-encryption.key
+    file: ./sample-secrets/idp/idp-encryption.key
   idp_signing:
-    file: ./secrets/idp/idp-signing.key
+    file: ./sample-secrets/idp/idp-signing.key
   idp_sealer:
-    file: ./secrets/idp/sealer.jks
+    file: ./sample-secrets/idp/sealer.jks
   sp_key:
-    file: ./secrets/sp/sp-key.pem
+    file: ./sample-secrets/sp/sp-key.pem

@@ -8,3 +8,5 @@
 target/
 node_modules/
 .DS_Store
+secrets.yml
+private-secrets/
