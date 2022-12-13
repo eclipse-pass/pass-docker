@@ -6,6 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup upterm session
-      uses: lhotari/action-upterm@v1
+      - name: Append hosts file
+        run: |
+          echo "127.0.0.1 pass.local" | sudo tee -a /etc/hosts
+          cat /etc/hosts
