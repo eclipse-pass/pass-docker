@@ -7,6 +7,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Append hosts file
+        run: echo "127.0.0.1 pass.local" | sudo tee -a /etc/hosts
+
+      - name: Checkout pass-docker
+        uses: actions/checkout@v3
+
+      - name: Checkout pass-acceptance-testing
+        uses: actions/checkout@v3
+        with:
+          repository: eclipse-pass/pass-acceptance-testing
+          path: pass-acceptance-testing
+      - name: Setup Yarn 
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - run: yarn install
+      
+      - name: Run pass-docker
         run: |
-          echo "127.0.0.1 pass.local" | sudo tee -a /etc/hosts
-          cat /etc/hosts
+          docker-compose up -d
+
+      - name: Run acceptance tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+          run: |
+            testcafe chrome ./pass-acceptance-testing/tests/baseCaseTests.js
+            testcafe chrome ./pass-acceptance-testing/tests/proxySubmissionTests.js
