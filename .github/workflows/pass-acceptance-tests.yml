@@ -28,8 +28,8 @@ jobs:
 
     - name: Wait for startup
       run: |
-        chmod +x .wait-to-start.sh
-        .wait-to-start.sh
+        chmod +x ./wait-to-start.sh
+        ./wait-to-start.sh
       shell: bash
 
     - name: Run acceptance tests
