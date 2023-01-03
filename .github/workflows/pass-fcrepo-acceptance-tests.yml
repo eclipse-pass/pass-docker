@@ -33,6 +33,7 @@ jobs:
       with:
         repository: eclipse-pass/pass-acceptance-testing
         path: pass-acceptance-testing
+        ref: fedora-tests
 
     - name: Run acceptance tests
       uses: DevExpress/testcafe-action@latest
