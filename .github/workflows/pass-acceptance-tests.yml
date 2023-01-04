@@ -16,14 +16,9 @@ jobs:
     - name: Checkout pass-docker
       uses: actions/checkout@v3
 
+    # The '--wait' flag will wait for the pass-core healthcheck
     - name: Run pass-docker
       run: ./demo.sh up -d --quiet-pull --no-build --wait
-
-    - name: Wait for startup
-      run: |
-        chmod +x ./wait-to-start.sh
-        ./wait-to-start.sh
-      shell: bash
 
     - name: Checkout pass-acceptance-testing
       uses: actions/checkout@v3

@@ -18,13 +18,16 @@ services:
      - source: idp_cert
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:bd0b8b3a79a5e476bed8545c3738b274922e6421be1bd39c5b1a3518a326fb23
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:318b14d2dbfee4570b91454632a443aef67d15bf481677fbd7f4532c02853af2
     env_file: .demo_env
     container_name: pass-core
     networks:
       - back
     depends_on:
       - postgres
+    healthcheck:
+      test: "curl -f http://pass-core:8080/data/user || exit 1"
+      start_period: 30s
   
   pass-ui:
     image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:d8d2b5aa7948bf14d3ae2bba4164e74e4bc08aa06973015d76196eddd05d06c1
@@ -128,6 +131,12 @@ services:
       - back
     depends_on:
       - pass-core
+
+  # testcafe:
+  #   image: testcafe/testcafe:2.2.0 #@sha256:daab4fba033728dc6cf36f9375eafdc81aa8f09a5446afe70b621ed4bdd517ac
+  #   networks:
+  #     - back
+  #   # Not enumerating depends_on here, as it has a wait script in its entrypoint
 
 volumes:
   db:
