@@ -29,7 +29,17 @@ jobs:
         repository: eclipse-pass/pass-acceptance-testing
         path: pass-acceptance-testing
 
+    - name: Setup outputs
+      run: mkdir -p outputs/screenshots
+
     - name: Run acceptance tests
       uses: DevExpress/testcafe-action@latest
       with:
-        args: "chrome ./pass-acceptance-testing/tests/*Tests.js --selector-timeout 60000 --assertion-timeout 60000 --ajax-request-timeout 60000 -s takeOnFails=true"
+        args: "chrome ./pass-acceptance-testing/tests/*Tests.js --selector-timeout 60000 --assertion-timeout 60000 --ajax-request-timeout 60000 -s takeOnFails=true path=outputs/screenshots"
+
+    - name: Upload outputs
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: screenshots
+        path: outputs/screenshots
