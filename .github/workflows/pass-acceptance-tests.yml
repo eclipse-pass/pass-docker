@@ -28,6 +28,7 @@ jobs:
       with:
         repository: eclipse-pass/pass-acceptance-testing
         path: pass-acceptance-testing
+        ref: add-assertion-timeout
 
     - name: Run acceptance tests
       uses: DevExpress/testcafe-action@latest
