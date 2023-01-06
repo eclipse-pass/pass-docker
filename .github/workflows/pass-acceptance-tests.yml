@@ -32,4 +32,4 @@ jobs:
     - name: Run acceptance tests
       uses: DevExpress/testcafe-action@latest
       with:
-        args: "chrome ./pass-acceptance-testing/tests/*Tests.js --selector-timeout 60000 --assertion-timeout 60000 --ajax-request-timeout 60000 -s takeOnFails=true path=outputs/screenshots"
+        args: "chrome ./pass-acceptance-testing/tests/*Tests.js --selector-timeout 60000 --assertion-timeout 60000 --ajax-request-timeout 60000"
