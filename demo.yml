@@ -132,12 +132,6 @@ services:
     depends_on:
       - pass-core
 
-  # testcafe:
-  #   image: testcafe/testcafe:2.2.0 #@sha256:daab4fba033728dc6cf36f9375eafdc81aa8f09a5446afe70b621ed4bdd517ac
-  #   networks:
-  #     - back
-  #   # Not enumerating depends_on here, as it has a wait script in its entrypoint
-
 volumes:
   db:
     driver: local
