@@ -20,7 +20,7 @@ services:
      - source: idp_cert
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0@sha256:89e035c0882af618375e504b91433319916a90731396ab81c3bc683126266a26
+    image: ghcr.io/eclipse-pass/pass-core-main:0.3.0@sha256:3c4c5fdbaed397af0ac5bfa0f86111cf90aa4bd602312179e0691985e5c0b3d0
     container_name: pass-core
     env_file:
       - .env
@@ -69,7 +69,7 @@ services:
 
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:6020f7f017108fcc1911d94e0afafcbb5dd02f005876eaa5453395697627628c
+    image: ghcr.io/eclipse-pass/proxy:0.3.0@sha256:6020f7f017108fcc1911d94e0afafcbb5dd02f005876eaa5453395697627628c
     container_name: proxy
     env_file:
       - .env
@@ -100,7 +100,7 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:02235c80cda327375819d84074b165bf931b25e219aff100e8fad13c2a21800d
+    image: ghcr.io/eclipse-pass/idp:0.3.0@sha256:02235c80cda327375819d84074b165bf931b25e219aff100e8fad13c2a21800d
     container_name: idp
     depends_on:
      - ldap
@@ -127,7 +127,7 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: ghcr.io/eclipse-pass/demo-ldap:0.2.0@sha256:331cd3ae9c3673c9439fa7465ee807172702bc3dac6583c173766e3c036e8c3e
+    image: ghcr.io/eclipse-pass/demo-ldap:0.3.0@sha256:331cd3ae9c3673c9439fa7465ee807172702bc3dac6583c173766e3c036e8c3e
     container_name: ldap
     env_file:
       - .env
