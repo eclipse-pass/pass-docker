@@ -7,7 +7,7 @@ version: '3.8'
 #  - eclipse-pass.nightly.yml
 services:
   auth:
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:c966c8500fe43d90a59839bba2798f9ed9a051c5379783a0971bf700003aeddf
+    image: ghcr.io/eclipse-pass/pass-auth:0.3.0@sha256:c0f68f7823fb0a79cac4145f7769ede2b9aecafb133dc7d9fc39ccc6c19892c5
     container_name: auth
     env_file:
       - .env
@@ -33,7 +33,7 @@ services:
       start_period: 30s
 
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:9b4003ffff1484ad4c4cad8e262dbe1480d68bf6dbdb3a2f453ea155a1fa5569
+    image: ghcr.io/eclipse-pass/pass-ui:0.3.0@sha256:09293aa7abc1d183e3435ef0574f77b3eddca04253b803f0edbeee04b3dd82f5
     build:
       context: ./ember
       args:
@@ -86,7 +86,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:35ee542e0e38183baeb94b0274c4a360f6a7b6a147a8557ab421ae4a6d86ea4d
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.3.0@sha256:cfe0b90db197aa460be2091e179978b6b95c73b8acb4278db86eed9876b4f1a8
     container_name: pass-ui-public
     env_file:
       - .env
