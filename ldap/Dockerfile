@@ -24,8 +24,9 @@ RUN useradd ldapadmin \
     && setup-ds.pl --silent --file /ds-setup.inf \
     && /usr/sbin/ns-slapd -D /etc/dirsrv/slapd-dir \
     && sleep 10 \
-    && ldapadd -H ldap:/// -f /users.ldif -x -D "cn=Directory Manager" -w password
+    && ldapadd -H ldap:/// -f /users.ldif -x -D "cn=Directory Manager" -w password \
+    && chmod +x entrypoint.sh
 
 EXPOSE 389
 
-CMD /usr/sbin/ns-slapd -D /etc/dirsrv/slapd-dir && tail -F /var/log/dirsrv/slapd-dir/access
+ENTRYPOINT ["./entrypoint.sh"]
