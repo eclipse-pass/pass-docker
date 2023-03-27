@@ -5,6 +5,8 @@ services:
   auth:
     env_file:
       - .eclipse-pass.local_env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   pass-core:
     env_file:
