@@ -7,7 +7,7 @@ version: '3.8'
 #  - eclipse-pass.nightly.yml
 services:
   auth:
-    image: ghcr.io/eclipse-pass/pass-auth:0.4.0-SNAPSHOT@sha256:b31d2742f38003d024550d4396b5ef41b09e3671f66d3ab16a5f420d758ddeea
+    image: ghcr.io/eclipse-pass/pass-auth:0.4.0-SNAPSHOT@sha256:58fed540ab85302371075a72f65dcbc8cf7ccd8022f318cbe8022fa1b2f938f6
     container_name: auth
     env_file:
       - .env
