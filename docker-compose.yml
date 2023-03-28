@@ -33,7 +33,7 @@ services:
       start_period: 30s
 
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.4.0-SNAPSHOT@sha256:a0db71c2178be837eda423e7aa0d121c6f88f2bed0f6f03dc1a37b53c8d00196
+    image: ghcr.io/eclipse-pass/pass-ui:0.4.0-SNAPSHOT@sha256:0814f5c6c56b8b01d92a7a40c94b80aefc4de4a7ff98207f143c955a4740d9f6
     build:
       context: ./ember
       args:
