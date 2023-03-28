@@ -60,6 +60,8 @@ Environment variables:
 * `PASS_CORE_BASE_URL=https://pass.local` : Used when generating JSON API relationship links. Needs to be absolute and must change to match deployment environment
 * `PASS_CORE_POSTGRES_PORT=5432`
 * `PASS_CORE_API_PORT=8080`
+* `PASS_CORE_BACKEND_USER=backend`
+* `PASS_CORE_BACKEND_PASSWORD=backend`
 * `POSTGRES_USER=postgres`
 * `POSTGRES_PASSWORD=postgres`
 * `JDBC_DATABASE_URL=jdbc:postgresql://postgres:5432/pass`
