@@ -11,6 +11,7 @@ RUN yum install -y epel-release \
 
 COPY common/ds-setup.inf /ds-setup.inf
 COPY ${TENANT}/users.ldif /users.ldif
+COPY entrypoint.sh .
 
 # The 389-ds setup will fail because the hostname can't reliable be determined, so we'll bypass it and then install.
 RUN useradd ldapadmin \
