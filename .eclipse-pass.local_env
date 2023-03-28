@@ -8,3 +8,4 @@ PASS_CORE_BASE_URL=https://pass.local
 ###################################################
 IDP_HOST=https://pass.local
 SAML_ENTRY_POINT="https://pass.local/idp/profile/SAML2/Redirect/SSO"
+PASS_UI_URL=http://host.docker.internal:4200/
