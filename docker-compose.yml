@@ -7,7 +7,7 @@ version: '3.8'
 #  - eclipse-pass.nightly.yml
 services:
   auth:
-    image: ghcr.io/eclipse-pass/pass-auth:0.3.0@sha256:c0f68f7823fb0a79cac4145f7769ede2b9aecafb133dc7d9fc39ccc6c19892c5
+    image: ghcr.io/eclipse-pass/pass-auth:0.4.0-SNAPSHOT@sha256:58fed540ab85302371075a72f65dcbc8cf7ccd8022f318cbe8022fa1b2f938f6
     container_name: auth
     env_file:
       - .env
@@ -20,7 +20,7 @@ services:
      - source: idp_cert
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.3.0@sha256:3c4c5fdbaed397af0ac5bfa0f86111cf90aa4bd602312179e0691985e5c0b3d0
+    image: ghcr.io/eclipse-pass/pass-core-main:0.4.0-SNAPSHOT@sha256:e3816b9b3149c603a0628aa386169d217497833d4797dca765fe488e30c425e9
     container_name: pass-core
     env_file:
       - .env
