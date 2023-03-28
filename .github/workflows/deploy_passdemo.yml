@@ -1,0 +1,41 @@
+name: Deploy passdemo
+
+on: workflow_dispatch
+
+jobs:
+  deploy_code:
+     runs-on: passdemo
+     steps:
+      - uses: actions/checkout@v2
+
+      - name: Check users available
+        run: |
+          echo "Using OSSRH_USERNAME ${{ secrets.OSSRH_USERNAME }}"
+          echo "Using GH_USER ${{ secrets.GH_USER }}"
+          echo "But an unknown secret shows ${{ secrets.GOOP }}"
+
+      # - name: Code Sanity Check
+      #   run: |
+      #     echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      #     echo "🐧 This job is now running on a ${{ runner.os }}"
+      #     pwd
+      #     ls -la
+
+      # - name: Docker Sanity Check
+      #   run: |
+      #     groups
+      #     docker info
+
+      # - name: Stop Existing App
+      #   run: |
+      #     # Stop the application, but then any other running containers
+      #     docker-compose -f docker-compose.yml -f eclipse-pass.demo.yml down
+      #     bash ./tools/docker/stopall.sh
+
+      # - name: Build App
+      #   run: |
+      #     docker-compose -f docker-compose.yml -f eclipse-pass.demo.yml pull
+
+      # - name: Run App
+      #   run: |
+      #     docker-compose -f docker-compose.yml -f eclipse-pass.demo.yml up -d
