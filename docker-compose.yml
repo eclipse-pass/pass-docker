@@ -29,7 +29,7 @@ services:
     depends_on:
       - postgres
     healthcheck:
-      test: "curl -f http://pass-core:8080/data/user || exit 1"
+      test: "curl -u $PASS_CORE_BACKEND_USER:$PASS_CORE_BACKEND_PASSWORD -f http://pass-core:8080/data/user || exit 1"
       start_period: 30s
 
   pass-ui:
@@ -137,7 +137,7 @@ services:
   loader:
     image: curlimages/curl:7.87.0
     container_name: loader
-    command: [curl, http://pass-core:8080/data/, -X, PATCH, -H, "content-type: application/vnd.api+json; ext=jsonpatch", -d, "@/data.json"]
+    command: [curl, http://pass-core:8080/data/, -u, "$PASS_CORE_BACKEND_USER:$PASS_CORE_BACKEND_PASSWORD", -X, PATCH, -H, "content-type: application/vnd.api+json; ext=jsonpatch", -d, "@/data.json"]
     networks:
       - back
     depends_on:
