@@ -127,7 +127,7 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: ghcr.io/eclipse-pass/demo-ldap:0.4.0@sha256:47c6a70dc6144daed0778f64d7faba301d2b8ed0ba8d79c69f759f134da8b85b
+    image: ghcr.io/eclipse-pass/demo-ldap:0.4.0@sha256:384a3ebcf79a20feacdf2ba4454a63a553703d2d5d3e02bf7483ed3eff37dfdd
     container_name: ldap
     env_file:
       - .env
