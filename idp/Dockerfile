@@ -16,7 +16,7 @@ COPY styling/error.vm /opt/shibboleth-idp/views/error.vm
 # Update metadata for deploy target
 COPY metadata/*.xml /opt/shibboleth-idp/metadata/
 
-COPY entrypoint.sh /bin/
+COPY entrypoint.sh .
 
 RUN chmod +x entrypoint.sh
 
