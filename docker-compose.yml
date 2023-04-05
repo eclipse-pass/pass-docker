@@ -7,7 +7,7 @@ version: '3.8'
 #  - eclipse-pass.nightly.yml
 services:
   auth:
-    image: ghcr.io/eclipse-pass/pass-auth:0.4.0@sha256:417e338b59d63343ffe0c8eec40a2d335f3402126c185923fa471bbd08a9ac28
+    image: "ghcr.io/eclipse-pass/pass-auth:${TAG}"
     container_name: auth
     env_file:
       - .env
@@ -20,7 +20,7 @@ services:
      - source: idp_cert
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.4.0@sha256:8a7f5aee466f513a5fd6910c9b73d6f46c95d43408f9cfc6d7f600adc539e47d
+    image: "ghcr.io/eclipse-pass/pass-core-main:${TAG}"
     container_name: pass-core
     env_file:
       - .env
@@ -33,7 +33,7 @@ services:
       start_period: 30s
 
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.4.0@sha256:c897d1b038ff85498cfd8d2b4178e56cd9bacaddffa7a3e4f61708d96264fd75
+    image: "ghcr.io/eclipse-pass/pass-ui:${TAG}"
     build:
       context: ./ember
       args:
@@ -69,7 +69,7 @@ services:
 
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.4.0@sha256:51052cb6c31cdfa347f9a402932f35eaf7c32f4e5aaf5e4f46140d5ae767c48c
+    image: "ghcr.io/eclipse-pass/proxy:${TAG}"
     container_name: proxy
     env_file:
       - .env
@@ -86,7 +86,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: ghcr.io/eclipse-pass/pass-ui-public:0.4.0@sha256:aee39cd5cec8069ce8ce2e47ceed1f7cbcdb7e67e00913afd97cd17a68600373
+    image: "ghcr.io/eclipse-pass/pass-ui-public:${TAG}"
     container_name: pass-ui-public
     env_file:
       - .env
@@ -100,7 +100,7 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: ghcr.io/eclipse-pass/idp:0.4.0@sha256:779526a89a90c5139917c4a2a267c69ebacc643ef215aef78fec282f9b5c3862
+    image: "ghcr.io/eclipse-pass/idp:${TAG}"
     container_name: idp
     depends_on:
      - ldap
@@ -127,7 +127,7 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: ghcr.io/eclipse-pass/demo-ldap:0.4.0@sha256:384a3ebcf79a20feacdf2ba4454a63a553703d2d5d3e02bf7483ed3eff37dfdd
+    image: "ghcr.io/eclipse-pass/demo-ldap:${TAG}"
     container_name: ldap
     env_file:
       - .env
