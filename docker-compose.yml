@@ -7,7 +7,7 @@ version: '3.8'
 #  - eclipse-pass.nightly.yml
 services:
   auth:
-    image: "ghcr.io/eclipse-pass/pass-auth:${TAG}"
+    image: "ghcr.io/eclipse-pass/pass-auth:${PASS_VERSION}"
     container_name: auth
     env_file:
       - .env
@@ -20,7 +20,7 @@ services:
      - source: idp_cert
 
   pass-core:
-    image: "ghcr.io/eclipse-pass/pass-core-main:${TAG}"
+    image: "ghcr.io/eclipse-pass/pass-core-main:${PASS_VERSION}"
     container_name: pass-core
     env_file:
       - .env
@@ -33,7 +33,7 @@ services:
       start_period: 30s
 
   pass-ui:
-    image: "ghcr.io/eclipse-pass/pass-ui:${TAG}"
+    image: "ghcr.io/eclipse-pass/pass-ui:${PASS_VERSION}"
     build:
       context: ./ember
       args:
@@ -69,7 +69,7 @@ services:
 
   proxy:
     build: ./demo-proxy/
-    image: "ghcr.io/eclipse-pass/proxy:${TAG}"
+    image: "ghcr.io/eclipse-pass/proxy:${PASS_VERSION}"
     container_name: proxy
     env_file:
       - .env
@@ -86,7 +86,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: "ghcr.io/eclipse-pass/pass-ui-public:${TAG}"
+    image: "ghcr.io/eclipse-pass/pass-ui-public:${PASS_VERSION}"
     container_name: pass-ui-public
     env_file:
       - .env
@@ -100,7 +100,7 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: "ghcr.io/eclipse-pass/idp:${TAG}"
+    image: "ghcr.io/eclipse-pass/idp:${PASS_VERSION}"
     container_name: idp
     depends_on:
      - ldap
@@ -127,7 +127,7 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: "ghcr.io/eclipse-pass/demo-ldap:${TAG}"
+    image: "ghcr.io/eclipse-pass/demo-ldap:${PASS_VERSION}"
     container_name: ldap
     env_file:
       - .env

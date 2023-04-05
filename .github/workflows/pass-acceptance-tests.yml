@@ -23,7 +23,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Run pass-docker
-      run: docker compose up -d --quiet-pull --no-build
+      run: docker compose up -d --no-build --quiet-pull --pull always
 
     - name: Checkout pass-acceptance-testing
       uses: actions/checkout@v3

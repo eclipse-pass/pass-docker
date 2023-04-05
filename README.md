@@ -4,7 +4,7 @@ The "demo" compose file describes an early system meant to demonstrate some new 
 
 Docker compose works as normal, but for the demo you need to specify both correct `yml` file and env file. In order to run a local instance, you can run:
 ``` sh
-docker compose up -d --no-build
+docker compose up -d --no-build --quiet-pull --pull always
 ```
 
 ## Services:
