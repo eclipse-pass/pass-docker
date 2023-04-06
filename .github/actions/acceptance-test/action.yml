@@ -1,0 +1,40 @@
+name: PASS acceptance tests
+description: >
+  Run acceptance tests.
+  
+  Assumes you are in the pass-docker project. Will start up the Compose environment
+  and tear it down when complete
+
+inputs:
+  timeouts:
+    description: 'Testing timeouts (ms)'
+    default: '60000'
+  pullimages:
+    description: 'Image pull policy (always|missing|never) [default: always]'
+    default: 'always'
+
+runs:
+  using: composite
+  steps:
+    - name: Append hosts file to enable "pass.local" on localhost
+      shell: bash
+      run: echo "127.0.0.1    pass.local" | sudo tee -a /etc/hosts
+
+    - name: Run pass-docker
+      shell: bash
+      run: docker compose up -d --no-build --quiet-pull --pull ${{ inputs.pullimages }}
+
+    - name: Checkout pass-acceptance-testing
+      uses: actions/checkout@v3
+      with:
+        repository: eclipse-pass/pass-acceptance-testing
+        path: pass-acceptance-testing
+
+    - name: Run acceptance tests
+      uses: DevExpress/testcafe-action@latest
+      with:
+        args: "chrome ./pass-acceptance-testing/tests/*Tests.js --selector-timeout ${{ inputs.timeouts}} --assertion-timeout ${{ inputs.timeouts}} --ajax-request-timeout ${{ inputs.timeouts}}"
+
+    - name: Stop pass-docker
+      shell: bash
+      run: docker compose down -v
