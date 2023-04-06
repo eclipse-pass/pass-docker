@@ -1,0 +1,72 @@
+name: Release pass-docker
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseversion:
+        required: true
+        description: Version to release (e.g. 0.4.0)
+      nextversion:
+        required: true
+        description: Next development version (e.g. 0.5.0-SNAPSHOT)
+      runtests:
+        description: 'Run acceptance tests against release version before pushing images?'
+        type: boolean
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      RELEASE: ${{ inputs.releaseversion }}
+      NEXT: ${{ inputs.nextversion }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Config git user
+        run: |
+          git config user.name ${{ github.actor }}
+          git config user.email "${{ github.actor}}@users.noreply.github.com"
+
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update tags to release version
+        uses: ./.github/actions/update-pass-version
+        with:
+          version: $RELEASE
+      
+      - name: Build new images
+        run: docker compose build proxy pass-ui-public idp ldap
+
+      - name: Acceptance tests
+        if: ${{ inputs.runtests }}
+        uses: ./.github/actions/acceptance-test
+        with:
+          # Images just built locally, don't pull anything
+          pullimages: 'never'
+
+      - name: Push release images
+        run: docker compose push proxy pass-ui-public idp ldap
+
+      - name: Bump image versions to next development version
+        uses: ./.github/actions/update-pass-version
+        with:
+          version: $NEXT
+
+      - name: Push git commits to GitHub
+        if: github.ref_type == 'branch' && github.ref_protected == false
+        run: git push origin ${{ github.ref_name }}
+
+      - name: Push release tag to GitHub
+        run: git push origin $RELEASE
+
+      - name: Build and push next development image tags
+        run: docker compose build --push proxy pass-ui-public idp ldap
+
