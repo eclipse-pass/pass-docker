@@ -1,0 +1,24 @@
+name: Update version
+description: 'Update version by changing all PASS Docker image tags and commit the change locally'
+
+inputs:
+  version:
+    required: true
+    description: New version to use
+
+runs:
+  using: composite
+  steps:
+    - name: Update PASS_VERSION
+      shell: bash
+      run: sed -i '/^PASS_VERSION/s/.*/PASS_VERSION=${{ inputs.version }}' .env
+
+    - name: Commit the change
+      shell: bash
+      run: |
+        git add .env
+        git commit -m "Update PASS Docker image tags"
+
+    - name: Create tag
+      shell: bash
+      run: git tag ${{ inputs.version }}
