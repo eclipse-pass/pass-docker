@@ -430,10 +430,9 @@
         "firstName": "Nihu",
         "lastName": "Ser",
         "locatorIds": [
-          "johnshopkins.edu:jhed:123425",
-          "johnshopkins.edu:hopkinsid:12345",
-          "johnshopkins.edu:employeeid:12345",
-          "johnshopkins.edu:jhed:12345"
+          "johnshopkins.edu:unique-id:NIHUSER",
+          "johnshopkins.edu:eppn:nih-user",
+          "johnshopkins.edu:employeeid:118110"
         ],
         "roles": [
           "submitter"
