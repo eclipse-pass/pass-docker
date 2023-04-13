@@ -1,0 +1,44 @@
+  # Update Docker images in pass-docker that are build in this repository:
+  #   * proxy
+  #   * pass-ui-public
+  #   * idp
+  #   * ldap
+name: update-docker-images
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # get-version:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     project-version: ${{ steps.project-version.outputs.version }}
+  #   steps:
+  #     - id: project-version
+  #       run: echo "VERSION=grep -Po '(?<=PASS_VERSION=).* .env" >> $GITHUB_OUTPUT
+  update-images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build set of Docker images
+        run: docker compose build --no-cache proxy pass-ui-public idp ldap
+
+      - name: Publish Docker images
+        run: docker compose push proxy pass-ui-public idp ldap
