@@ -31,14 +31,10 @@ jobs:
 
       - name: Stop Existing App
         run: |
-          # Stop the application, but then also  all docker compose projects, containers, images, etc. for a clean start:
-          docker-compose -f docker-compose.yml -f eclipse-pass.nightly.yml down
+          # Stop the application, but then also all docker compose projects, containers, images, etc. for a clean start:
+          docker compose -f docker-compose.yml -f eclipse-pass.nightly.yml down
           bash ./tools/docker/stopall.sh
-
-      - name: Build App
-        run: |
-          docker-compose -f docker-compose.yml -f eclipse-pass.nightly.yml pull
 
       - name: Run App
         run: |
-          docker-compose -f docker-compose.yml -f eclipse-pass.nightly.yml up -d
+          docker compose -f docker-compose.yml -f eclipse-pass.nightly.yml up -d --no-build --pull always
