@@ -455,9 +455,9 @@
           "submitter"
         ],
         "locatorIds": [
-          "johnshopkins.edu:jhed:staff2",
+          "johnshopkins.edu:eppn:staff2",
           "johnshopkins.edu:employeeid:1020304",
-          "johnshopkins.edu:hopkinsid:FAKE0002"
+          "johnshopkins.edu:unique-id:FAKE0002"
         ],
         "email": "staffWithNoGrants@jhu.edu",
         "username": "staff2@johnshopkins.edu"
@@ -478,9 +478,9 @@
           "submitter"
         ],
         "locatorIds": [
-          "johnshopkins.edu:jhed:swhg",
+          "johnshopkins.edu:eppn:swhg",
           "johnshopkins.edu:employeeid:906502",
-          "johnshopkins.edu:hopkinsid:FAKESWG"
+          "johnshopkins.edu:unique-id:FAKESWG"
         ],
         "middleName": "Who",
         "email": "staffWithGrants@jhu.edu",
@@ -502,8 +502,8 @@
           "submitter"
         ],
         "locatorIds": [
-          "johnshopkins.edu:jhed:fhg1",
-          "johnshopkins.edu:hopkinsid:MF150",
+          "johnshopkins.edu:eppn:fhg1",
+          "johnshopkins.edu:unique-id:MF150",
           "johnshopkins.edu:employeeid:150"
         ],
         "middleName": "A",
@@ -525,6 +525,11 @@
         "displayName": "Andrew Forward",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:aforward",
+          "johnshopkins.edu:unique-id:FAKE0009",
+          "johnshopkins.edu:employeeid:99000009"
         ]
       }
     }
@@ -543,6 +548,11 @@
         "displayName": "Allen Moore",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:amoore",
+          "johnshopkins.edu:unique-id:FAKE0010",
+          "johnshopkins.edu:employeeid:99000010"
         ]
       }
     }
@@ -561,6 +571,11 @@
         "displayName": "Bill Branan",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:bbranan",
+          "johnshopkins.edu:unique-id:FAKE0011",
+          "johnshopkins.edu:employeeid:99000011"
         ]
       }
     }
@@ -579,6 +594,11 @@
         "displayName": "Grant McSheffrey",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:grant-mcs",
+          "johnshopkins.edu:unique-id:FAKE0012",
+          "johnshopkins.edu:employeeid:99000012"
         ]
       }
     }
@@ -597,6 +617,11 @@
         "displayName": "John Abrahams",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:jabrah",
+          "johnshopkins.edu:unique-id:FAKE0013",
+          "johnshopkins.edu:employeeid:99000013"
         ]
       }
     }
@@ -615,6 +640,11 @@
         "displayName": "Jared Galanis",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:jaredgalanis",
+          "johnshopkins.edu:unique-id:FAKE0014",
+          "johnshopkins.edu:employeeid:99000014"
         ]
       }
     }
@@ -633,6 +663,11 @@
         "displayName": "Jeff Gara",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:jgara",
+          "johnshopkins.edu:unique-id:FAKE0015",
+          "johnshopkins.edu:employeeid:99000015"
         ]
       }
     }
@@ -651,6 +686,11 @@
         "displayName": "Jim Martino",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:jrmartino",
+          "johnshopkins.edu:unique-id:FAKE0016",
+          "johnshopkins.edu:employeeid:99000016"
         ]
       }
     }
@@ -669,6 +709,11 @@
         "displayName": "John Kellerman",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:kineticsquid",
+          "johnshopkins.edu:unique-id:FAKE0017",
+          "johnshopkins.edu:employeeid:99000017"
         ]
       }
     }
@@ -687,6 +732,11 @@
         "displayName": "Mark Patton",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:markpatton",
+          "johnshopkins.edu:unique-id:FAKE0018",
+          "johnshopkins.edu:employeeid:99000018"
         ]
       }
     }
@@ -705,6 +755,11 @@
         "displayName": "Tim Martin",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:springstim",
+          "johnshopkins.edu:unique-id:FAKE0019",
+          "johnshopkins.edu:employeeid:99000019"
         ]
       }
     }
@@ -723,6 +778,11 @@
         "displayName": "Tim Sanders",
         "roles": [
           "submitter"
+        ],
+        "locatorIds": [
+          "johnshopkins.edu:eppn:tsande16",
+          "johnshopkins.edu:unique-id:FAKE0020",
+          "johnshopkins.edu:employeeid:99000020"
         ]
       }
     }
