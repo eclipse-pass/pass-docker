@@ -26,7 +26,11 @@
         "formSchema": "{\"id\":\"JScholarship\",\"schema\":{\"title\":\"Johns Hopkins - JScholarship <br><p class=\"lead text-muted\">Deposit requirements for JH\"s institutional repository JScholarship.</p>\",\"type\":\"object\",\"properties\":{\"authors\":{\"title\":\"<div class=\"row\"><div class=\"col-6\">Author(s) <small class=\"text-muted\">(required)</small></div><div class=\"col-6 p-0\"></div></div>\",\"type\":\"array\",\"uniqueItems\":true,\"items\":{\"type\":\"object\",\"properties\":{\"author\":{\"type\":\"string\",\"fieldClass\":\"body-text col-6 pull-left pl-0\"}}}}}},\"options\":{\"fields\":{\"authors\":{\"hidden\":false}}}}",
         "name": "JScholarship",
         "url": "https://jscholarship.library.jhu.edu/",
-        "repositoryKey": "jscholarship"
+        "repositoryKey": "jscholarship",
+        "schemas": [
+          "https://eclipse-pass.github.io/metadata-schemas/jhu/jscholarship.json",
+          "https://eclipse-pass.github.io/metadata-schemas/jhu/common.json"
+        ]
       }
     }
   },
