@@ -49,8 +49,7 @@ jobs:
         if: ${{ inputs.runtests }}
         uses: ./.github/actions/acceptance-test
         with:
-          # Images just built locally, don't pull anything
-          pullimages: 'never'
+          pullimages: 'missing'
 
       - name: Push release images
         run: docker compose push proxy pass-ui-public idp ldap
