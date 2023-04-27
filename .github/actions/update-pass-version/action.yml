@@ -11,7 +11,7 @@ runs:
   steps:
     - name: Update PASS_VERSION
       shell: bash
-      run: sed -i '/^PASS_VERSION/s/.*/PASS_VERSION=${{ inputs.version }}' .env
+      run: sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=${{ inputs.version }}/" .env
 
     - name: Commit the change
       shell: bash
