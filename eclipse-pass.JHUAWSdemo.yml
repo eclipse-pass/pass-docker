@@ -1,0 +1,32 @@
+# Manages the demo.eclipse-pass.org deploy
+# `docker compose -f eclipse-pass.base.yml -f eclipse-pass.JHUAWSdemo.yml up`
+version: '3.8'
+
+services:
+  auth:
+    env_file:
+      - .eclipse-pass.JHUAWSdemo_env
+
+  pass-core:
+    env_file:
+      - .eclipse-pass.JHUAWSdemo_env
+
+  pass-ui:
+    env_file:
+      - .eclipse-pass.JHUAWSdemo_env
+
+  postgres:
+    env_file:
+      - .eclipse-pass.JHUAWSdemo_env
+
+  pass-ui-public:
+    env_file:
+      - .eclipse-pass.JHUAWSdemo_env
+
+  idp:
+    env_file:
+      - .eclipse-pass.JHUAWSdemo_env
+
+  loader:
+    env_file:
+      - .eclipse-pass.JHUAWSdemo_env
