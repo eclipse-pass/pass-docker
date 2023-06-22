@@ -33,7 +33,7 @@ runs:
     - name: Run acceptance tests
       uses: DevExpress/testcafe-action@latest
       with:
-        args: "chrome --allow-insecure-localhost --hostname pass.local ./pass-acceptance-testing/tests/*Tests.js --selector-timeout ${{ inputs.timeouts}} --assertion-timeout ${{ inputs.timeouts}} --ajax-request-timeout ${{ inputs.timeouts}}"
+        args: "chrome --ignore-certificate-errors ./pass-acceptance-testing/tests/*Tests.js --selector-timeout ${{ inputs.timeouts}} --assertion-timeout ${{ inputs.timeouts}} --ajax-request-timeout ${{ inputs.timeouts}}"
 
     - name: Stop pass-docker
       shell: bash
