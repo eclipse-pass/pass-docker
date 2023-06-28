@@ -1,10 +1,10 @@
 ###################################################
 # PASS_CORE config ################################
 ###################################################
-PASS_CORE_BASE_URL=https://oapass.org
+PASS_CORE_BASE_URL=https://demo.eclipse-pass.org
 
 ###################################################
 # Auth / Proxy config #############################
 ###################################################
-IDP_HOST=https://oapass.org
-SAML_ENTRY_POINT="https://oapass.org/idp/profile/SAML2/Redirect/SSO"
+IDP_HOST=https://demo.eclipse-pass.org
+SAML_ENTRY_POINT="https://demo.eclipse-pass.org/idp/profile/SAML2/Redirect/SSO"
