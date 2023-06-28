@@ -30,7 +30,7 @@ Environment variables:
 * `AUTH_LOGIN_SUCCESS=/app/auth-callback`
 * `AUTH_LOGIN_FAILURE=/`
 * `AUTH_LOGOUT=/logout`
-* `AUTH_LOGOUT_REDIRECT=/` : The location to redirect to after a logout occurs. In the default `pass-docker` setup `/` resolves to the `pass-ui-public` pages. This can be configured to redirect to an IDP. To configure this to redirect to the demo IDP use `/login/saml` as the value.
+* `AUTH_LOGOUT_REDIRECT=/login/saml` : The location to redirect to after a logout occurs.
 * `FORCE_AUTHN=true`
 * `SIGNING_CERT_IDP="..."`
 * `SAML_ENTRY_POINT="https://pass.local/idp/profile/SAML2/Redirect/SSO"` : absolute URL must change for different environments

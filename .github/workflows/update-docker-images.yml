@@ -1,6 +1,5 @@
   # Update Docker images in pass-docker that are build in this repository:
   #   * proxy
-  #   * pass-ui-public
   #   * idp
   #   * ldap
 name: update-docker-images
@@ -38,7 +37,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Build set of Docker images
-        run: docker compose build --no-cache proxy pass-ui-public idp ldap
+        run: docker compose build --no-cache proxy idp ldap
 
       - name: Publish Docker images
-        run: docker compose push proxy pass-ui-public idp ldap
+        run: docker compose push proxy idp ldap

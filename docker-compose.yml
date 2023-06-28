@@ -80,21 +80,6 @@ services:
       - "80:80"
       - "443:443"
 
-  pass-ui-public:
-    build:
-      context: ./static-html
-      args:
-        STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
-        STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: "ghcr.io/eclipse-pass/pass-ui-public:${PASS_VERSION}"
-    container_name: pass-ui-public
-    env_file:
-      - .env
-    ports:
-      - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
-    networks:
-      - front
-
   idp:
     build:
       context: ./idp

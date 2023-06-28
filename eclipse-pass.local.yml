@@ -20,10 +20,6 @@ services:
     env_file:
       - .eclipse-pass.local_env
 
-  pass-ui-public:
-    env_file:
-      - .eclipse-pass.local_env
-
   idp:
     env_file:
       - .eclipse-pass.local_env
