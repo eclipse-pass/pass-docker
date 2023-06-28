@@ -19,10 +19,6 @@ services:
     env_file:
       - .eclipse-pass.demo_env
 
-  pass-ui-public:
-    env_file:
-      - .eclipse-pass.demo_env
-
   idp:
     env_file:
       - .eclipse-pass.demo_env
