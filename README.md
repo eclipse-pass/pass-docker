@@ -2,9 +2,32 @@ The "demo" compose file describes an early system meant to demonstrate some new 
 
 ## Running:
 
-Docker compose works as normal, but for the demo you need to specify both correct `yml` file and env file. In order to run a local instance, you can run:
-``` sh
+Docker compose works as normal, but for the demo you need to specify both correct `yml` file and env file. 
+
+In order to run a local instance **_without_** deposit-service and dspace, you can run:
+```
 docker compose up -d --no-build --quiet-pull --pull always
+```
+
+In order to stop a local instance, you can run:
+```
+docker compose -p pass-docker down -v
+```
+Note the `-v` to remove the volumes, **this is critical** so on subsequent starts, user data is not duplicated.
+
+In order to run a local instance **_with_** deposit-service and dspace, you can run:
+```
+docker compose -p pass-docker -f docker-compose.yml -f docker-compose-deposit.yml -f docker-compose-dspace.yml up -d --no-build --quiet-pull
+```
+
+Run the following to create a test admin user in dspace:
+```
+docker-compose -p pass-docker -f dspace-cli.yml run --rm dspace-cli create-administrator -e test@test.edu -f admin -l user -p admin -c en
+```
+
+Run the following to load sample data into dspace:
+```
+docker-compose -p pass-docker -f dspace-cli.yml -f dspace-cli.ingest.yml run --rm dspace-cli
 ```
 
 ## Services:
