@@ -18,7 +18,7 @@ version: '3.8'
 
 services:
   deposit-services:
-    image: "ghcr.io/eclipse-pass/deposit-services-core:0.8.0-SNAPSHOT"
+    image: "ghcr.io/eclipse-pass/deposit-services-core:${PASS_VERSION}"
     container_name: pass-deposit-services
     env_file:
       - .env
