@@ -1,7 +1,7 @@
 #
 # DSpace License
 # Copyright (c) 2002-2021, LYRASIS.  All rights reserved.
-# Detailed available online at: http://www.dspace.org/license/
+# Details available online at: http://www.dspace.org/license/
 #
 # The docker-compose file to start Dspace7 with SwordV2 enabled.
 # The dspace service definitions were taken from the dspace-angular project:
