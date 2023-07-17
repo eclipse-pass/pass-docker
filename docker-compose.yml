@@ -28,6 +28,7 @@ services:
       - back
     depends_on:
       - postgres
+      - localstack
     healthcheck:
       test: "curl -u $PASS_CORE_BACKEND_USER:$PASS_CORE_BACKEND_PASSWORD -f http://pass-core:8080/data/user || exit 1"
       start_period: 30s
@@ -131,6 +132,21 @@ services:
     volumes:
       - ./demo_data.json:/data.json
 
+  localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
+    image: localstack/localstack
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./localstack/sqs_bootstrap.sh:/etc/localstack/init/ready.d/init-aws.sh"
+    networks:
+      - back
+
 volumes:
   db:
     driver: local
@@ -140,6 +156,9 @@ networks:
     driver: bridge
   back:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/16
 
 secrets:
   idp_backchannel:
