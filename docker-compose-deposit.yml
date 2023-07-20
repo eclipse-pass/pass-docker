@@ -26,6 +26,8 @@ services:
       - back
     depends_on:
       - pass-core
+    volumes:
+      - ./deposit/deposit-repositories.json:/deposit/deposit-repositories.json
 
   pmc-ftp-server:
     container_name: pmc-ftp-server
