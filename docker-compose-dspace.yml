@@ -20,7 +20,7 @@ services:
         # __D__ => "-" (e.g. google__D__metadata => google-metadata)
         # dspace.dir, dspace.server.url, dspace.ui.url and dspace.name
         dspace__P__dir: /dspace
-        dspace__P__server__P__url: http://dspace:8080/server
+        dspace__P__server__P__url: http://localhost:8080/server
         dspace__P__ui__P__url: http://localhost:4000
         dspace__P__name: 'DSpace Started with Docker Compose'
         # db.url: Ensure we are using the 'dspacedb' image for our database
@@ -32,7 +32,9 @@ services:
         proxies__P__trusted__P__ipranges: '172.23.0'
         swordv2__D__server__P__enabled: true
         swordv2__D__server__P__url: http://dspace:8080/server/swordv2
-      image: "${DOCKER_OWNER:-dspace}/dspace:${DSPACE_VER:-dspace-7_x-test}"
+        swordv2__D__server__P__servicedocument__P__url: http://dspace:8080/server/swordv2/servicedocument
+        swordv2__D__server__P__collection__P__url: http://dspace:8080/server/swordv2/collection
+      image: "dspace/dspace:dspace-7.6-test"
       depends_on:
         - dspacedb
       networks:
@@ -63,7 +65,7 @@ services:
       environment:
         PGDATA: /pgdata
         POSTGRES_PASSWORD: dspace
-      image: dspace/dspace-postgres-pgcrypto
+      image: dspace/dspace-postgres-pgcrypto:dspace-7.6
       networks:
         back:
       ports:
@@ -76,7 +78,7 @@ services:
   # DSpace Solr container
   dspacesolr:
       container_name: dspacesolr
-      image: "${DOCKER_OWNER:-dspace}/dspace-solr:${DSPACE_VER:-dspace-7_x}"
+      image: "dspace/dspace-solr:dspace-7.6"
       # Needs main 'dspace' container to start first to guarantee access to solr_configs
       depends_on:
         - dspace
@@ -122,7 +124,7 @@ services:
         DSPACE_REST_HOST: localhost
         DSPACE_REST_PORT: 8080
         DSPACE_REST_NAMESPACE: /server
-      image: dspace/dspace-angular:dspace-7_x
+      image: dspace/dspace-angular:dspace-7.6
       networks:
         back:
       ports:
