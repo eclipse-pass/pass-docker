@@ -1,0 +1,20 @@
+# Manages the stage.eclipse-pass.org deploy
+# `docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml up`
+version: '3.8'
+
+services:
+  auth:
+    env_file:
+      - .eclipse-pass.stage_env
+
+  proxy:
+    env_file:
+      - .eclipse-pass.stage_env
+
+  pass-core:
+    env_file:
+      - .eclipse-pass.stage_env
+
+  pass-ui:
+    env_file:
+      - .eclipse-pass.stage_env

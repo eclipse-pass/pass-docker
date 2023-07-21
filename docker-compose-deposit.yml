@@ -21,7 +21,7 @@ services:
     image: "ghcr.io/eclipse-pass/deposit-services-core:${PASS_VERSION}"
     container_name: pass-deposit-services
     env_file:
-      - .env
+      - .eclipse-pass.local_env
     networks:
       - back
     depends_on:

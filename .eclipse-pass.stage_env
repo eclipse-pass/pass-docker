@@ -1,0 +1,55 @@
+
+###################################################
+# Localstack AWS props config #####################
+###################################################
+
+## TODO Secret
+AWS_ACCESS_KEY_ID=stageaccesskey
+## TODO Secret
+AWS_SECRET_ACCESS_KEY=stagesecretkey
+AWS_REGION=us-east-1
+
+###################################################
+# PASS_CORE config ################################
+###################################################
+PASS_CORE_BASE_URL=https://stage.pass
+
+PASS_CORE_POSTGRES_PORT=5432
+
+PASS_CORE_DATABASE_URL=jdbc:postgresql://stage-postgres:5432/pass
+
+## TODO Secret
+PASS_CORE_DATABASE_USERNAME=stagedbuser
+## TODO Secret
+PASS_CORE_DATABASE_PASSWORD=stagedbpass
+
+## TODO Secret
+PASS_CORE_BACKEND_USER=stagepasscoreuser
+## TODO Secret
+PASS_CORE_BACKEND_PASSWORD=stagepasscorepassword
+
+###################################################
+# PASS_DEPOSIT_SERVICES config ####################
+###################################################
+PASS_DEPOSIT_REPOSITORY_CONFIGURATION:file:////deposit/stage-deposit-repositories.json
+
+PASS_CLIENT_URL=http://stage-pass-core:8080/
+## TODO Secret
+PASS_CLIENT_USER=stagepasscoreuser
+## TODO Secret
+PASS_CLIENT_PASSWORD=stagepasscorepassword
+
+## TODO Secret in repository.configuration
+DSPACE_HOST=dspace
+DSPACE_PORT=8080
+
+## TODO Secret in repository.configuration
+FTP_HOST=pmc-ftp-server
+FTP_PORT=21
+
+###################################################
+# Auth / Proxy config #############################
+###################################################
+IDP_HOST=https://stage.idp
+SAML_ENTRY_POINT="https://stage.pass/idp/profile/SAML2/Redirect/SSO"
+PASS_UI_URL=http://stage.pass:81/
