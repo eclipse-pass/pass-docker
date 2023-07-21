@@ -1,11 +1,99 @@
+
+###################################################
+# Localstack AWS props config #####################
+###################################################
+
+## TODO Secret
+AWS_ACCESS_KEY_ID=test
+## TODO Secret
+AWS_SECRET_ACCESS_KEY=test
+
+AWS_REGION=us-east-1
+AWS_SQS_ENDPOINT_OVERRIDE=http://localstack:4566
+
 ###################################################
 # PASS_CORE config ################################
 ###################################################
 PASS_CORE_BASE_URL=https://pass.local
+
+PASS_CORE_POSTGRES_PORT=5432
+
+PASS_CORE_DATABASE_URL=jdbc:postgresql://postgres:5432/pass
+
+## TODO Secret
+PASS_CORE_DATABASE_USERNAME=pass
+## TODO Secret
+PASS_CORE_DATABASE_PASSWORD=moo
+
+## TODO Secret
+PASS_CORE_BACKEND_USER=backend
+## TODO Secret
+PASS_CORE_BACKEND_PASSWORD=backend
+
+# Local Postgres configuration
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+
+###################################################
+# PASS_DEPOSIT_SERVICES config ####################
+###################################################
+PASS_DEPOSIT_REPOSITORY_CONFIGURATION:file:////deposit/deposit-repositories.json
+
+PASS_CLIENT_URL=http://pass-core:8080/
+## TODO Secret
+PASS_CLIENT_USER=backend
+## TODO Secret
+PASS_CLIENT_PASSWORD=backend
+
+## TODO Secret in repository.configuration
+DSPACE_HOST=dspace
+DSPACE_PORT=8080
+
+## TODO Secret in repository.configuration
+FTP_HOST=pmc-ftp-server
+FTP_PORT=21
 
 ###################################################
 # Auth / Proxy config #############################
 ###################################################
 IDP_HOST=https://pass.local
 SAML_ENTRY_POINT="https://pass.local/idp/profile/SAML2/Redirect/SSO"
-PASS_UI_URL=http://host.docker.internal:4200/
+PASS_UI_URL=http://pass-ui:81/
+
+###################################################
+# Sample data loader ##############################
+# Must specify. Can differ from other values ######
+###################################################
+LOADER_API_HOST=http://pass-core
+LOADER_API_PORT=8080
+LOADER_API_NAMESPACE=data
+
+###################################################
+# LDAP / Mail server config #######################
+###################################################
+MAIL_SMTP=11025
+MAIL_IMAPS=11993
+MAIL_MSP=11587
+OVERRIDE_HOSTNAME=mail.jhu.edu
+ENABLE_SPAMASSASSIN=0
+ENABLE_CLAMAV=0
+ENABLE_FAIL2BAN=0
+ENABLE_POSTGREY=0
+SMTP_ONLY=0
+ONE_DIR=1
+DMS_DEBUG=0
+ENABLE_LDAP=1
+TLS_LEVEL=intermediate
+LDAP_SERVER_HOST=ldap
+LDAP_SEARCH_BASE=ou=People,dc=pass
+LDAP_BIND_DN=cn=admin,dc=pass
+LDAP_BIND_PW=password
+LDAP_QUERY_FILTER_USER=(&(objectClass=posixAccount)(mail=%s))
+LDAP_QUERY_FILTER_GROUP=(&(objectClass=posixAccount)(mailGroupMember=%s))
+LDAP_QUERY_FILTER_ALIAS=(&(objectClass=posixAccount)(mailAlias=%s))
+LDAP_QUERY_FILTER_DOMAIN=(|(mail=*@%s)(mailalias=*@%s)(mailGroupMember=*@%s))
+ENABLE_SASLAUTHD=0
+POSTMASTER_ADDRESS=root
+SSL_TYPE=manual
+SSL_CERT_PATH=/tmp/docker-mailserver/cert.pem
+SSL_KEY_PATH=/tmp/docker-mailserver/key.rsa

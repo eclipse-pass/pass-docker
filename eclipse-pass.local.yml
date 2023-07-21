@@ -9,6 +9,9 @@ services:
       - "host.docker.internal:host-gateway"
 
   pass-core:
+    depends_on:
+      - postgres
+      - localstack
     env_file:
       - .eclipse-pass.local_env
 
@@ -17,13 +20,92 @@ services:
       - .eclipse-pass.local_env
 
   postgres:
+    image: postgres:14-alpine
+    restart: always
     env_file:
       - .eclipse-pass.local_env
+    networks:
+      - back
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./postgres/demo/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh
 
   idp:
+    build:
+      context: ./idp
+      args:
+        TENANT: jhu
+    image: "ghcr.io/eclipse-pass/idp:${PASS_VERSION}"
+    container_name: idp
+    depends_on:
+      - ldap
+    environment:
+      - JETTY_MAX_HEAP=64m
+      - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
+      - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
+    expose:
+      - "4443"
     env_file:
       - .eclipse-pass.local_env
+    networks:
+      - back
+    secrets:
+      - source: idp_backchannel
+      - source: idp_browser
+      - source: idp_encryption
+      - source: idp_signing
+      - source: idp_sealer
+      - source: idp_cert
+
+  ldap:
+    build:
+      context: ./ldap
+      args:
+        TENANT: jhu
+    image: "ghcr.io/eclipse-pass/demo-ldap:${PASS_VERSION}"
+    container_name: ldap
+    env_file:
+      - .eclipse-pass.local_env
+    networks:
+      - back
 
   loader:
+    image: curlimages/curl:7.87.0
+    container_name: loader
     env_file:
       - .eclipse-pass.local_env
+    command: [ curl, http://pass-core:8080/data/, -u, "$PASS_CORE_BACKEND_USER:$PASS_CORE_BACKEND_PASSWORD", -X, PATCH, -H, "content-type: application/vnd.api+json; ext=jsonpatch", -d, "@/data.json" ]
+    networks:
+      - back
+    depends_on:
+      pass-core:
+        condition: service_healthy
+    volumes:
+      - ./demo_data.json:/data.json
+
+  localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
+    image: localstack/localstack:2.1.0
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./localstack/sqs_bootstrap.sh:/etc/localstack/init/ready.d/init-aws.sh"
+    networks:
+      - back
+
+secrets:
+  idp_backchannel:
+    file: ./secrets/idp/idp-backchannel.p12
+  idp_browser:
+    file: ./secrets/idp/idp-browser.p12
+  idp_encryption:
+    file: ./secrets/idp/idp-encryption.key
+  idp_signing:
+    file: ./secrets/idp/idp-signing.key
+  idp_sealer:
+    file: ./secrets/idp/sealer.jks
