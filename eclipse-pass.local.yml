@@ -12,12 +12,19 @@ services:
       - source: sp_cert
       - source: idp_cert
 
+  proxy:
+    env_file:
+      - .eclipse-pass.local_env
+
   pass-core:
     depends_on:
       - postgres
       - localstack
     env_file:
       - .eclipse-pass.local_env
+    healthcheck:
+      test: 'curl -u "$$PASS_CORE_BACKEND_USER:$$PASS_CORE_BACKEND_PASSWORD" -f http://pass-core:8080/data/user || exit 1'
+      start_period: 30s
 
   pass-ui:
     env_file:
@@ -27,6 +34,7 @@ services:
     image: postgres:14-alpine
     restart: always
     env_file:
+      - .env
       - .eclipse-pass.local_env
     networks:
       - back
@@ -50,6 +58,7 @@ services:
     expose:
       - "4443"
     env_file:
+      - .env
       - .eclipse-pass.local_env
     networks:
       - back
@@ -69,6 +78,7 @@ services:
     image: "ghcr.io/eclipse-pass/demo-ldap:${PASS_VERSION}"
     container_name: ldap
     env_file:
+      - .env
       - .eclipse-pass.local_env
     networks:
       - back
@@ -77,8 +87,10 @@ services:
     image: curlimages/curl:7.87.0
     container_name: loader
     env_file:
+      - .env
       - .eclipse-pass.local_env
-    command: [ curl, http://pass-core:8080/data/, -u, "$PASS_CORE_BACKEND_USER:$PASS_CORE_BACKEND_PASSWORD", -X, PATCH, -H, "content-type: application/vnd.api+json; ext=jsonpatch", -d, "@/data.json" ]
+    entrypoint: /bin/sh -c
+    command: [ 'curl http://pass-core:8080/data/ -u "$$PASS_CORE_BACKEND_USER:$$PASS_CORE_BACKEND_PASSWORD" -X PATCH -H "content-type: application/vnd.api+json; ext=jsonpatch" -d "@/data.json"' ]
     networks:
       - back
     depends_on:
