@@ -29,13 +29,6 @@ services:
     networks:
       - front
       - back
-    secrets:
-      ## TODO Secret
-     - source: sp_key
-      ## TODO Secret
-     - source: sp_cert
-      ## TODO Secret
-     - source: idp_cert
 
   pass-core:
     image: "ghcr.io/eclipse-pass/pass-core-main:${PASS_VERSION}"
@@ -95,11 +88,3 @@ networks:
     ipam:
       config:
         - subnet: 172.23.0.0/16
-
-secrets:
-  idp_cert:
-    file: ./secrets/idp/idp-signing.crt
-  sp_key:
-    file: ./secrets/sp/sp-key.pem
-  sp_cert:
-    file: ./secrets/sp/sp-cert.pem

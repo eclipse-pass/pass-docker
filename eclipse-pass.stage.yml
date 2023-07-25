@@ -1,11 +1,15 @@
 # Manages the stage.eclipse-pass.org deploy
-# `docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml up`
+# `docker-compose -f docker-compose.yml -f eclipse-pass.stage.yml up`
 version: '3.8'
 
 services:
   auth:
     env_file:
       - .eclipse-pass.stage_env
+    secrets:
+      - source: sp_key
+      - source: sp_cert
+      - source: idp_cert
 
   proxy:
     env_file:
@@ -18,3 +22,11 @@ services:
   pass-ui:
     env_file:
       - .eclipse-pass.stage_env
+
+secrets:
+  idp_cert:
+    file: ./secrets/idp/idp-signing.crt
+  sp_key:
+    file: ./secrets/sp/sp-key.pem
+  sp_cert:
+    file: ./secrets/sp/sp-cert.pem
