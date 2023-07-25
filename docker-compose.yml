@@ -33,11 +33,10 @@ services:
   pass-core:
     image: "ghcr.io/eclipse-pass/pass-core-main:${PASS_VERSION}"
     container_name: pass-core
+    env_file:
+      - .env
     networks:
       - back
-    healthcheck:
-      test: "curl -u $$PASS_CORE_BACKEND_USER:$$PASS_CORE_BACKEND_PASSWORD -f http://pass-core:8080/data/user || exit 1"
-      start_period: 30s
 
   pass-ui:
     image: "ghcr.io/eclipse-pass/pass-ui:${PASS_VERSION}"

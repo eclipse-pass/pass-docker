@@ -1,11 +1,11 @@
 # Manages the stage.eclipse-pass.org deploy
-# `docker-compose -f docker-compose.yml -f eclipse-pass.stage.yml up`
+# `docker-compose -f docker-compose.yml -f eclipse-pass.JHUAWSstage.yml up`
 version: '3.8'
 
 services:
   auth:
     env_file:
-      - .eclipse-pass.stage_env
+      - .eclipse-pass.JHUAWSstage_env
     secrets:
       - source: sp_key
       - source: sp_cert
@@ -13,15 +13,15 @@ services:
 
   proxy:
     env_file:
-      - .eclipse-pass.stage_env
+      - .eclipse-pass.JHUAWSstage_env
 
   pass-core:
     env_file:
-      - .eclipse-pass.stage_env
+      - .eclipse-pass.JHUAWSstage_env
 
   pass-ui:
     env_file:
-      - .eclipse-pass.stage_env
+      - .eclipse-pass.JHUAWSstage_env
 
 secrets:
   idp_cert:
