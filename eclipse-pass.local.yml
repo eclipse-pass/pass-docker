@@ -7,6 +7,10 @@ services:
       - .eclipse-pass.local_env
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    secrets:
+      - source: sp_key
+      - source: sp_cert
+      - source: idp_cert
 
   pass-core:
     depends_on:
@@ -99,6 +103,12 @@ services:
       - back
 
 secrets:
+  idp_cert:
+    file: ./secrets/idp/idp-signing.crt
+  sp_key:
+    file: ./secrets/sp/sp-key.pem
+  sp_cert:
+    file: ./secrets/sp/sp-cert.pem
   idp_backchannel:
     file: ./secrets/idp/idp-backchannel.p12
   idp_browser:

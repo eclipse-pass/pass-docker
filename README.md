@@ -6,7 +6,7 @@ Docker compose works as normal, but for the demo you need to specify both correc
 
 In order to run a local instance **_without_** deposit-service, ftp, and dspace, you can run:
 ```
-docker compose up -d --no-build --quiet-pull --pull always
+docker compose -f docker-compose.yml -f eclipse-pass.local.yml up -d --no-build --quiet-pull --pull always
 ```
 
 In order to stop a local instance, you can run:
@@ -17,7 +17,7 @@ Note the `-v` to remove the volumes, **this is critical** so on subsequent start
 
 In order to run a local instance **_with_** deposit-service, ftp, dspace, you can run:
 ```
-docker compose -p pass-docker -f docker-compose.yml -f docker-compose-deposit.yml -f docker-compose-dspace.yml up -d --no-build --quiet-pull
+docker compose -p pass-docker -f docker-compose.yml -f eclipse-pass.local.yml -f docker-compose-deposit.yml -f docker-compose-dspace.yml up -d --no-build --quiet-pull --pull always
 ```
 
 Run the following to create a test admin user in dspace:
