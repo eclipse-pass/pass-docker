@@ -1,5 +1,7 @@
 # Manages the stage.eclipse-pass.org deploy
 # `docker-compose -f docker-compose.yml -f eclipse-pass.JHUAWSstage.yml up`
+# Note the env_file and secrets files do not exist in this repo. They will be in
+# JHU AWS Stage environment.
 version: '3.8'
 
 services:
@@ -25,8 +27,8 @@ services:
 
 secrets:
   idp_cert:
-    file: ./secrets/idp/idp-signing.crt
+    file: ./stage-idp-signing.crt
   sp_key:
-    file: ./secrets/sp/sp-key.pem
+    file: ./stage-sp-key.pem
   sp_cert:
-    file: ./secrets/sp/sp-cert.pem
+    file: ./stage-sp-cert.pem
