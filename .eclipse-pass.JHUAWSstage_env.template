@@ -1,4 +1,10 @@
 ###################################################
+# This is a template of the env vars needed for   #
+# the JHU PASS Stage deployment.  The actual env  #
+# file will reside in AWS.                        #
+###################################################
+
+###################################################
 # Localstack AWS props config #####################
 ###################################################
 
