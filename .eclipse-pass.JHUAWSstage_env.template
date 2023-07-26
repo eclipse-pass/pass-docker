@@ -5,11 +5,9 @@
 ###################################################
 
 ###################################################
-# Localstack AWS props config #####################
+# AWS resources will be accessed via IAM Roles ####
 ###################################################
 
-AWS_ACCESS_KEY_ID=stageaccesskey
-AWS_SECRET_ACCESS_KEY=stagesecretkey
 AWS_REGION=us-east-1
 
 ###################################################
