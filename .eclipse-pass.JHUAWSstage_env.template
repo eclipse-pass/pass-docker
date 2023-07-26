@@ -24,6 +24,10 @@ PASS_CORE_DATABASE_URL=jdbc:postgresql://stage-postgres:5432/pass
 PASS_CORE_DATABASE_USERNAME=stagedbuser
 PASS_CORE_DATABASE_PASSWORD=stagedbpass
 
+PASS_CORE_FILE_SERVICE_TYPE=S3
+PASS_CORE_S3_BUCKET_NAME=pass-core-files
+PASS_CORE_S3_REPO_PREFIX=stage
+
 ###################################################
 # PASS_DEPOSIT_SERVICES config ####################
 ###################################################
