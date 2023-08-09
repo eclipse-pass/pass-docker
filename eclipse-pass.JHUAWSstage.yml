@@ -26,6 +26,10 @@ services:
   pass-ui:
     env_file:
       - .eclipse-pass.JHUAWSstage_env
+    volumes:
+      - "${HOST_PATH}/branding-overrides.css:/usr/share/nginx/html/app/branding-overrides.css"
+      - "${HOST_PATH}/pass-ui-entrypoint-stage.sh:/pass-ui-entrypoint-stage.sh"
+    entrypoint: ["/bin/sh", "-c", "/pass-ui-entrypoint-stage.sh"]
 
 secrets:
   idp_cert:
