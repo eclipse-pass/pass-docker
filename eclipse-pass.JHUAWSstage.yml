@@ -27,8 +27,8 @@ services:
     env_file:
       - .eclipse-pass.JHUAWSstage_env
     volumes:
-      - "./pass-ui-entrypoint-stage.sh:/pass-ui-entrypoint-stage.sh"
-    entrypoint: ["/bin/sh", "-c", "/pass-ui-entrypoint-stage.sh"]
+      - "./pass-ui-jhu-entrypoint.sh:/pass-ui-jhu-entrypoint.sh"
+    entrypoint: ["/bin/sh", "-c", "/pass-ui-jhu-entrypoint.sh"]
 
 secrets:
   idp_cert:
