@@ -40,4 +40,4 @@ jobs:
         run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build --no-cache proxy idp ldap
 
       - name: Publish Docker images
-        run: docker compose push proxy idp ldap
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml push proxy idp ldap
