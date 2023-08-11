@@ -35,9 +35,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Build set of Docker images
-        run: docker compose build --no-cache proxy idp ldap
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build --no-cache proxy idp ldap
 
       - name: Publish Docker images
         run: docker compose push proxy idp ldap
