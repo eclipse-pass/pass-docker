@@ -35,11 +35,14 @@ PASS_CLIENT_URL=http://stage-pass-core:8080/
 PASS_CLIENT_USER=stagepasscoreuser
 PASS_CLIENT_PASSWORD=stagepasscorepassword
 
-DSPACE_HOST=dspace
-DSPACE_PORT=8080
+DSPACE_SERVER=dspace:8080
+DSPACE_USER=test@test.edu
+DSPACE_PASSWORD=admin
 
-FTP_HOST=pmc-ftp-server
-FTP_PORT=21
+PMC_FTP_HOST=pmc-ftp-server
+PMC_FTP_PORT=21
+PMC_FTP_USER=nihmsftpuser
+PMC_FTP_PASSWORD=nihmsftppass
 
 ###################################################
 # Auth / Proxy config #############################

@@ -26,19 +26,19 @@
       "auth-realms": [
         {
           "mech": "basic",
-          "username": "test@test.edu",
-          "password": "admin",
-          "url": "http://${dspace.host}:${dspace.port}/server/swordv2"
+          "username": "${dspace.user}",
+          "password": "${dspace.password}",
+          "url": "http://${dspace.server}/server/swordv2"
         }
       ],
       "protocol-binding": {
         "protocol": "SWORDv2",
-        "username": "test@test.edu",
-        "password": "admin",
-        "server-fqdn": "${dspace.host}",
-        "server-port": "${dspace.port}",
-        "service-doc": "http://${dspace.host}:${dspace.port}/server/swordv2/servicedocument",
-        "default-collection": "http://${dspace.host}:${dspace.port}/server/swordv2/collection/123456789/20",
+        "username": "${dspace.user}",
+        "password": "${dspace.password}",
+        "server-fqdn": null,
+        "server-port": null,
+        "service-doc": "http://${dspace.server}/server/swordv2/servicedocument",
+        "default-collection": "http://${dspace.server}/server/swordv2/collection/123456789/20",
         "on-behalf-of": null,
         "deposit-receipt": true,
         "user-agent": "pass-deposit/x.y.z"
@@ -71,10 +71,10 @@
     "transport-config": {
       "protocol-binding": {
         "protocol": "ftp",
-        "username": "nihmsftpuser",
-        "password": "nihmsftppass",
-        "server-fqdn": "${ftp.host}",
-        "server-port": "${ftp.port}",
+        "username": "${pmc.ftp.user}",
+        "password": "${pmc.ftp.password}",
+        "server-fqdn": "${pmc.ftp.host}",
+        "server-port": "${pmc.ftp.port}",
         "data-type": "binary",
         "transfer-mode": "stream",
         "use-pasv": true,
