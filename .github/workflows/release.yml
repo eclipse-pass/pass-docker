@@ -43,7 +43,7 @@ jobs:
           version: $RELEASE
       
       - name: Build new images
-        run: docker compose build proxy idp ldap
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build proxy idp ldap
 
       - name: Acceptance tests
         if: ${{ inputs.runtests }}
@@ -52,7 +52,7 @@ jobs:
           pullimages: 'missing'
 
       - name: Push release images
-        run: docker compose push proxy idp ldap
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml push proxy idp ldap
 
       - name: Bump image versions to next development version
         uses: ./.github/actions/update-pass-version
@@ -67,5 +67,5 @@ jobs:
         run: git push origin $RELEASE
 
       - name: Build and push next development image tags
-        run: docker compose build --push proxy idp ldap
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build --push proxy idp ldap
 
