@@ -30,19 +30,16 @@ services:
     volumes:
       - ./deposit/deposit-repositories.json:/deposit/deposit-repositories.json
 
-  pmc-ftp-server:
-    container_name: pmc-ftp-server
-    environment:
-      - FTP_USER=nihmsftpuser
-      - FTP_PASS=nihmsftppass
-    image: fauria/vsftpd
+  pmc-sftp-server:
+    container_name: pmc-sftp-server
+    image: atmoz/sftp
     ports:
-      - '20-21:20-21/tcp'
-      - '40000-40009:40000-40009/tcp'
+      - '2222:22/tcp'
     networks:
       - back
     volumes:
-      - ftpdata:/home/user
+      - sftpdata:/home/pmcsftpuser
+    command: pmcsftpuser:pmcsftppass:::upload
 
 volumes:
-  ftpdata:
+  sftpdata:

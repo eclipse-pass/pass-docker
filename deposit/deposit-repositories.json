@@ -70,15 +70,12 @@
     },
     "transport-config": {
       "protocol-binding": {
-        "protocol": "ftp",
+        "protocol": "sftp",
         "username": "${pmc.ftp.user}",
         "password": "${pmc.ftp.password}",
         "server-fqdn": "${pmc.ftp.host}",
         "server-port": "${pmc.ftp.port}",
-        "data-type": "binary",
-        "transfer-mode": "stream",
-        "use-pasv": true,
-        "default-directory": "/logs/upload/test/%s"
+        "default-directory": "/upload/%s"
       }
     }
   }
