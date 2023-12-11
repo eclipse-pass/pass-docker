@@ -30,12 +30,18 @@ runs:
         repository: eclipse-pass/pass-acceptance-testing
         path: pass-acceptance-testing
 
+    # Can run `yarn test`, but calling testcafe directly allows us to more easily set test timeouts
     - name: Run acceptance tests
-      uses: DevExpress/testcafe-action@latest
-      with:
-        version: "3.3.0"
-        args: "'chrome --ignore-certificate-errors --allow-insecure-localhost' --hostname localhost ./pass-acceptance-testing/tests/*Tests.js --selector-timeout ${{ inputs.timeouts}} --assertion-timeout ${{ inputs.timeouts}} --ajax-request-timeout ${{ inputs.timeouts}}"
+      run: |
+        cd pass-acceptance-testing
+        yarn install --frozen-lockfile
+        npx testcafe 'chrome --ignore-certificate-errors --allow-insecure-localhost' \
+          --hostname localhost \
+          tests/*Tests.js \
+          --selector-timeout ${{ inputs.timeouts}} \
+          --assertion-timeout ${{ inputs.timeouts}} \
+          --ajax-request-timeout ${{ inputs.timeouts}}
 
     - name: Stop pass-docker
       shell: bash
-      run: docker compose down -v
+      run: cd .. && docker compose down -v
