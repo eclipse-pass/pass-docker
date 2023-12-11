@@ -32,6 +32,7 @@ runs:
 
     # Can run `yarn test`, but calling testcafe directly allows us to more easily set test timeouts
     - name: Run acceptance tests
+      shell: bash
       run: |
         cd pass-acceptance-testing
         yarn install --frozen-lockfile
