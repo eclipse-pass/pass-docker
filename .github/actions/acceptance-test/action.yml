@@ -33,32 +33,32 @@ runs:
     # Need X-server for Linux runner but not for Windows or macOS runners:
     # https://github.com/DevExpress/testcafe-action/blob/master/index.js#L64
     - name: Run acceptance tests
-      if: runner.os != "Linux"
+      # if: runner.os != "Linux"
       shell: bash
       run: |
         cd pass-acceptance-testing
         yarn install --frozen-lockfile
         npx testcafe \
-          'chrome --ignore-certificate-errors --allow-insecure-localhost' \
+          'chrome:headless --ignore-certificate-errors --allow-insecure-localhost' \
           --hostname localhost \
           tests/*Tests.js \
           --selector-timeout ${{ inputs.timeouts}} \
           --assertion-timeout ${{ inputs.timeouts}} \
           --ajax-request-timeout ${{ inputs.timeouts}}
 
-    - name: Run acceptance tests (Linux)
-      if: runner.os == "Linux"
-      shell: bash
-      run: |
-        cd pass-acceptance-testing
-        yarn install --frozen-lockfile
-        xvfb-run --server-args="-screen 0 1280x720x24" > /dev/null npx testcafe \
-          'chrome --ignore-certificate-errors --allow-insecure-localhost' \
-          --hostname localhost \
-          tests/*Tests.js \
-          --selector-timeout ${{ inputs.timeouts}} \
-          --assertion-timeout ${{ inputs.timeouts}} \
-          --ajax-request-timeout ${{ inputs.timeouts}}
+    # - name: Run acceptance tests (Linux)
+    #   if: runner.os == "Linux"
+    #   shell: bash
+    #   run: |
+    #     cd pass-acceptance-testing
+    #     yarn install --frozen-lockfile
+    #     xvfb-run --server-args="-screen 0 1280x720x24" > /dev/null npx testcafe \
+    #       'chrome:headless --ignore-certificate-errors --allow-insecure-localhost' \
+    #       --hostname localhost \
+    #       tests/*Tests.js \
+    #       --selector-timeout ${{ inputs.timeouts}} \
+    #       --assertion-timeout ${{ inputs.timeouts}} \
+    #       --ajax-request-timeout ${{ inputs.timeouts}}
 
     - name: Stop pass-docker
       shell: bash
