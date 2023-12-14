@@ -36,8 +36,8 @@ runs:
 
     - name: Run acceptance tests
       shell: bash
+      working-directory: pass-acceptance-testing
       run: |
-        cd pass-acceptance-testing
         yarn install --frozen-lockfile
         npx testcafe \
           'chrome:headless --ignore-certificate-errors --allow-insecure-localhost' \
@@ -50,4 +50,4 @@ runs:
     - name: Stop pass-docker
       if: always()
       shell: bash
-      run: cd .. && docker compose -f docker-compose.yml -f eclipse-pass.local.yml down -v
+      run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml down -v
