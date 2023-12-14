@@ -16,6 +16,10 @@ inputs:
 runs:
   using: composite
   steps:
+    - run: |
+        echo "Set timeouts: ${{ inputs.timeouts }}"
+      shell: bash
+
     - name: Append hosts file to enable "pass.local" on localhost
       shell: bash
       run: echo "127.0.0.1    pass.local" | sudo tee -a /etc/hosts
@@ -30,10 +34,7 @@ runs:
         repository: eclipse-pass/pass-acceptance-testing
         path: pass-acceptance-testing
 
-    # Need X-server for Linux runner but not for Windows or macOS runners:
-    # https://github.com/DevExpress/testcafe-action/blob/master/index.js#L64
     - name: Run acceptance tests
-      # if: runner.os != "Linux"
       shell: bash
       run: |
         cd pass-acceptance-testing
@@ -46,20 +47,7 @@ runs:
           --assertion-timeout ${{ inputs.timeouts}} \
           --ajax-request-timeout ${{ inputs.timeouts}}
 
-    # - name: Run acceptance tests (Linux)
-    #   if: runner.os == "Linux"
-    #   shell: bash
-    #   run: |
-    #     cd pass-acceptance-testing
-    #     yarn install --frozen-lockfile
-    #     xvfb-run --server-args="-screen 0 1280x720x24" > /dev/null npx testcafe \
-    #       'chrome:headless --ignore-certificate-errors --allow-insecure-localhost' \
-    #       --hostname localhost \
-    #       tests/*Tests.js \
-    #       --selector-timeout ${{ inputs.timeouts}} \
-    #       --assertion-timeout ${{ inputs.timeouts}} \
-    #       --ajax-request-timeout ${{ inputs.timeouts}}
-
     - name: Stop pass-docker
+      if: always()
       shell: bash
-      run: cd .. && docker compose down -v
+      run: cd .. && docker compose -f docker-compose.yml -f eclipse-pass.local.yml down -v
