@@ -16,6 +16,10 @@ inputs:
 runs:
   using: composite
   steps:
+    - run: |
+        echo "Set timeouts: ${{ inputs.timeouts }}"
+      shell: bash
+
     - name: Append hosts file to enable "pass.local" on localhost
       shell: bash
       run: echo "127.0.0.1    pass.local" | sudo tee -a /etc/hosts
@@ -31,11 +35,19 @@ runs:
         path: pass-acceptance-testing
 
     - name: Run acceptance tests
-      uses: DevExpress/testcafe-action@latest
-      with:
-        version: "3.3.0"
-        args: "'chrome --ignore-certificate-errors --allow-insecure-localhost' --hostname localhost ./pass-acceptance-testing/tests/*Tests.js --selector-timeout ${{ inputs.timeouts}} --assertion-timeout ${{ inputs.timeouts}} --ajax-request-timeout ${{ inputs.timeouts}}"
+      shell: bash
+      working-directory: pass-acceptance-testing
+      run: |
+        yarn install --frozen-lockfile
+        npx testcafe \
+          'chrome:headless --ignore-certificate-errors --allow-insecure-localhost' \
+          --hostname localhost \
+          tests/*Tests.js \
+          --selector-timeout ${{ inputs.timeouts}} \
+          --assertion-timeout ${{ inputs.timeouts}} \
+          --ajax-request-timeout ${{ inputs.timeouts}}
 
     - name: Stop pass-docker
+      if: always()
       shell: bash
-      run: docker compose down -v
+      run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml down -v
