@@ -424,6 +424,26 @@
   },
   {
     "op": "add",
+    "path": "/funder",
+    "value": {
+      "id": "5",
+      "type": "funder",
+      "attributes": {
+        "localKey": "johnshopkins.edu:funder:316235",
+        "name": "SCANDINAVIAN BIOPHARMA"
+      },
+      "relationships": {
+        "policy": {
+          "data": {
+            "id": "0",
+            "type": "policy"
+          }
+        }
+      }
+    }
+  },
+  {
+    "op": "add",
     "path": "/user",
     "value": {
       "id": "0",
@@ -1066,13 +1086,13 @@
         },
         "directFunder": {
           "data": {
-            "id": "1",
+            "id": "5",
             "type": "funder"
           }
         },
         "primaryFunder": {
           "data": {
-            "id": "1",
+            "id": "5",
             "type": "funder"
           }
         }
