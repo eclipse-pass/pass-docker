@@ -2,7 +2,7 @@
   "JScholarship": {
     "deposit-config": {
       "processing": {
-        "beanName": "org.eclipse.pass.deposit.messaging.status.DefaultDepositStatusProcessor"
+        "beanName": "org.eclipse.pass.deposit.status.DefaultDepositStatusProcessor"
       },
       "mapping": {
         "http://dspace.org/state/archived": "accepted",
@@ -46,16 +46,6 @@
     }
   },
   "pmc": {
-    "deposit-config": {
-      "processing": {
-      },
-      "mapping": {
-        "INFO": "accepted",
-        "ERROR": "rejected",
-        "WARN": "rejected",
-        "default-mapping": "submitted"
-      }
-    },
     "assembler": {
       "specification": "nihms-native-2017-07",
       "beanName": "nihmsAssembler",
