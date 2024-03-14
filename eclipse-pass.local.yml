@@ -55,6 +55,8 @@ services:
       - JETTY_MAX_HEAP=64m
       - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
       - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
+    ports:
+      - 9080:8080
     expose:
       - "4443"
     env_file:
