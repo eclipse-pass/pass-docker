@@ -47,7 +47,8 @@ PMC_FTP_PASSWORD=pmcsftppass
 PASS_CORE_API_URL=http://pass-core:8080/
 PASS_CORE_NAMESPACE=data/
 
-PASS_UI_URL=http://pass-ui:81/
+PASS_CORE_APP_LOCATION=http://pass-ui:81/app/
+PASS_CORE_IDP_METADATA=http://idp:8080/idp/shibboleth
 
 PASSPORT_STRATEGY="multiSaml"
 NODE_ENV="development"
