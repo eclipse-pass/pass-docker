@@ -2,30 +2,19 @@
 version: '3.8'
 
 services:
-  auth:
-    env_file:
-      - .eclipse-pass.local_env
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    secrets:
-      - source: sp_key
-      - source: sp_cert
-      - source: idp_cert
-
-  proxy:
-    env_file:
-      - .eclipse-pass.local_env
-
   pass-core:
     depends_on:
       - postgres
       - localstack
+      - idp
     env_file:
       - .eclipse-pass.local_env
     healthcheck:
       test: 'curl -u "$$PASS_CORE_BACKEND_USER:$$PASS_CORE_BACKEND_PASSWORD" -f http://pass-core:8080/data/user || exit 1'
       start_period: 30s
-
+    ports:
+      - 8080:8080
+      
   pass-ui:
     env_file:
       - .eclipse-pass.local_env

@@ -21,15 +21,6 @@ version: '3.8'
 #  - eclipse-pass.demo.yml
 #  - eclipse-pass.nightly.yml
 services:
-  auth:
-    image: "ghcr.io/eclipse-pass/pass-auth:${PASS_VERSION}"
-    container_name: auth
-    env_file:
-      - .env
-    networks:
-      - front
-      - back
-
   pass-core:
     image: "ghcr.io/eclipse-pass/pass-core-main:${PASS_VERSION}"
     container_name: pass-core
@@ -61,19 +52,6 @@ services:
       - .env
     networks:
       - back # is 'back' in the main docker-compose, use this or 'front'?
-
-  proxy:
-    build: ./demo-proxy/
-    image: "ghcr.io/eclipse-pass/proxy:${PASS_VERSION}"
-    container_name: proxy
-    env_file:
-      - .env
-    networks:
-      - front
-      - back
-    ports:
-      - "80:80"
-      - "443:443"
 
 volumes:
   db:
