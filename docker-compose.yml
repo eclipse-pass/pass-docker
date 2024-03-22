@@ -22,7 +22,7 @@ version: '3.8'
 #  - eclipse-pass.nightly.yml
 services:
   auth:
-    image: "${IMAGE_URI}pass-auth${IMAGE_VERSION}"
+    image: "ghcr.io/eclipse-pass/pass-auth:${PASS_VERSION}"
     container_name: auth
     env_file:
       - .env
@@ -31,7 +31,7 @@ services:
       - back
 
   pass-core:
-    image: "${IMAGE_URI}pass-core-main${IMAGE_VERSION}"
+    image: "ghcr.io/eclipse-pass/pass-core-main:${PASS_VERSION}"
     container_name: pass-core
     env_file:
       - .env
@@ -39,7 +39,7 @@ services:
       - back
 
   pass-ui:
-    image: "${IMAGE_URI}pass-ui${IMAGE_VERSION}"
+    image: "ghcr.io/eclipse-pass/pass-ui:${PASS_VERSION}"
     build:
       context: ./ember
       args:
@@ -64,7 +64,7 @@ services:
 
   proxy:
     build: ./demo-proxy/
-    image: "${IMAGE_URI}proxy${IMAGE_VERSION}"
+    image: "ghcr.io/eclipse-pass/proxy:${PASS_VERSION}"
     container_name: proxy
     env_file:
       - .env
