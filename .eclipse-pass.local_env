@@ -50,10 +50,6 @@ EMBER_HOST=http://localhost:8080
 PASS_CORE_APP_LOCATION=http://pass-ui:81/app/
 PASS_CORE_IDP_METADATA=http://idp:8080/idp/shibboleth
 
-PASSPORT_STRATEGY="multiSaml"
-NODE_ENV="development"
-AUTH_PORT=3000
-
 IDP_HOST=http://localhost:9080
 SP_LOGIN=http://localhost:8080/login/saml2/sso/pass
 
@@ -62,14 +58,6 @@ SIGNING_CERT_SP="MIIC6zCCAdOgAwIBAgIJAOy0nki3WAOVMA0GCSqGSIb3DQEBBQUAMBcxFTATBgN
 SAML_ISSUER="https://sp.pass/shibboleth"
 
 SESSION_SECRET="J6@NXHe!6ANivq*kp2xVL.hmuMsPQ@2XWTJpzN3YANXDNFGfVUmm.m_gEvXaLstuoPCZQwUv4CmFb-4jo*VyARkBpPqLzqFi2aiX"
-
-###################################################
-# Sample data loader ##############################
-# Must specify. Can differ from other values ######
-###################################################
-LOADER_API_HOST=http://pass-core
-LOADER_API_PORT=8080
-LOADER_API_NAMESPACE=data
 
 ###################################################
 # LDAP / Mail server config #######################
