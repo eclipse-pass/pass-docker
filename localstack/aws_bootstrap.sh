@@ -12,3 +12,5 @@ create_queue() {
 create_queue "submission-event"
 create_queue "submission"
 create_queue "deposit"
+
+awslocal s3 mb s3://passcorefilestest

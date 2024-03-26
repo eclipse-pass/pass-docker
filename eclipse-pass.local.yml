@@ -108,7 +108,7 @@ services:
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
-      - "./localstack/sqs_bootstrap.sh:/etc/localstack/init/ready.d/init-aws.sh"
+      - "./localstack/aws_bootstrap.sh:/etc/localstack/init/ready.d/init-aws.sh"
     networks:
       - back
 
