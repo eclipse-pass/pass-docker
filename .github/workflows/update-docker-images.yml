@@ -1,5 +1,4 @@
   # Update Docker images in pass-docker that are build in this repository:
-  #   * proxy
   #   * idp
   #   * ldap
 name: update-docker-images
@@ -37,7 +36,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build set of Docker images
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build --no-cache proxy idp ldap
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build --no-cache idp ldap
 
       - name: Publish Docker images
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml push proxy idp ldap
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml push idp ldap
