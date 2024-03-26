@@ -8,6 +8,7 @@ services:
       - localstack
       - idp
     env_file:
+      - .env
       - .eclipse-pass.local_env
     healthcheck:
       test: 'curl -u "$$PASS_CORE_BACKEND_USER:$$PASS_CORE_BACKEND_PASSWORD" -f http://pass-core:8080/data/user || exit 1'
@@ -19,6 +20,7 @@ services:
 
   pass-ui:
     env_file:
+      - .env    
       - .eclipse-pass.local_env
 
   postgres:
