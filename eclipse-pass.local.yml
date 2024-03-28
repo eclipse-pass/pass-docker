@@ -101,14 +101,14 @@ services:
 
   localstack:
     container_name: "localstack"
-    image: localstack/localstack:2.1.0
+    image: localstack/localstack:3.2.0
     ports:
       - "127.0.0.1:4566:4566"            # LocalStack Gateway
       - "127.0.0.1:4510-4559:4510-4559"  # external services port range
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
-      - "./localstack/sqs_bootstrap.sh:/etc/localstack/init/ready.d/init-aws.sh"
+      - "./localstack/aws_bootstrap.sh:/etc/localstack/init/ready.d/init-aws.sh"
     networks:
       - back
 

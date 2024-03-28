@@ -23,6 +23,10 @@ PASS_CORE_DATABASE_PASSWORD=moo
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 
+PASS_CORE_FILE_SERVICE_TYPE=S3
+PASS_CORE_S3_BUCKET_NAME=passcorefilestest
+PASS_CORE_S3_ENDPOINT=http://localstack:4566
+
 ###################################################
 # PASS_DEPOSIT_SERVICES config ####################
 ###################################################
