@@ -3,10 +3,6 @@
 version: '3.8'
 
 services:
-  auth:
-    env_file:
-      - .eclipse-pass.JHUAWSdemo_env
-
   pass-core:
     env_file:
       - .eclipse-pass.JHUAWSdemo_env
