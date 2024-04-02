@@ -26,7 +26,8 @@ services:
     networks:
       - back
     depends_on:
-      - pass-core
+       pass-core:
+        condition: service_healthy
     volumes:
       - ./deposit/deposit-repositories.json:/deposit/deposit-repositories.json
 
