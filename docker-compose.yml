@@ -21,15 +21,6 @@ version: '3.8'
 #  - eclipse-pass.demo.yml
 #  - eclipse-pass.nightly.yml
 services:
-  auth:
-    image: "ghcr.io/eclipse-pass/pass-auth:${PASS_VERSION}"
-    container_name: auth
-    env_file:
-      - .env
-    networks:
-      - front
-      - back
-
   pass-core:
     image: "ghcr.io/eclipse-pass/pass-core-main:${PASS_VERSION}"
     container_name: pass-core
@@ -40,40 +31,11 @@ services:
 
   pass-ui:
     image: "ghcr.io/eclipse-pass/pass-ui:${PASS_VERSION}"
-    build:
-      context: ./ember
-      args:
-        # required args (throw error during build):
-        EMBER_GIT_PASS_UI_GIT_REPOREPO: "${PASS_UI_GIT_REPO:?undefined-PASS_UI_GIT_REPO}"
-        PASS_UI_GIT_BRANCH: "${PASS_UI_GIT_BRANCH:?undefined-PASS_UI_GIT_BRANCH}"
-        # sensible defaults have been defined:
-        DOI_SERVICE_URL: "${DOI_SERVICE_URL:-}"
-        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL:-}"
-        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL:-}"
-        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI:-}"
-        PASS_UI_PORT: "${PASS_UI_PORT:-}"
-        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE:-}"
-        PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL:-}"
-        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL:-}"
-        USER_SERVICE_URL: "${USER_SERVICE_URL:-}"
     container_name: pass-ui
     env_file:
       - .env
     networks:
-      - back # is 'back' in the main docker-compose, use this or 'front'?
-
-  proxy:
-    build: ./demo-proxy/
-    image: "ghcr.io/eclipse-pass/proxy:${PASS_VERSION}"
-    container_name: proxy
-    env_file:
-      - .env
-    networks:
-      - front
       - back
-    ports:
-      - "80:80"
-      - "443:443"
 
 volumes:
   db:
