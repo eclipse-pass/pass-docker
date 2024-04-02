@@ -55,7 +55,8 @@
         "algorithms": [
           "sha512",
           "md5"
-        ]
+        ],
+        "funder-mapping": {}
       }
     },
     "transport-config": {
