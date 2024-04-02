@@ -20,7 +20,7 @@ services:
         # __D__ => "-" (e.g. google__D__metadata => google-metadata)
         # dspace.dir, dspace.server.url, dspace.ui.url and dspace.name
         dspace__P__dir: /dspace
-        dspace__P__server__P__url: http://localhost:8080/server
+        dspace__P__server__P__url: http://localhost:9000/server
         dspace__P__ui__P__url: http://localhost:4000
         dspace__P__name: 'DSpace Started with Docker Compose'
         # db.url: Ensure we are using the 'dspacedb' image for our database
@@ -40,7 +40,7 @@ services:
       networks:
         back:
       ports:
-        - published: 8080
+        - published: 9000
           target: 8080
       stdin_open: true
       tty: true
@@ -122,7 +122,7 @@ services:
         DSPACE_UI_NAMESPACE: /
         DSPACE_REST_SSL: 'false'
         DSPACE_REST_HOST: localhost
-        DSPACE_REST_PORT: 8080
+        DSPACE_REST_PORT: 9000
         DSPACE_REST_NAMESPACE: /server
       image: dspace/dspace-angular:dspace-7.6
       networks:
