@@ -32,44 +32,15 @@ docker compose -p pass-docker -f dspace-cli.yml -f dspace-cli.ingest.yml run --r
 
 ## Services:
 
-### [`pass-auth`](https://github.com/jaredgalanis/pass-auth)
+### [`idp`](https://github.com/eclipse-pass/pass-docker/idp)
 
-Repository: https://github.com/jaredgalanis/pass-auth
-Package: https://github.com/orgs/eclipse-pass/packages/container/package/pass-auth
-
-Provides authorization mechanisms to secure routes. It also acts as a reverse proxy, ensuring the configured routes are protected appropriately.
-
-Node based authentication service that currently integrates SAML authentication workflow in the demo environment.
+Repository: https://github.com/eclipse-pass/pass-docker
+Package: https://github.com/orgs/eclipse-pass/packages/container/package/idp
 
 Environment variables:
-
-* `PASS_CORE_API_URL=http://pass-core:8080/`
-* `PASS_CORE_NAMESPACE=data/`
-* `PASS_UI_URL=http://pass-ui:81/`
-* `PASSPORT_STRATEGY="multiSaml"`
-* `NODE_ENV="development"`
-* `AUTH_PORT=3000`
-* `AUTH_LOGIN="/login/:idpId"`
-* `AUTH_LOGIN_SUCCESS=/app/auth-callback`
-* `AUTH_LOGIN_FAILURE=/`
-* `AUTH_LOGOUT=/logout`
-* `AUTH_LOGOUT_REDIRECT=/login/saml` : The location to redirect to after a logout occurs.
-* `FORCE_AUTHN=true`
+* `IDP_HOST=http://localhost:9080`
+* `SP_LOGIN=http://localhost:8080/login/saml2/sso/pass`
 * `SIGNING_CERT_IDP="..."`
-* `SAML_ENTRY_POINT="https://pass.local/idp/profile/SAML2/Redirect/SSO"` : absolute URL must change for different environments
-* `SAML_ISSUER="https://sp.pass/shibboleth"`
-* `ACS_URL="/Shibboleth.sso/SAML2/POST/:idpId"`
-* `METADATA_URL="/metadata/:idpId"`
-* `IDENTIFIER_FORMAT=""`
-* `SESSION_SECRET="..."`
-
-The following are absolute URLs on a docker compose private network, should not need to change in other environments
-* `USER_SERVICE_URL="http://fcrepo:8080"`
-* `ELASTIC_SEARCH_URL="http://elasticsearch:9200/pass/_search"`
-* `SCHEMA_SERVICE_URL="http://schemaservice:8086"`
-* `POLICY_SERVICE_URL="http://policyservice:8088"`
-* `DOI_SERVICE_URL="http://doiservice:8080/"`
-* `DOWNLOAD_SERVICE_URL="http://downloadservice:6502"`
 
 ### [`pass-core`](https://github.com/eclipse-pass/pass-core)
 
@@ -78,9 +49,11 @@ Package: https://github.com/orgs/eclipse-pass/packages/container/package/pass-co
 
 Presents a JSON:API window to the backend from behind the authentication layer. Swagger is not yet hooked up so is unreachable. Provides data and web APIs to the application.
 
+Support SAML and HTTP basic authentication.
+
 Environment variables:
 
-* `PASS_CORE_BASE_URL=https://pass.local` : Used when generating JSON API relationship links. Needs to be absolute and must change to match deployment environment
+* `PASS_CORE_BASE_URL=http://localhost:8080` : Used when generating JSON API relationship links. Needs to be absolute and must change to match deployment environment
 * `PASS_CORE_POSTGRES_PORT=5432`
 * `PASS_CORE_API_PORT=8080`
 * `PASS_CORE_BACKEND_USER=backend`
@@ -95,13 +68,6 @@ Environment variables:
 
 Pretty much an out-of-the-box PostgreSQL server. Only interacts with the [`pass-core`](https://github.com/eclipse-pass/pass-core) service.
 
-### `proxy`
-
-Repository: built out of this project
-Package: https://github.com/orgs/eclipse-pass/packages/container/package/proxy
-
-Custom Apache server, copied from the previous non-demo environments top level proxy. Has a self-signed cert for pseudo "https" support. We should consider removing this in favor of simply exposing the `auth` service, since this proxy basically just forwards everything to `auth` anyway. This would require a more production-ready and robust `auth` service that handles https correctly and is easier to configure.
-
 ### [`pass-ui`](https://github.com/eclipse-pass/pass-ui)
 
 Repository: https://github.com/eclipse-pass/pass-ui
@@ -113,8 +79,6 @@ Environment variables:
 
 * `PASS_UI_PORT=81`
 * `PASS_API_NAMESPACE=data`
-* `PASS_UI_GIT_REPO=https://github.com/eclipse-pass/pass-ui`
-* `PASS_UI_GIT_BRANCH=main`
 * `PASS_UI_ROOT_URL=/app`
 * `STATIC_CONFIG_URL=/app/config.json`
 * `DOI_SERVICE_URL=/doiservice/journal`
@@ -124,6 +88,7 @@ Environment variables:
 * `POLICY_SERVICE_REPOSITORY_ENDPOINT=/policyservice/repositories`
 * `SCHEMA_SERVICE_URL=/schemaservice`
 * `USER_SERVICE_URL=/pass-user-service/whoami`
+
 
 ### `loader`
 
