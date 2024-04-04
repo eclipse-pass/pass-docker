@@ -4,9 +4,12 @@ version: '3.8'
 services:
   pass-core:
     depends_on:
-      - postgres
-      - localstack
-      - idp
+      postgres:
+        condition: service_started
+      localstack:
+        condition: service_healthy
+      idp:
+        condition: service_healthy
     env_file:
       - .env
       - .eclipse-pass.local_env
@@ -55,6 +58,9 @@ services:
     env_file:
       - .env
       - .eclipse-pass.local_env
+    healthcheck:
+      test: 'curl -f http://idp:8080/idp/shibboleth || exit 1'
+      start_period: 10s
     networks:
       - back
     secrets:
