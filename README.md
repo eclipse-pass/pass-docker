@@ -40,7 +40,6 @@ Package: https://github.com/orgs/eclipse-pass/packages/container/package/idp
 Environment variables:
 * `IDP_HOST=http://localhost:9080`
 * `SP_LOGIN=http://localhost:8080/login/saml2/sso/pass`
-* `SIGNING_CERT_IDP="..."`
 
 ### [`pass-core`](https://github.com/eclipse-pass/pass-core)
 
@@ -55,9 +54,14 @@ Environment variables:
 
 * `PASS_CORE_BASE_URL=http://localhost:8080` : Used when generating JSON API relationship links. Needs to be absolute and must change to match deployment environment
 * `PASS_CORE_POSTGRES_PORT=5432`
-* `PASS_CORE_API_PORT=8080`
 * `PASS_CORE_BACKEND_USER=backend`
 * `PASS_CORE_BACKEND_PASSWORD=backend`
+* `PASS_CORE_APP_LOCATION=http://pass-ui:81/app/` : Resource location of pass ui resources
+* `PASS_CORE_APP_CSP=default-src 'self';` : Content Security Policy header value
+* `PASS_CORE_IDP_METADATA=http://idp:8080/idp/shibboleth` : Resource location of IDP metadata
+* `PASS_CORE_SP_ID=https://sp.pass/shibboleth` : Identifier of pass-core as an SP
+* `PASS_CORE_SP_KEY=file:///path/key`          : Resource location of SP key
+* `PASS_CORE_SP_CERT=file:///path/cert`        : Resource location of SP certificate
 * `POSTGRES_USER=postgres`
 * `POSTGRES_PASSWORD=postgres`
 * `JDBC_DATABASE_URL=jdbc:postgresql://postgres:5432/pass`
