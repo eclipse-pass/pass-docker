@@ -21,6 +21,12 @@ PASS_CORE_DATABASE_PASSWORD=moo
 
 PASS_CORE_IDP_METADATA=http://idp:8080/idp/shibboleth
 
+# Go back to the app on logout
+PASS_CORE_LOGOUT_SUCCESS=/app/
+
+# Delete IDP session cookie on logout so can login as another user
+PASS_CORE_LOGOUT_DELETE_COOKIES="JSESSIONID /,shib_idp_session /idp"
+
 # Postgres configuration
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
