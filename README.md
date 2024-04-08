@@ -62,6 +62,8 @@ Environment variables:
 * `PASS_CORE_SP_ID=https://sp.pass/shibboleth` : Identifier of pass-core as an SP
 * `PASS_CORE_SP_KEY=file:///path/key`          : Resource location of SP key
 * `PASS_CORE_SP_CERT=file:///path/cert`        : Resource location of SP certificate
+* `PASS_CORE_LOGOUT_SUCCESS=/app/`             : Location user is redirected after logout
+* `PASS_CORE_LOGOUT_DELETE_COOKIES="JSESSIONID /,shib_idp_session /idp"` : Cookies to delete on logout, "name path" separated by commas.
 * `POSTGRES_USER=postgres`
 * `POSTGRES_PASSWORD=postgres`
 * `JDBC_DATABASE_URL=jdbc:postgresql://postgres:5432/pass`
