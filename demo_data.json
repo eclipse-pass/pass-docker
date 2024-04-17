@@ -429,8 +429,8 @@
       "id": "5",
       "type": "funder",
       "attributes": {
-        "localKey": "johnshopkins.edu:funder:316235",
-        "name": "SCANDINAVIAN BIOPHARMA"
+        "localKey": "johnshopkins.edu:funder:E2E_TEST_FUNDER_LK",
+        "name": "PASS_E2E_TEST_FUNDER"
       },
       "relationships": {
         "policy": {
@@ -968,6 +968,21 @@
   },
   {
     "op": "add",
+    "path": "/journal",
+    "value": {
+      "id": "10",
+      "type": "journal",
+      "attributes": {
+        "issns": [
+          "Print:test-fake"
+        ],
+        "journalName": "PASS_E2E_TEST_JOURNAL",
+        "nlmta": "PASS_E2E_TEST_JOURNAL"
+      }
+    }
+  },
+  {
+    "op": "add",
     "path": "/publication",
     "value": {
       "id": "0",
@@ -1069,11 +1084,11 @@
       "id": "1",
       "type": "grant",
       "attributes": {
-        "endDate": "2018-08-31T00:00:00.000Z",
-        "awardNumber": "Z0650001",
+        "endDate": "2088-08-31T00:00:00.000Z",
+        "awardNumber": "TEST_E2E_AWD_NUM",
         "awardDate": "2015-09-23T00:00:00.000Z",
         "awardStatus": "active",
-        "projectName": "Reversible activation of critical period plasticity in visual cortex",
+        "projectName": "TEST_E2E_GRANT",
         "startDate": "2015-09-01T00:00:00.000Z",
         "localKey": "johnshopkins.edu:grant:12345"
       },
