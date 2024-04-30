@@ -2,7 +2,7 @@
 # PASS_CORE config ################################
 ###################################################
 
-PASS_CORE_BASE_URL=https://demo.eclipse-pass.org:8080
+PASS_CORE_BASE_URL=https://demo.eclipse-pass.org
 PASS_CORE_IDP_METADATA=http://idp:8080/idp/shibboleth
 
 ###################################################
@@ -10,4 +10,4 @@ PASS_CORE_IDP_METADATA=http://idp:8080/idp/shibboleth
 ###################################################
 
 IDP_HOST=https://demo.eclipse-pass.org:9080
-SP_LOGIN=http://demo.eclipse-pass.org:8080/login/saml2/sso/pass
+SP_LOGIN=https://demo.eclipse-pass.org/login/saml2/sso/pass
