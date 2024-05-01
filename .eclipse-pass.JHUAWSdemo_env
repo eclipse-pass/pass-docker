@@ -4,6 +4,7 @@
 
 PASS_CORE_BASE_URL=https://demo.eclipse-pass.org
 PASS_CORE_IDP_METADATA=http://idp:8080/idp/shibboleth
+PASS_CORE_SP_ACS=https://demo.eclipse-pass.org/login/saml2/sso/pass
 
 ###################################################
 # IDP config #############################
