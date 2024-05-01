@@ -41,6 +41,10 @@ Environment variables:
 * `IDP_HOST=http://localhost:9080`
 * `SP_LOGIN=http://localhost:8080/login/saml2/sso/pass`
 
+Separately there is a non-container environment variable `IDP_INTERNAL_PORT` which is used to set the internal port on the IDP container which 9080 maps to.
+The default is 8080. This can be used to make 9080 support https by setting it to 4443 in the docker compose environment. One way to do this is by adding
+`IDP_INTERNAL_PORT=4443` to the docker compose command. Note that `-e` should not be used because it is for container environment variables.
+
 ### [`pass-core`](https://github.com/eclipse-pass/pass-core)
 
 Repository: https://github.com/eclipse-pass/pass-core
