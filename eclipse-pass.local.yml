@@ -52,9 +52,7 @@ services:
       - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
       - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
     ports:
-      - 9080:8080
-    expose:
-      - "4443"
+      - 9080:${IDP_INTERNAL_PORT-8080}
     env_file:
       - .env
       - .eclipse-pass.local_env
