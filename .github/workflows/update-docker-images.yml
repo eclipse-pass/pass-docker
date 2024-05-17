@@ -5,25 +5,17 @@ name: update-docker-images
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - 'main'
-    tags-ignore:
-      - '*'
+  pull_request:
+    types:
+      - closed
 
 concurrency:
   group: ci-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  # get-version:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     project-version: ${{ steps.project-version.outputs.version }}
-  #   steps:
-  #     - id: project-version
-  #       run: echo "VERSION=grep -Po '(?<=PASS_VERSION=).* .env" >> $GITHUB_OUTPUT
   update-images:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
