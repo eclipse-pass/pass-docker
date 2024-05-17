@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   update-images:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
