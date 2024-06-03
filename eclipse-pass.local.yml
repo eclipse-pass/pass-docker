@@ -89,7 +89,7 @@ services:
       - .env
       - .eclipse-pass.local_env
     entrypoint: /bin/sh -c
-    command: [ 'curl http://pass-core:8080/data/ -u "$$PASS_CORE_BACKEND_USER:$$PASS_CORE_BACKEND_PASSWORD" -X PATCH -H "content-type: application/vnd.api+json;ext=jsonpatch" -H "accept:application/vnd.api+json; ext=jsonpatch" -d "@/data.json"' ]
+    command: [ 'curl http://pass-core:8080/data/ -u "$$PASS_CORE_BACKEND_USER:$$PASS_CORE_BACKEND_PASSWORD" -X PATCH -H "content-type: application/vnd.api+json;ext=jsonpatch" -H "accept:application/vnd.api+json; ext=jsonpatch" -H "X-XSRF-TOKEN:moo" -H "Cookie:XSRF-TOKEN=moo" -d "@/data.json"' ]
     networks:
       - back
     depends_on:
