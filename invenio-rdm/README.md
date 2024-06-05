@@ -1,6 +1,6 @@
 # Test InvenioRDM
 
-This is a test InvenioRDM instance that can be run locally for testing.
+This is a InvenioRDM instance that can be run locally for testing.
 
 **Note**: This is only intended for local testing and is not meant for Production use.
 
@@ -12,7 +12,7 @@ The `pass-docker-invenio-rdm` directory was created following these instructions
 - You must have Python v3.8 or greater installed.
 - You must have the `invenio-cli` python tool installed and available in your PATH.  https://inveniordm.docs.cern.ch/install/cli/
 
-Run the following commands in order to start your new InvenioRDM instance:
+Run the following commands in order to start the InvenioRDM instance:
 
 ```console
 ./build.sh
@@ -30,7 +30,7 @@ Once running, visit https://127.0.0.1 in your browser.
 **Note**: The server is using a self-signed SSL certificate, so your browser
 will issue a warning that you will have to by-pass.
 
-To Stop InvenioRDM, run the following commands:
+To stop the InvenioRDM instance, run the following commands:
 
 ```console
 ./stop.sh

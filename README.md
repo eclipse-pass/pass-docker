@@ -35,13 +35,14 @@ docker compose -p pass-docker -f dspace-cli.yml -f dspace-cli.ingest.yml run --r
 ### Run With Deposit Services and InvenioRDM
 In order to run a local instance **_with_** deposit-service, ftp, InvenioRDM, you can run:
 
-First, you need to start the local test InvenioRDM in the `invenio-rdm` directory:
+Refer to [invenio-rdm/README](./invenio-rdm/README.md) to ensure the prerequisites are met before running the commands below.
+
+First, start the local test InvenioRDM by running the following command in the `invenio-rdm` directory:
 
 ```console
 ./build.sh
 ./start.sh
 ```
-Refer to invenio-rdm/README to ensure the prerequisites are met before running the commands above.
 
 After the InvenioRDM service is up and running, run the following commands in the `pass-docker` directory:
 
