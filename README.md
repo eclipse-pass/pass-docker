@@ -4,6 +4,7 @@ The "demo" compose file describes an early system meant to demonstrate some new 
 
 Docker compose works as normal, but for the demo you need to specify both correct `yml` file and env file. 
 
+### Run With No Deposit Services
 In order to run a local instance **_without_** deposit-service, ftp, and dspace, you can run:
 ```
 docker compose -f docker-compose.yml -f eclipse-pass.local.yml up -d --no-build --quiet-pull --pull always
@@ -15,6 +16,7 @@ docker compose -p pass-docker down -v
 ```
 Note the `-v` to remove the volumes, **this is critical** so on subsequent starts, user data is not duplicated.
 
+### Run With Deposit Services and DSpace
 In order to run a local instance **_with_** deposit-service, ftp, dspace, you can run:
 ```
 docker compose -p pass-docker -f docker-compose.yml -f eclipse-pass.local.yml -f docker-compose-deposit.yml -f docker-compose-dspace.yml up -d --no-build --quiet-pull --pull always
@@ -28,6 +30,23 @@ docker compose -p pass-docker -f dspace-cli.yml run --rm dspace-cli create-admin
 Run the following to load sample data into dspace:
 ```
 docker compose -p pass-docker -f dspace-cli.yml -f dspace-cli.ingest.yml run --rm dspace-cli
+```
+
+### Run With Deposit Services and InvenioRDM
+In order to run a local instance **_with_** deposit-service, ftp, InvenioRDM, you can run:
+
+First, you need to start the local test InvenioRDM in the `invenio-rdm` directory:
+
+```console
+./build.sh
+./start.sh
+```
+Refer to invenio-rdm/README to ensure the prerequisites are met before running the commands above.
+
+After the InvenioRDM service is up and running, run the following commands in the `pass-docker` directory:
+
+```console
+docker compose -p pass-docker -f docker-compose.yml -f eclipse-pass.local.yml -f docker-compose-deposit.yml -f docker-compose-deposit-invenio-rdm.yml up -d --no-build --quiet-pull --pull always
 ```
 
 ## Services:
