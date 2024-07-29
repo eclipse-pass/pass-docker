@@ -69,5 +69,16 @@
         "default-directory": "/upload/%s"
       }
     }
+  },
+  "InvenioRDM": {
+    "assembler": {
+      "specification": "invenioRdm",
+      "beanName": "invenioRdmAssembler"
+    },
+    "transport-config": {
+      "protocol-binding": {
+        "protocol": "invenioRdm"
+      }
+    }
   }
 }
