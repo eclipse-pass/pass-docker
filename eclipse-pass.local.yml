@@ -46,7 +46,8 @@ services:
     image: "ghcr.io/eclipse-pass/idp:${PASS_VERSION}"
     container_name: idp
     depends_on:
-      - ldap
+      ldap:
+        condition: service_healthy
     environment:
       - JETTY_MAX_HEAP=64m
       - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
@@ -70,15 +71,24 @@ services:
       - source: idp_cert
 
   ldap:
-    build:
-      context: ./ldap
-      args:
-        TENANT: jhu
-    image: "ghcr.io/eclipse-pass/demo-ldap:${PASS_VERSION}"
+    image: "389ds/dirsrv:3.1"
     container_name: ldap
     env_file:
       - .env
       - .eclipse-pass.local_env
+    # Start the container, wait for it to start, create the suffix, and then load users
+    command:
+      - /bin/bash
+      - -c
+      - |
+        set -m
+        /usr/lib/dirsrv/dscontainer -r &
+        while !(/usr/lib/dirsrv/dscontainer -H) >/dev/null 2>&1; do sleep 5; done;
+        dsconf -D "cn=Directory Manager" localhost backend create --suffix="$$DS_SUFFIX_NAME" --be-name="pass"
+        ldapadd -f /pass.ldif -H ldap://localhost:3389 -w "$$DS_DM_PASSWORD" -D "cn=Directory Manager"
+        fg
+    volumes:
+      - ./ldap/pass.ldif:/pass.ldif
     networks:
       - back
 
