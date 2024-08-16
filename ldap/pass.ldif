@@ -1,9 +1,12 @@
-dn: cn=admin,dc=pass
-objectClass: simpleSecurityObject
-objectClass: organizationalRole
-cn: admin
-userPassword: password
-description: LDAP administrator
+dn: dc=pass
+dc: pass
+description: PASS
+objectClass: top
+objectClass: domain
+
+dn: ou=People,dc=pass
+objectClass: organizationalUnit
+ou: People
 
 dn: uid=staff1,ou=People,dc=pass
 uid: staff1
