@@ -10,7 +10,7 @@ on:
         required: true
         description: Next development version (e.g. 0.5.0-SNAPSHOT)
       runtests:
-        description: 'Run acceptance tests against release version before pushing images?'
+        description: 'Run acceptance tests against release version?'
         type: boolean
 
 jobs:
@@ -42,17 +42,11 @@ jobs:
         with:
           version: $RELEASE
       
-      - name: Build new images
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
-
       - name: Acceptance tests
         if: ${{ inputs.runtests }}
         uses: ./.github/actions/acceptance-test
         with:
           pullimages: 'missing'
-
-      - name: Push release images
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml push idp ldap
 
       - name: Bump image versions to next development version
         uses: ./.github/actions/update-pass-version
