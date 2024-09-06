@@ -39,36 +39,36 @@ services:
       - ./postgres/demo/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh
 
   idp:
-    build:
-      context: ./idp
-      args:
-        TENANT: jhu
-    image: "ghcr.io/eclipse-pass/idp:${PASS_VERSION}"
+    image: "tier/shib-idp:4.3.3_20240415"
     container_name: idp
     depends_on:
       ldap:
         condition: service_healthy
-    environment:
-      - JETTY_MAX_HEAP=64m
-      - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
-      - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
-    ports:
-      - 9080:${IDP_INTERNAL_PORT-8080}
     env_file:
       - .env
       - .eclipse-pass.local_env
-    healthcheck:
-      test: 'curl -f http://idp:8080/idp/shibboleth || exit 1'
-      start_period: 10s
+    ports:
+      - 9080:${IDP_INTERNAL_PORT-8080}
+    command:
+      - /bin/bash
+      - -c
+      - |
+        cp /idp-config/config/tomcat/* /usr/local/tomcat/conf
+        cp /idp-config/credentials/tomcat/* /opt/certs
+        cp /idp-config/config/shib-idp/conf/* /opt/shibboleth-idp/conf
+        cp /idp-config/credentials/shib-idp/* /opt/shibboleth-idp/credentials
+        cp /idp-config/config/shib-idp/metadata/* /opt/shibboleth-idp/metadata
+        cp /idp-config/dummylogo.png /opt/shibboleth-idp/edit-webapp/images/placeholder-logo.png
+
+        sed -i "s#IDP_HOST#$$IDP_HOST#g" /opt/shibboleth-idp/metadata/idp-metadata.xml
+        sed -i "s#IDP_HOST#$$IDP_HOST#g" /opt/shibboleth-idp/conf/idp.properties
+        sed -i "s#SP_LOGIN#$$SP_LOGIN#g" /opt/shibboleth-idp/metadata/sp-metadata.xml
+
+        /usr/bin/startup.sh
+    volumes:
+      - ./idp:/idp-config
     networks:
       - back
-    secrets:
-      - source: idp_backchannel
-      - source: idp_browser
-      - source: idp_encryption
-      - source: idp_signing
-      - source: idp_sealer
-      - source: idp_cert
 
   ldap:
     image: "389ds/dirsrv:3.1"
@@ -120,21 +120,3 @@ services:
       - "./localstack/aws_bootstrap.sh:/etc/localstack/init/ready.d/init-aws.sh"
     networks:
       - back
-
-secrets:
-  idp_cert:
-    file: ./secrets/idp/idp-signing.crt
-  sp_key:
-    file: ./secrets/sp/sp-key.pem
-  sp_cert:
-    file: ./secrets/sp/sp-cert.pem
-  idp_backchannel:
-    file: ./secrets/idp/idp-backchannel.p12
-  idp_browser:
-    file: ./secrets/idp/idp-browser.p12
-  idp_encryption:
-    file: ./secrets/idp/idp-encryption.key
-  idp_signing:
-    file: ./secrets/idp/idp-signing.key
-  idp_sealer:
-    file: ./secrets/idp/sealer.jks

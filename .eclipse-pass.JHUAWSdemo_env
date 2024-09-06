@@ -12,3 +12,10 @@ PASS_CORE_SP_ACS=https://demo.eclipse-pass.org/login/saml2/sso/pass
 
 IDP_HOST=https://demo.eclipse-pass.org:9080
 SP_LOGIN=https://demo.eclipse-pass.org/login/saml2/sso/pass
+
+###################################################
+# LDAP config #######################
+###################################################
+
+DS_DM_PASSWORD=password
+DS_SUFFIX_NAME="dc=pass"
