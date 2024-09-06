@@ -124,39 +124,6 @@ Environment variables:
 
 A basic Docker image where we can run a `curl` command to bootstrap the environment with data from `demo_data.json`
 
-### `idp`, `ldap`
-
-Other related images that work together with `pass-auth` to handle authentication. Based on services of the same name in the older `docker-compose` environment.
-
-Environment variables:
-
-* `MAIL_SMTP=11025`
-* `MAIL_IMAPS=11993`
-* `MAIL_MSP=11587`
-* `OVERRIDE_HOSTNAME=mail.jhu.edu`
-* `ENABLE_SPAMASSASSIN=0`
-* `ENABLE_CLAMAV=0`
-* `ENABLE_FAIL2BAN=0`
-* `ENABLE_POSTGREY=0`
-* `SMTP_ONLY=0`
-* `ONE_DIR=1`
-* `DMS_DEBUG=0`
-* `ENABLE_LDAP=1`
-* `TLS_LEVEL=intermediate`
-* `LDAP_SERVER_HOST=ldap`
-* `LDAP_SEARCH_BASE=ou=People,dc=pass`
-* `LDAP_BIND_DN=cn=admin,dc=pass`
-* `LDAP_BIND_PW=password`
-* `LDAP_QUERY_FILTER_USER=(&(objectClass=posixAccount)(mail=%s))`
-* `LDAP_QUERY_FILTER_GROUP=(&(objectClass=posixAccount)(mailGroupMember=%s))`
-* `LDAP_QUERY_FILTER_ALIAS=(&(objectClass=posixAccount)(mailAlias=%s))`
-* `LDAP_QUERY_FILTER_DOMAIN=(|(mail=*@%s)(mailalias=*@%s)(mailGroupMember=*@%s))`
-* `ENABLE_SASLAUTHD=0`
-* `POSTMASTER_ADDRESS=root`
-* `SSL_TYPE=manual`
-* `SSL_CERT_PATH=/tmp/docker-mailserver/cert.pem`
-* `SSL_KEY_PATH=/tmp/docker-mailserver/key.rsa`
-
 ## Running Acceptance Tests
 
 Repository: https://github.com/eclipse-pass/pass-acceptance-testing
