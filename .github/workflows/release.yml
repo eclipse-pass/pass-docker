@@ -59,6 +59,3 @@ jobs:
 
       - name: Push release tag to GitHub
         run: git push origin $RELEASE
-
-      - name: Build and push next development image tags
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build --push idp ldap
