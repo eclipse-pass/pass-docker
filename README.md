@@ -52,10 +52,10 @@ docker compose -p pass-docker -f docker-compose.yml -f eclipse-pass.local.yml -f
 
 ## Services:
 
-### [`idp`](https://github.com/eclipse-pass/pass-docker/idp)
+### `idp`
 
-Repository: https://github.com/eclipse-pass/pass-docker
-Package: https://github.com/orgs/eclipse-pass/packages/container/package/idp
+This service runs a Shibboleth Identity Provider using an image from [https://spaces.at.internet2.edu/display/ITAP/InCommon+Trusted+Access+Platform+Release].
+Configuration files in the image are overridden on startup by using files in `idp/`.
 
 Environment variables:
 * `IDP_HOST=http://localhost:9080`
@@ -64,6 +64,12 @@ Environment variables:
 Separately there is a non-container environment variable `IDP_INTERNAL_PORT` which is used to set the internal port on the IDP container which 9080 maps to.
 The default is 8080. This can be used to make 9080 support https by setting it to 4443 in the docker compose environment. One way to do this is by adding
 `IDP_INTERNAL_PORT=4443` to the docker compose command. Note that `-e` should not be used because it is for container environment variables.
+
+
+### `ldap`
+
+This service runs the 389 Directory Server which is a LDAP server. It is used by the IDP as a source of information on users.
+The users in ` ldap/pass.ldif` are loaded on startup.
 
 ### [`pass-core`](https://github.com/eclipse-pass/pass-core)
 
