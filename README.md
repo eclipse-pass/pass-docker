@@ -87,8 +87,8 @@ Environment variables:
 
 * `PASS_CORE_BASE_URL=http://localhost:8080` : Used when generating JSON API relationship links. Needs to be absolute and must change to match deployment environment
 * `PASS_CORE_POSTGRES_PORT=5432`
-* `PASS_CORE_BACKEND_USER=backend`
-* `PASS_CORE_BACKEND_PASSWORD=backend`
+* `PASS_CORE__USER=backend`
+* `PASS_CORE_PASSWORD=backend`
 * `PASS_CORE_APP_LOCATION=http://pass-ui:81/app/` : Resource location of pass ui resources
 * `PASS_CORE_APP_CSP=default-src 'self';` : Content Security Policy header value
 * `PASS_CORE_IDP_METADATA=http://idp:8080/idp/shibboleth` : Resource location of IDP metadata

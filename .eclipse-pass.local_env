@@ -11,8 +11,8 @@ AWS_SQS_ENDPOINT_OVERRIDE=http://localstack:4566
 # PASS_CORE config ################################
 ###################################################
 PASS_CORE_BASE_URL=http://localhost:8080
-PASS_CORE_BACKEND_USER=backend
-PASS_CORE_BACKEND_PASSWORD=backend
+PASS_CORE_USER=backend
+PASS_CORE_PASSWORD=backend
 
 PASS_CORE_POSTGRES_PORT=5432
 PASS_CORE_DATABASE_URL=jdbc:postgresql://postgres:5432/pass
