@@ -21,6 +21,8 @@ services:
       - 8080:8080
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    volumes:
+      - ./pass-core/saml2/:/saml2/
 
   pass-ui:
     env_file:
