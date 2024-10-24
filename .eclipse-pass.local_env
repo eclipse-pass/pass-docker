@@ -5,7 +5,6 @@
 AWS_ACCESS_KEY_ID=test
 AWS_SECRET_ACCESS_KEY=test
 AWS_REGION=us-east-1
-AWS_SQS_ENDPOINT_OVERRIDE=http://localstack:4566
 
 ###################################################
 # PASS_CORE config ################################
@@ -19,7 +18,13 @@ PASS_CORE_DATABASE_URL=jdbc:postgresql://postgres:5432/pass
 PASS_CORE_DATABASE_USERNAME=pass
 PASS_CORE_DATABASE_PASSWORD=moo
 
+PASS_CORE_SP_ID=https://sp.pass/shibboleth
+PASS_CORE_SP_KEY=file:////saml2/sp-key.pem
+PASS_CORE_SP_CERT=file:////saml2/sp-cert.pem
+PASS_CORE_SP_ACS={baseUrl}/login/saml2/sso/{registrationId}
 PASS_CORE_IDP_METADATA=http://idp:8080/idp/shibboleth
+PASS_CORE_DEFAULT_LOGIN_SUCCESS=/app/
+PASS_CORE_LOGIN_PROCESSING_PATH=/login/saml2/sso/{registrationId}
 
 # Go back to the app on logout
 PASS_CORE_LOGOUT_SUCCESS=/app/
@@ -27,13 +32,17 @@ PASS_CORE_LOGOUT_SUCCESS=/app/
 # Delete IDP session cookie on logout so can login as another user
 PASS_CORE_LOGOUT_DELETE_COOKIES="JSESSIONID /,shib_idp_session /idp"
 
+PASS_CORE_USERTOKEN_KEY=
+
 # Postgres configuration
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 
 PASS_CORE_FILE_SERVICE_TYPE=S3
 PASS_CORE_S3_BUCKET_NAME=passcorefilestest
-PASS_CORE_S3_ENDPOINT=http://localstack:4566
+
+# Override aws endpoints to use localstack
+PASS_CORE_JAVA_OPTS="-Daws.sqs.endpoint-override=http://localstack:4566 -Dpass.file-service.s3-endpoint=http://localstack:4566"
 
 ###################################################
 # PASS_DEPOSIT_SERVICES config ####################
