@@ -82,19 +82,9 @@ services:
     env_file:
       - .env
       - .eclipse-pass.local_env
-    # Start the container, wait for it to start, create the suffix, and then load users
-    command:
-      - /bin/bash
-      - -c
-      - |
-        set -m
-        /usr/lib/dirsrv/dscontainer -r &
-        while !(/usr/lib/dirsrv/dscontainer -H) >/dev/null 2>&1; do sleep 5; done;
-        dsconf -D "cn=Directory Manager" localhost backend create --suffix="$$DS_SUFFIX_NAME" --be-name="pass"
-        ldapadd -f /pass.ldif -H ldap://localhost:3389 -w "$$DS_DM_PASSWORD" -D "cn=Directory Manager"
-        fg
+    # Healthy when manage to create the suffix and load users
     healthcheck:
-      test: 'ldapsearch  -H ldap://localhost:3389 -w "$$DS_DM_PASSWORD" -D "cn=Directory Manager" || exit 1'
+      test: 'dsconf -D "cn=Directory Manager" localhost backend create --suffix="$$DS_SUFFIX_NAME" --be-name="pass" ||  ldapadd -f /pass.ldif -H ldap://localhost:3389 -w "$$DS_DM_PASSWORD" -D "cn=Directory Manager" || exit 1'
       start_period: 60s
       interval: 5s
     volumes:
