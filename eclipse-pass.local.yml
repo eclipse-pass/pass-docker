@@ -1,5 +1,4 @@
 # Env customizations for a local development instance
-version: '3.8'
 
 services:
   pass-core:
@@ -30,7 +29,7 @@ services:
       - .eclipse-pass.local_env
 
   postgres:
-    image: postgres:14-alpine
+    image: postgres:15-alpine
     restart: always
     env_file:
       - .env
@@ -93,7 +92,7 @@ services:
       - back
 
   loader:
-    image: curlimages/curl:7.87.0
+    image: curlimages/curl:8.11.0
     container_name: loader
     env_file:
       - .env
@@ -110,7 +109,7 @@ services:
 
   localstack:
     container_name: "localstack"
-    image: localstack/localstack:3.2.0
+    image: localstack/localstack:3.8.1
     ports:
       - "127.0.0.1:4566:4566"            # LocalStack Gateway
       - "127.0.0.1:4510-4559:4510-4559"  # external services port range
