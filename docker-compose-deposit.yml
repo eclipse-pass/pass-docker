@@ -14,7 +14,6 @@
 # limitations under the License.
 #
 # The docker-compose file to start PASS deposit services.
-version: '3.8'
 
 services:
   deposit-services:
