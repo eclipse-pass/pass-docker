@@ -1,6 +1,5 @@
 # Manages the demo.eclipse-pass.org deploy
 # `docker compose -f docker-compose.yml -f eclipse-pass.local.yml -f eclipse-pass.JHUAWSdemo.yml up`
-version: '3.8'
 
 services:
   pass-core:
