@@ -2,6 +2,25 @@
 
 Welcome to your InvenioRDM instance.
 
+## Getting started
+
+Run the following commands in order to start your new InvenioRDM instance:
+
+```console
+invenio-cli containers start --lock --build --setup
+```
+
+The above command first builds the application docker image and afterwards
+starts the application and related services (database, Opensearch, Redis
+and RabbitMQ). The build and boot process will take some time to complete,
+especially the first time as docker images have to be downloaded during the
+process.
+
+Once running, visit https://127.0.0.1 in your browser.
+
+**Note**: The server is using a self-signed SSL certificate, so your browser
+will issue a warning that you will have to by-pass.
+
 ## Overview
 
 Following is an overview of the generated files and folders:
