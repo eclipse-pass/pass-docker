@@ -66,6 +66,8 @@ PMC_FTP_PORT=22
 PMC_FTP_USER=pmcsftpuser
 PMC_FTP_PASSWORD=pmcsftppass
 
+AWS_SQS_ENDPOINT_OVERRIDE=http://localstack:4566
+
 ###################################################
 # IDP config #############################
 ###################################################
