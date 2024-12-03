@@ -86,9 +86,9 @@ services:
     env_file:
       - .env
       - .eclipse-pass.local_env
-    # Healthy when manage to create the suffix and load users
+    # Healthy when users found or successfully created
     healthcheck:
-      test: '(dsconf -D "cn=Directory Manager" localhost backend create --suffix="$$DS_SUFFIX_NAME" --be-name="pass"; ldapadd -f /pass.ldif -H ldap://localhost:3389 -w "$$DS_DM_PASSWORD" -D "cn=Directory Manager") || exit 1'
+      test: '(dsconf -D "cn=Directory Manager" localhost backend create --suffix="$$DS_SUFFIX_NAME" --be-name="pass"; ldapsearch  -H ldap://localhost:3389 -w "$$DS_DM_PASSWORD" -D "cn=Directory Manager" || ldapadd -f /pass.ldif -H ldap://localhost:3389 -w "$$DS_DM_PASSWORD" -D "cn=Directory Manager") || exit 1'
       start_period: 60s
       interval: 5s
     volumes:
