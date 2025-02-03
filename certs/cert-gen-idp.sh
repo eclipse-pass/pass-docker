@@ -5,7 +5,7 @@ set -e
 echo ""
 echo "Create idp-encryption cert/key"
 rm -f /cert-gen-output/*
-PASS_BASE=$(uuidgen)
+PASS_BASE=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c15)
 KEY_PW="${PASS_BASE}keypw"
 STORE_PW="${PASS_BASE}localstorepw"
 P12STORE_PW="${PASS_BASE}pkcs12pw"
@@ -16,7 +16,7 @@ cp /cert-gen-output/private_key.pem /idp/credentials/shib-idp/idp-encryption.key
 echo ""
 echo "Create idp-signing cert/key"
 rm -f /cert-gen-output/*
-PASS_BASE=$(uuidgen)
+PASS_BASE=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c15)
 KEY_PW="${PASS_BASE}keypw"
 STORE_PW="${PASS_BASE}localstorepw"
 P12STORE_PW="${PASS_BASE}pkcs12pw"
@@ -38,7 +38,7 @@ awk -v token="IDP_METADATA_CERT" -v replacement="$CERT" '
 echo ""
 echo "Create tomcat keystore with cert"
 rm -f /cert-gen-output/*
-PASS_BASE=$(uuidgen)
+PASS_BASE=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c15)
 KEY_PW="${PASS_BASE}keypw"
 STORE_PW="${PASS_BASE}localstorepw"
 P12STORE_PW="${PASS_BASE}pkcs12pw"
@@ -50,7 +50,7 @@ sed -i "s#KEYSTORE_PW#$STORE_PW#g" /idp/config/tomcat/server.xml
 echo ""
 echo "Create pass-core cert/key"
 rm -f /cert-gen-output/*
-PASS_BASE=$(uuidgen)
+PASS_BASE=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c15)
 KEY_PW="${PASS_BASE}keypw"
 STORE_PW="${PASS_BASE}localstorepw"
 P12STORE_PW="${PASS_BASE}pkcs12pw"
@@ -72,7 +72,7 @@ awk -v token="SP_METADATA_CERT" -v replacement="$CERT" '
 
 echo ""
 echo "Create sealer secretkey sealer.jks"
-PASS_BASE=$(uuidgen)
+PASS_BASE=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c15)
 KEY_PW="${PASS_BASE}keypw"
 STORE_PW="${PASS_BASE}localstorepw"
 keytool -genseckey -alias secret1 -keypass $KEY_PW -keyalg AES -keysize 256 \

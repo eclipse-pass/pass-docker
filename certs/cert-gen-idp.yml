@@ -14,8 +14,6 @@ services:
           exit 0
         fi
         echo "Creating PKI for IDP"
-        apt-get update
-        apt-get install uuid-runtime
         chmod +x /scripts/cert-gen.sh
         chmod +x /scripts/cert-gen-idp.sh
         mkdir /cert-gen-output

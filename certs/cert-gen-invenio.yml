@@ -14,11 +14,9 @@ services:
           exit 0
         fi
         echo "Creating certificates for InvenioRDM"
-        apt-get update
-        apt-get install uuid-runtime
         chmod +x /scripts/cert-gen.sh
         mkdir /cert-gen-output
-        PASS_BASE=$$(uuidgen)
+        PASS_BASE=$$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c15)
         KEY_PW="$${PASS_BASE}keypw"
         STORE_PW="$${PASS_BASE}localstorepw"
         P12STORE_PW="$${PASS_BASE}pkcs12pw"
