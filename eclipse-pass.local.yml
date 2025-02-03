@@ -1,5 +1,8 @@
 # Env customizations for a local development instance
 
+include:
+  - ./certs/cert-gen-idp.yml
+
 services:
   pass-core:
     depends_on:
@@ -44,6 +47,8 @@ services:
     image: "tier/shib-idp:4.3.3_20240415"
     container_name: idp
     depends_on:
+      cert-gen-idp:
+        condition: service_completed_successfully
       ldap:
         condition: service_healthy
     env_file:
