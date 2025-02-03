@@ -27,9 +27,11 @@ services:
         cp /cert-gen-output/cert.pem /invenio/docker/nginx/test.crt
         cp /cert-gen-output/private_key.pem /invenio/docker/nginx/test.key
         cp /cert-gen-output/localtest.jks /deposit/localtest.jks
-        echo "PASS_DEPOSIT_SVC_JAVA_OPTS=-Djavax.net.ssl.trustStore=/certificates/localtest.jks \
-          -Djavax.net.ssl.trustStorePassword=$(< /cert-gen-output/secret.prop)" > /invenio/.eclipse-pass.invenio.local_env
-        echo "INVENIORDM_API_TOKEN=<generated_api_key>" >> /invenio/.eclipse-pass.invenio.local_env
+        cat > /invenio/.eclipse-pass.invenio.local_env << EOF
+        PASS_DEPOSIT_SVC_JAVA_OPTS=-Djavax.net.ssl.trustStore=/certificates/localtest.jks \
+          -Djavax.net.ssl.trustStorePassword=$(< /cert-gen-output/secret.prop)
+        INVENIORDM_API_TOKEN=<generated_api_key>
+        EOF
     volumes:
       - ./cert-gen.sh:/scripts/cert-gen.sh
       - ../invenio-rdm/pass-docker-invenio-rdm:/invenio
