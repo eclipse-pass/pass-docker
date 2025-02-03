@@ -17,9 +17,16 @@
 
 services:
   deposit-services:
+    env_file:
+      - .env
+      - .eclipse-pass.local_env
+      - invenio-rdm/pass-docker-invenio-rdm/.eclipse-pass.invenio.local_env
     networks:
       - back
       - pass-docker-invenio-rdm_default
+    volumes:
+      - ./deposit/deposit-repositories.json:/deposit/deposit-repositories.json
+      - ./deposit/localtest.jks:/certificates/localtest.jks
 
 networks:
   pass-docker-invenio-rdm_default:
