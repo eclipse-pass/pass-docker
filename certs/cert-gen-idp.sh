@@ -38,6 +38,8 @@ echo "Create pass-core cert/key"
 ./scripts/cert-gen.sh "CN=localhost" "SAN=dns:localhost"
 cp /cert-gen-output/cert.pem /pass-core/saml2/sp-cert.pem
 cp /cert-gen-output/private_key.pem /pass-core/saml2/sp-key.pem
+chmod 755 /pass-core/saml2/sp-cert.pem
+chmod 755 /pass-core/saml2/sp-key.pem
 CERT=$(sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' /pass-core/saml2/sp-cert.pem | sed '1d;$d')
 awk -v token="SP_METADATA_CERT" -v replacement="$CERT" '
 {
