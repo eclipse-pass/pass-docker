@@ -16,12 +16,8 @@ services:
         echo "Creating certificates for InvenioRDM"
         chmod +x /scripts/cert-gen.sh
         mkdir /cert-gen-output
-        PASS_BASE=$$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c15)
-        KEY_PW="$${PASS_BASE}keypw"
-        STORE_PW="$${PASS_BASE}localstorepw"
-        P12STORE_PW="$${PASS_BASE}pkcs12pw"
         ./scripts/cert-gen.sh "CN=pass-docker-invenio-rdm-frontend-1,OU=dev,O=.,L=.,C=." \
-          "SAN=dns:pass-docker-invenio-rdm-frontend-1" $$KEY_PW $$STORE_PW $$P12STORE_PW
+          "SAN=dns:pass-docker-invenio-rdm-frontend-1"
         cp /cert-gen-output/cert.pem /invenio/docker/nginx/test.crt
         cp /cert-gen-output/private_key.pem /invenio/docker/nginx/test.key
         cp /cert-gen-output/localtest.jks /deposit/localtest.jks
