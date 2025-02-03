@@ -4,9 +4,6 @@ set -e
 
 CERT_DNAME=$1
 CERT_EXT=$2
-KEY_PW=$3
-STORE_PW=$4
-P12STORE_PW=$5
 
 CERT_EXT_ARG=""
 
@@ -14,6 +11,12 @@ if [ -n "$CERT_EXT" ];then
   CERT_EXT_ARG="-ext ${CERT_EXT}"
 fi
 
+rm -f /cert-gen-output/*
+
+PASS_BASE=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c15)
+KEY_PW="${PASS_BASE}keypw"
+STORE_PW="${PASS_BASE}localstorepw"
+P12STORE_PW="${PASS_BASE}pkcs12pw"
 keytool -genkeypair -alias localtest -keyalg RSA -dname $CERT_DNAME -keystore /cert-gen-output/localtest.jks \
   -keypass $KEY_PW -storepass $STORE_PW $CERT_EXT_ARG
 keytool -importkeystore -srckeystore /cert-gen-output/localtest.jks -srcstorepass $STORE_PW \
