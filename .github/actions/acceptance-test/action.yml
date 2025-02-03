@@ -26,7 +26,7 @@ runs:
 
     - name: Run pass-docker
       shell: bash
-      run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml up --no-build --quiet-pull --pull ${{ inputs.pullimages }}
+      run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml up -d --no-build --quiet-pull --pull ${{ inputs.pullimages }}
 
     - name: Checkout pass-acceptance-testing
       uses: actions/checkout@v3
