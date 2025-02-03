@@ -1,0 +1,27 @@
+# Gen cert for IDP
+
+services:
+  cert-gen-idp:
+    image: "eclipse-temurin:17.0.13_11-jre-jammy"
+    container_name: cert-gen-idp
+    command:
+      - /bin/bash
+      - -c
+      - |
+        set -e
+        if [ -f /idp/credentials/shib-idp/idp-encryption.crt ]; then
+          echo "PKI for IDP already exists"
+          exit 0
+        fi
+        echo "Creating PKI for IDP"
+        apt-get update
+        apt-get install uuid-runtime
+        chmod +x /scripts/cert-gen.sh
+        chmod +x /scripts/cert-gen-idp.sh
+        mkdir /cert-gen-output
+        ./scripts/cert-gen-idp.sh
+    volumes:
+      - ./cert-gen.sh:/scripts/cert-gen.sh
+      - ./cert-gen-idp.sh:/scripts/cert-gen-idp.sh
+      - ../idp:/idp
+      - ../pass-core:/pass-core
