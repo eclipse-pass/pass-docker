@@ -1,0 +1,84 @@
+#! /bin/sh
+
+set -e
+
+echo ""
+echo "Create idp-encryption cert/key"
+rm -f /cert-gen-output/*
+PASS_BASE=$(uuidgen)
+KEY_PW="${PASS_BASE}keypw"
+STORE_PW="${PASS_BASE}localstorepw"
+P12STORE_PW="${PASS_BASE}pkcs12pw"
+./scripts/cert-gen.sh "CN=localhost" "SAN=dns:localhost,uri:https://localhost/idp/shibboleth" $KEY_PW $STORE_PW $P12STORE_PW
+cp /cert-gen-output/cert.pem /idp/credentials/shib-idp/idp-encryption.crt
+cp /cert-gen-output/private_key.pem /idp/credentials/shib-idp/idp-encryption.key
+
+echo ""
+echo "Create idp-signing cert/key"
+rm -f /cert-gen-output/*
+PASS_BASE=$(uuidgen)
+KEY_PW="${PASS_BASE}keypw"
+STORE_PW="${PASS_BASE}localstorepw"
+P12STORE_PW="${PASS_BASE}pkcs12pw"
+./scripts/cert-gen.sh "CN=localhost" "SAN=dns:localhost,uri:https://localhost/idp/shibboleth" $KEY_PW $STORE_PW $P12STORE_PW
+cp /cert-gen-output/cert.pem /idp/credentials/shib-idp/idp-signing.crt
+cp /cert-gen-output/private_key.pem /idp/credentials/shib-idp/idp-signing.key
+CERT=$(sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' /idp/credentials/shib-idp/idp-signing.crt | sed '1d;$d')
+awk -v token="IDP_METADATA_CERT" -v replacement="$CERT" '
+{
+  if ($0 ~ token) {
+    gsub(token, replacement)
+    print
+  } else {
+    print
+  }
+}
+' /idp/config/shib-idp/metadata/template.idp-metadata.xml > /idp/config/shib-idp/metadata/idp-metadata.xml
+
+echo ""
+echo "Create tomcat keystore with cert"
+rm -f /cert-gen-output/*
+PASS_BASE=$(uuidgen)
+KEY_PW="${PASS_BASE}keypw"
+STORE_PW="${PASS_BASE}localstorepw"
+P12STORE_PW="${PASS_BASE}pkcs12pw"
+./scripts/cert-gen.sh "CN=localhost,OU=SUBJ_OU,O=SUBJ_O,L=SUBJ_CITY,ST=SUBJ_STATE,C=SUBJ_COUNTRY" "" $KEY_PW $STORE_PW $P12STORE_PW
+cp /cert-gen-output/localtest.jks /idp/credentials/tomcat/keystore.jks
+cp /idp/config/tomcat/template.server.xml /idp/config/tomcat/server.xml
+sed -i "s#KEYSTORE_PW#$STORE_PW#g" /idp/config/tomcat/server.xml
+
+echo ""
+echo "Create pass-core cert/key"
+rm -f /cert-gen-output/*
+PASS_BASE=$(uuidgen)
+KEY_PW="${PASS_BASE}keypw"
+STORE_PW="${PASS_BASE}localstorepw"
+P12STORE_PW="${PASS_BASE}pkcs12pw"
+./scripts/cert-gen.sh "CN=localhost" "SAN=dns:localhost" $KEY_PW $STORE_PW $P12STORE_PW
+cp /cert-gen-output/cert.pem /pass-core/saml2/sp-cert.pem
+cp /cert-gen-output/private_key.pem /pass-core/saml2/sp-key.pem
+cp /idp/config/shib-idp/metadata/template.sp-metadata.xml /idp/config/shib-idp/metadata/sp-metadata.xml
+CERT=$(sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' /pass-core/saml2/sp-cert.pem | sed '1d;$d')
+awk -v token="SP_METADATA_CERT" -v replacement="$CERT" '
+{
+  if ($0 ~ token) {
+    gsub(token, replacement)
+    print
+  } else {
+    print
+  }
+}
+' /idp/config/shib-idp/metadata/template.sp-metadata.xml > /idp/config/shib-idp/metadata/sp-metadata.xml
+
+echo ""
+echo "Create sealer secretkey sealer.jks"
+PASS_BASE=$(uuidgen)
+KEY_PW="${PASS_BASE}keypw"
+STORE_PW="${PASS_BASE}localstorepw"
+keytool -genseckey -alias secret1 -keypass $KEY_PW -keyalg AES -keysize 256 \
+  -keystore /cert-gen-output/sealer.jks -storepass $STORE_PW -storetype JCEKS
+cp /cert-gen-output/sealer.jks /idp/credentials/shib-idp/sealer.jks
+cat > /idp/credentials/shib-idp/sealer.properties << EOF
+idp.sealer.storePassword = $STORE_PW
+idp.sealer.keyPassword = $KEY_PW
+EOF

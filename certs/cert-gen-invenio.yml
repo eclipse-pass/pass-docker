@@ -1,0 +1,36 @@
+# Gen cert for InvenioRDM
+
+services:
+  cert-gen-invenio:
+    image: "eclipse-temurin:17.0.13_11-jre-jammy"
+    container_name: cert-gen-invenio
+    command:
+      - /bin/bash
+      - -c
+      - |
+        set -e
+        if [ -f /invenio/docker/nginx/test.crt ]; then
+          echo "Certificates for InvenioRDM already exists"
+          exit 0
+        fi
+        echo "Creating certificates for InvenioRDM"
+        apt-get update
+        apt-get install uuid-runtime
+        chmod +x /scripts/cert-gen.sh
+        mkdir /cert-gen-output
+        PASS_BASE=$$(uuidgen)
+        KEY_PW="$${PASS_BASE}keypw"
+        STORE_PW="$${PASS_BASE}localstorepw"
+        P12STORE_PW="$${PASS_BASE}pkcs12pw"
+        ./scripts/cert-gen.sh "CN=pass-docker-invenio-rdm-frontend-1,OU=dev,O=.,L=.,C=." \
+          "SAN=dns:pass-docker-invenio-rdm-frontend-1" $$KEY_PW $$STORE_PW $$P12STORE_PW
+        cp /cert-gen-output/cert.pem /invenio/docker/nginx/test.crt
+        cp /cert-gen-output/private_key.pem /invenio/docker/nginx/test.key
+        cp /cert-gen-output/localtest.jks /deposit/localtest.jks
+        echo "PASS_DEPOSIT_SVC_JAVA_OPTS=-Djavax.net.ssl.trustStore=/certificates/localtest.jks \
+          -Djavax.net.ssl.trustStorePassword=$(< /cert-gen-output/secret.prop)" > /invenio/.eclipse-pass.invenio.local_env
+        echo "INVENIORDM_API_TOKEN=<generated_api_key>" >> /invenio/.eclipse-pass.invenio.local_env
+    volumes:
+      - ./cert-gen.sh:/scripts/cert-gen.sh
+      - ../invenio-rdm/pass-docker-invenio-rdm:/invenio
+      - ../deposit:/deposit

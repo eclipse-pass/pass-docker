@@ -8,3 +8,14 @@
 target/
 node_modules/
 .DS_Store
+*.key
+*.crt
+*.pem
+*.jks
+*.p12
+secret.prop*
+sealer.properties
+.eclipse-pass.invenio.local_env
+idp-metadata.xml
+sp-metadata.xml
+server.xml
