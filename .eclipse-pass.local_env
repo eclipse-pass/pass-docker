@@ -61,7 +61,7 @@ DSPACE_USER=test@test.edu
 DSPACE_PASSWORD=admin
 
 INVENIORDM_API_BASE_URL=https://pass-docker-invenio-rdm-frontend-1/api
-INVENIORDM_VERIFY_SSL_CERT=false
+INVENIORDM_API_TOKEN=
 
 PMC_FTP_HOST=pmc-sftp-server
 PMC_FTP_PORT=22
