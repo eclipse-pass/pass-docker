@@ -22,7 +22,6 @@
 services:
   pass-core:
     image: "ghcr.io/eclipse-pass/pass-core-main:${PASS_VERSION}"
-    platform: linux/amd64
     container_name: pass-core
     env_file:
       - .env
@@ -31,7 +30,6 @@ services:
 
   pass-ui:
     image: "ghcr.io/eclipse-pass/pass-ui:${PASS_VERSION}"
-    platform: linux/amd64
     container_name: pass-ui
     env_file:
       - .env
