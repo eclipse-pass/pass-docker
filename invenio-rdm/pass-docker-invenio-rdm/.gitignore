@@ -65,7 +65,7 @@ test.db
 logs/
 
 # Invenio-cli per machine file
-.invenio.private
+#.invenio.private
 
 # S3 default bucket location
 data/default/*
