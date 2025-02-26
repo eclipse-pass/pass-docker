@@ -2,8 +2,8 @@
 - email: admin@pass-docker-invenio-rdm.com
   active: true
   confirmed: true
-  username: admin
-  full_name: Admin
+  username: pass-docker-admin
+  full_name: Pass-Docker Admin
   password: mooadmin
   roles:
     - admin
