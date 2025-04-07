@@ -7,8 +7,7 @@
         "archive": "ZIP",
         "compression": "NONE",
         "algorithms": [
-          "sha512",
-          "md5"
+          "sha512"
         ],
         "funder-mapping": {}
       }
