@@ -125,6 +125,7 @@ services:
         DSPACE_REST_HOST: localhost
         DSPACE_REST_PORT: 9000
         DSPACE_REST_NAMESPACE: /server
+        DSPACE_MARKDOWN_ENABLED: true
       image: dspace/dspace-angular:dspace-7.6
       networks:
         back:
