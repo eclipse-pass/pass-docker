@@ -446,7 +446,14 @@
         "localKey": "johnshopkins.edu:funder:301694",
         "name": "WILLIAM AND ELLA OWENS MEDICAL RESE"
       },
-      "relationships": {}
+        "relationships": {
+          "policy": {
+            "data": {
+              "id": "2",
+              "type": "policy"
+            }
+          }
+        }
     }
   },
   {
