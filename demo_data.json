@@ -7,10 +7,12 @@
       "type": "repository",
       "attributes": {
         "integrationType": "web-link",
-        "formSchema": "{\"id\":\"eric\",\"schema\":{\"title\":\"Department of Education - ERIC <br><small>Requires deposit to Education Resource Information Center (ERIC).</small><br><br><p class=\"lead text-muted\">Automatic submission from PASS to ERIC is not available at this time. Instead, submission to ERIC will be prompted before this submission is finalized in PASS. The publication information collected so far can be used to complete the submission via the ERIC website.</p>\",\"type\":\"object\",\"properties\":{}},\"options\":{\"fields\":{}}}",
         "name": "Educational Resources Information Center (ERIC)",
         "url": "https://eric.ed.gov/",
-        "repositoryKey": "eric"
+        "repositoryKey": "eric",
+        "schemas": [
+          "https://eclipse-pass.github.io/metadata-schemas/jhu/common.json"
+        ]
       }
     }
   },
