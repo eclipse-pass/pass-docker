@@ -1149,6 +1149,80 @@
     "op": "add",
     "path": "/grant",
     "value": {
+      "id": "0-1234",
+      "type": "grant",
+      "attributes": {
+        "endDate": "2022-06-30T00:00:00.000Z",
+        "awardNumber": "R01EY01234",
+        "awardDate": "2017-05-26T00:00:00.000Z",
+        "awardStatus": "active",
+        "projectName": "NIH Test Grant 1234",
+        "startDate": "2017-07-01T00:00:00.000Z",
+        "localKey": "johnshopkins.edu:grant:1234"
+      },
+      "relationships": {
+        "pi": {
+          "data": {
+            "id": "0",
+            "type": "user"
+          }
+        },
+        "directFunder": {
+          "data": {
+            "id": "0",
+            "type": "funder"
+          }
+        },
+        "primaryFunder": {
+          "data": {
+            "id": "0",
+            "type": "funder"
+          }
+        }
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/grant",
+    "value": {
+      "id": "0-5678",
+      "type": "grant",
+      "attributes": {
+        "endDate": "2022-06-30T00:00:00.000Z",
+        "awardNumber": "R01EY05678",
+        "awardDate": "2017-05-26T00:00:00.000Z",
+        "awardStatus": "active",
+        "projectName": "NIH Test Grant 5678",
+        "startDate": "2017-07-01T00:00:00.000Z",
+        "localKey": "johnshopkins.edu:grant:5678"
+      },
+      "relationships": {
+        "pi": {
+          "data": {
+            "id": "0",
+            "type": "user"
+          }
+        },
+        "directFunder": {
+          "data": {
+            "id": "0",
+            "type": "funder"
+          }
+        },
+        "primaryFunder": {
+          "data": {
+            "id": "0",
+            "type": "funder"
+          }
+        }
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/grant",
+    "value": {
       "id": "1",
       "type": "grant",
       "attributes": {
