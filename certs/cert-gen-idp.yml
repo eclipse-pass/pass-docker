@@ -18,6 +18,9 @@ services:
         chmod +x /scripts/cert-gen-idp.sh
         mkdir /cert-gen-output
         ./scripts/cert-gen-idp.sh
+    # security_opt section here for Podman, lets the chmod commands work
+    security_opt:
+      - label=disable
     volumes:
       - ./cert-gen.sh:/scripts/cert-gen.sh
       - ./cert-gen-idp.sh:/scripts/cert-gen-idp.sh
