@@ -24,12 +24,13 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
-      - ./pass-core/saml2/:/saml2/
+      - ./pass-core/saml2/:/saml2/:Z
 
   pass-ui:
     env_file:
       - .env
       - .eclipse-pass.local_env
+    user: "0"
 
   postgres:
     image: postgres:15-alpine
@@ -40,8 +41,8 @@ services:
     networks:
       - back
     volumes:
-      - db:/var/lib/postgresql/data
-      - ./postgres/demo/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh
+      - db:/var/lib/postgresql/data:Z
+      - ./postgres/demo/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh:Z
 
   idp:
     image: "tier/shib-idp:4.3.3_20240415"
@@ -73,10 +74,15 @@ services:
 
         /usr/bin/startup.sh
     healthcheck:
+      # http_code will return "000" if server is not up
+      test: ["CMD", "bash", "-c", "! curl -s http://localhost:8080 -o /dev/null -w \"%{http_code}\" | grep -qv '^000$' || exit 1"]
       start_period: 60s
       interval: 5s
+      timeout: 5s
+      retries: 3
+    #   - label=disable
     volumes:
-      - ./idp:/idp-config
+      - ./idp:/idp-config:Z
     networks:
       - back
 
@@ -92,7 +98,7 @@ services:
       start_period: 60s
       interval: 5s
     volumes:
-      - ./ldap/pass.ldif:/pass.ldif
+      - ./ldap/pass.ldif:/pass.ldif:Z
     networks:
       - back
 
@@ -110,7 +116,7 @@ services:
       pass-core:
         condition: service_healthy
     volumes:
-      - ./demo_data.json:/data.json
+      - ./demo_data.json:/data.json:Z
 
   localstack:
     container_name: "localstack"
@@ -121,6 +127,6 @@ services:
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
-      - "./localstack/aws_bootstrap.sh:/etc/localstack/init/ready.d/init-aws.sh"
+      - "./localstack/aws_bootstrap.sh:/etc/localstack/init/ready.d/init-aws.sh:Z"
     networks:
       - back
