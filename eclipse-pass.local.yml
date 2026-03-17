@@ -75,7 +75,7 @@ services:
         /usr/bin/startup.sh
     healthcheck:
       # http_code will return "000" if server is not up
-      test: ["CMD", "bash", "-c", "! curl -s http://localhost:8080 -o /dev/null -w \"%{http_code}\" | grep -qv '^000$' || exit 1"]
+      test: 'curl http://localhost:8080 -s -o /dev/null -w "%{http_code}" | grep -qv "^000$" || exit 1'
       start_period: 60s
       interval: 5s
       timeout: 5s
