@@ -23,7 +23,7 @@ jobs:
       NEXT: ${{ inputs.nextversion }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Config git user
         run: |
@@ -31,7 +31,7 @@ jobs:
           git config user.email "${{ github.actor}}@users.noreply.github.com"
 
       - name: Login to GHCR
-        uses: docker/login-action@v2
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
