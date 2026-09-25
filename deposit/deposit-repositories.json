@@ -23,17 +23,6 @@
       }
     }
   },
-  "InvenioRDM": {
-    "assembler": {
-      "specification": "invenioRdm",
-      "beanName": "invenioRdmAssembler"
-    },
-    "transport-config": {
-      "protocol-binding": {
-        "protocol": "invenioRdm"
-      }
-    }
-  },
   "DSpace": {
     "assembler": {
       "specification": "DSpace",

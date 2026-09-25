@@ -15,7 +15,6 @@ node_modules/
 *.p12
 secret.prop*
 sealer.properties
-.eclipse-pass.invenio.local_env
 idp-metadata.xml
 sp-metadata.xml
 server.xml
