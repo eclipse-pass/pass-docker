@@ -69,25 +69,6 @@
   },
   {
     "op": "add",
-    "path": "/repository",
-    "value": {
-      "id": "4",
-      "type": "repository",
-      "attributes": {
-        "agreementText": "InvenioRDM agreement",
-        "integrationType": "full",
-        "name": "InvenioRDM",
-        "url": "https://inveniosoftware.org/products/rdm/",
-        "repositoryKey": "inveniordm",
-        "schemas": [
-          "https://eclipse-pass.github.io/metadata-schemas/jhu/inveniordm.json",
-          "https://eclipse-pass.github.io/metadata-schemas/jhu/common.json"
-        ]
-      }
-    }
-  },
-  {
-    "op": "add",
     "path": "/policy",
     "value": {
       "id": "0",
@@ -364,29 +345,6 @@
   },
   {
     "op": "add",
-    "path": "/policy",
-    "value": {
-      "id": "12",
-      "type": "policy",
-      "attributes": {
-        "policyUrl": "https://inveniosoftware.org/products/rdm/",
-        "description": "InvenioRDM policy description",
-        "title": "InvenioRDM Policy"
-      },
-      "relationships": {
-        "repositories": {
-          "data": [
-            {
-              "id": "4",
-              "type": "repository"
-            }
-          ]
-        }
-      }
-    }
-  },
-  {
-    "op": "add",
     "path": "/funder",
     "value": {
       "id": "0",
@@ -484,26 +442,6 @@
         "policy": {
           "data": {
             "id": "0",
-            "type": "policy"
-          }
-        }
-      }
-    }
-  },
-  {
-    "op": "add",
-    "path": "/funder",
-    "value": {
-      "id": "6",
-      "type": "funder",
-      "attributes": {
-        "localKey": "johnshopkins.edu:funder:INVENIORDM_FUNDER_LK",
-        "name": "INVENIORDM_TEST_FUNDER"
-      },
-      "relationships": {
-        "policy": {
-          "data": {
-            "id": "12",
             "type": "policy"
           }
         }
@@ -1639,43 +1577,6 @@
         "primaryFunder": {
           "data": {
             "id": "4",
-            "type": "funder"
-          }
-        }
-      }
-    }
-  },
-  {
-    "op": "add",
-    "path": "/grant",
-    "value": {
-      "id": "11",
-      "type": "grant",
-      "attributes": {
-        "endDate": "2026-07-31T00:00:00.000Z",
-        "startDate": "2023-07-01T00:00:00.000Z",
-        "awardDate": "2023-08-04T00:00:00.000Z",
-        "awardNumber": "invenio-test-awd-num-1",
-        "awardStatus": "active",
-        "projectName": "PASS TEST INVENIORDM GRANT",
-        "localKey": "johnshopkins.edu:grant:112233"
-      },
-      "relationships": {
-        "pi": {
-          "data": {
-            "id": "2",
-            "type": "user"
-          }
-        },
-        "directFunder": {
-          "data": {
-            "id": "6",
-            "type": "funder"
-          }
-        },
-        "primaryFunder": {
-          "data": {
-            "id": "6",
             "type": "funder"
           }
         }
