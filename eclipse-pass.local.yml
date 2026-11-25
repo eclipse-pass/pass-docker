@@ -33,7 +33,7 @@ services:
     user: "0"
 
   postgres:
-    image: postgres:15-alpine
+    image: postgres:17-alpine
     restart: always
     env_file:
       - .env
@@ -103,7 +103,7 @@ services:
       - back
 
   loader:
-    image: curlimages/curl:8.11.0
+    image: curlimages/curl:8.23.0
     container_name: loader
     env_file:
       - .env
@@ -120,7 +120,7 @@ services:
 
   localstack:
     container_name: "localstack"
-    image: localstack/localstack:3.8.1
+    image: localstack/localstack:4.14.0
     ports:
       - "127.0.0.1:4566:4566"            # LocalStack Gateway
       - "127.0.0.1:4510-4559:4510-4559"  # external services port range
