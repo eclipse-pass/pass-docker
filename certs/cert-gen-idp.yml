@@ -2,7 +2,10 @@
 
 services:
   cert-gen-idp:
-    image: "eclipse-temurin:17.0.13_11-jre-jammy"
+    image: "eclipse-temurin:17.0.21.1_2-jre-jammy"
+    # 17.0.21.1_2 (CVE-2026-114938 fix) has no linux/arm64 image yet (adoptium/containers#1146). Docker then falls
+    # back to the 32-bit arm/v7 image, whose JCE init fails under emulation, so run the amd64 build instead.
+    platform: linux/amd64
     container_name: cert-gen-idp
     command:
       - /bin/bash
